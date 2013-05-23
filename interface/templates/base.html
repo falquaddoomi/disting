@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Compgraph: {% block childpagename %}base{% endblock %}</title>
+
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}interface/res/gh-buttons.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}interface/css/interface.css" />
+
+        {% block style %}
+        <!-- provides a place for inheriting pages to add custom styles -->
+        {% endblock %}
+    </head>
+
+    <body>
+        <div id="trunk">
+            <div id="header">
+                <h1>Compgraph : Model Distinguishability Tool</h1>
+
+                {% if user.is_authenticated %}
+                <div class="login_widget">
+                logged in as <b>{{ user }}</b> - <a href="{% url 'interface:interface_logout' %}">log out</a>
+                </div>
+                {% endif %}
+            </div>
+
+            <div id="content">
+                {% block content %}{% endblock %}
+            </div>
+
+            <div id="footer">
+            </div>
+        </div>
+    </body>
+</html>

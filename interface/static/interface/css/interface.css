@@ -1,0 +1,62 @@
+body {
+    font-family: Tahoma, sans-serif; font-size: 14px;
+    background: #ccc;
+    margin: 0; padding: 0;
+}
+
+/* structural styles */
+
+#trunk {
+    width: 960px;
+    padding: 10px;
+    background: white;
+    margin: 20px auto;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 10px;
+}
+
+#header {
+    border-bottom: solid 1px #ccc;
+    padding: 10px;
+    position: relative;
+}
+
+#header h1 {
+    padding: 0px; margin: 0; font-size: 32px;
+}
+
+#header .login_widget {
+    position: absolute;
+    right: 5px; bottom: 15px;
+}
+
+#content {
+    padding: 10px;
+}
+
+/* page-level styles */
+
+.task_list {
+    padding: 3px; border: solid 1px #aaa; width: 600px;
+    margin-bottom: 1em;
+}
+
+.task_list tr.task_header td {
+    background: black; padding: 5px; color: white; font-weight: bold;
+    text-align: left;
+}
+
+.task_list td {
+    padding: 5px;
+    text-align: left;
+    background: white;
+}
+
+.task_list tr.alt td {
+    background: #eee;
+}
+
+.example { font-family: "Courier New", sans-serif; }
+
+/* vertical tables */
+.vertical td { padding: 6px; }
+/*.vertical tr.action_tray td { border-top: solid 1px #ccc; }*/

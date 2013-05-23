@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block childpagename %}
+Details for Job #{{ job.id }}
+{% endblock %}
+
+{% block content %}
+    <h1>Details for Job #{{ job.id }}</h1>
+
+    <div style="margin-left: 20px;">
+        <h2>Input</h2>
+        <pre style="margin-left: 20px; overflow-x: auto;">{{ job.makeInput }}</pre>
+
+        <h2>Result</h2>
+        {% if job.result %}
+        <pre style="margin-left: 20px; overflow-x: auto;">{{ job.result }}</pre>
+        {% else %}
+        <div style="margin-left: 20px; font-style: italic;">(results pending completion or error...)</div>
+        {% endif %}
+    </div>
+
+    <div style="margin-top: 2em;">
+        <a class="button" style="width: 100px;" href="{% url 'interface:home' %}">Return to Queue</a>
+        {% if job.status != "pending" and job.status != "running" %}
+        <a class="button icon loop" style="width: 80px;" href="{% url 'interface:resubmitjob' job.id %}">Resubmit Job</a>
+        {% endif %}
+        <a class="button icon remove" onclick="return confirm('Are you sure that you want to delete this job?');" style="width: 80px;" href="{% url 'interface:removejob' job.id %}">Remove Job</a>
+    </div>
+{% endblock %}

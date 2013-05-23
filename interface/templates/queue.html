@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block childpagename %}
+Queue
+{% endblock %}
+
+{% block style %}
+<style>
+.status_pending { font-weight: bold; color: #365377; }
+.status_running { font-weight: bold; color: #776920; }
+.status_complete { font-weight: bold; color: #48771d; }
+.status_error { font-weight: bold; color: #b84541; }
+</style>
+{% endblock %}
+
+{% block content %}
+<p>Below is your job queue, which shows the jobs that you've added that are pending, in progress, and completed.</p>
+
+    <div class="queue">
+        <table class="task_list" style="width: 700px;" cellpadding="0" cellspacing="0">
+            <tr class="task_header">
+                <td>Submitted @</td>
+                <td>Modified @</td>
+                <td>Status</td>
+                <td>&nbsp;</td>
+            </tr>
+
+            {% for job in jobs %}
+                <tr class="{% cycle 'reg' 'alt' %}">
+                    <td>{{ job.created_on }}</td>
+                    <td>{{ job.updated_on }}</td>
+                    <td><span class="status_{{ job.status }}">&bullet; {{ job.status }}</span></td>
+                    <td style="text-align: right;">
+                        <a class="button icon search" style="width: 80px;" href="{% url 'interface:viewjob' job.id %}">View Details</a>
+                        {% if job.status == 'error' %}
+                        <a class="button icon loop" style="width: 80px; margin-left: 2px;" href="{% url 'interface:resubmitjob' job.id %}">Resubmit</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="4"><i>no jobs have been submitted yet...</i></td></tr>
+            {% endfor %}
+        </table>
+
+        <div style="margin-top: 1em; text-align: left; width: 600px;">
+            <a class="button icon add" style="width: 80px;" href="{% url 'interface:addjob' %}">Add Job</a>
+            <a class="button icon reload" style="width: 80px; margin-left: 2px;" href="{% url 'interface:home' %}">Refresh</a>
+        </div>
+    </div>
+{% endblock %}
