@@ -10,7 +10,10 @@ import graphTools
 import networkx
 import laplaceTools
 
-def processInput(data):
+def default_notify(msg):
+    print msg
+
+def processInput(data, notify=default_notify):
     # take in the data in the given format and extract all of the fields from it
     inputParams = [str(line.strip().split('=')[1]) for line in data.split('\n')]
 

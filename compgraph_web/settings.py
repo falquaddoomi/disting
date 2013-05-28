@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     # third-party apps
     'south',
     'django_extensions',
+    'djcelery',
 
     # my apps
     'interface'
@@ -161,3 +162,7 @@ LOGGING = {
         },
     }
 }
+
+# FAISAL: celery config
+import djcelery
+djcelery.setup_loader()
