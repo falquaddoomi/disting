@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" name="Default" comment="">
+      <change type="DELETED" beforePath="C:\Users\Faisal\PycharmProjects\compgraph_web\computation\tasks\__init__.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compgraph_web/static/icons/cc/black/2x2_grid_icon&amp;16.png" afterPath="$PROJECT_DIR$/compgraph_web/static/icons/cc/black/2x2_grid_icon&amp;16.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compgraph_web/static/icons/cc/white/2x2_grid_icon&amp;16.png" afterPath="$PROJECT_DIR$/compgraph_web/static/icons/cc/white/2x2_grid_icon&amp;16.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compgraph_web/static/icons/cc/black/2x2_grid_icon&amp;24.png" afterPath="$PROJECT_DIR$/compgraph_web/static/icons/cc/black/2x2_grid_icon&amp;24.png" />
@@ -3508,9 +3509,9 @@
     </list>
     <ignored path="compgraph_web.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/models.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369142518825" ignored="false" />
+    <file path="/models.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369850373995" ignored="false" />
     <file path="/views.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369145419143" ignored="false" />
-    <file path="/settings.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369759724422" ignored="false" />
+    <file path="/settings.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369762486732" ignored="false" />
     <file path="/urls.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369145196246" ignored="false" />
     <file path="/base.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369141478216" ignored="false" />
     <file path="/home.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1367298760013" ignored="false" />
@@ -3518,16 +3519,22 @@
     <file path="/dummy.xml" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369131736949" ignored="false" />
     <file path="/thanks.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1367300449534" ignored="false" />
     <file path="/admin.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1367300588761" ignored="false" />
-    <file path="/main.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369294934642" ignored="false" />
+    <file path="/main.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1370000226778" ignored="false" />
     <file path="$PROJECT_DIR$/computation/sympy/utilities/runtests.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369117997775" ignored="false" />
     <file path="/interface.css" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369141914029" ignored="false" />
     <file path="/queue.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369147821247" ignored="false" />
     <file path="/login.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369141998714" ignored="false" />
-    <file path="/processor.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369147157248" ignored="false" />
+    <file path="/processor.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1370000467270" ignored="false" />
     <file path="/addjob.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369144898843" ignored="false" />
-    <file path="/laplaceTools.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369142670737" ignored="false" />
+    <file path="/laplaceTools.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369995666250" ignored="false" />
     <file path="/results.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369147227359" ignored="false" />
-    <file path="/Dummy.txt" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369759434792" ignored="false" />
+    <file path="/Dummy.txt" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369959396442" ignored="false" />
+    <file path="/tasks.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369997671740" ignored="false" />
+    <file path="/laplaceTools_dist.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369765780750" ignored="false" />
+    <file path="/maxima_server.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369959914137" ignored="false" />
+    <file path="/maxima_proxy.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369998547946" ignored="false" />
+    <file path="/maximaTools.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1370000704781" ignored="false" />
+    <file path="/a.dummy" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369994721885" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -3547,28 +3554,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="queue.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/interface/templates/queue.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="17" selection-start="786" selection-end="786" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/computation/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="23" selection-start="748" selection-end="748" vertical-scroll-proportion="0.0">
+            <state line="302" column="0" selection-start="10943" selection-end="10943" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/compgraph_web/settings.py">
+      <file leaf-file-name="processor.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interface/management/commands/processor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="130" column="15" selection-start="4610" selection-end="4610" vertical-scroll-proportion="0.31719533">
+            <state line="19" column="30" selection-start="648" selection-end="648" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#65#0" expanded="true" />
+                <marker date="1370000466685" expanded="true" signature="345:2925" placeholder="..." />
+                <marker date="1370000466685" expanded="true" signature="727:2925" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="laplaceTools.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/computation/laplaceTools.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="599" column="38" selection-start="17305" selection-end="17305" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+                <marker date="1369995667181" expanded="false" signature="802:858" placeholder="import ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="maximaTools.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/computation/maximaTools.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="0" selection-start="470" selection-end="470" vertical-scroll-proportion="0.42570952">
               <folding />
             </state>
           </provider>
@@ -3592,22 +3615,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/../compgraph/input.txt" />
-        <option value="$PROJECT_DIR$/interface/templates/request.html" />
-        <option value="$PROJECT_DIR$/compgraph_web/urls.py" />
-        <option value="$PROJECT_DIR$/interface/templates/base.html" />
-        <option value="$PROJECT_DIR$/interface/templates/registration/login.html" />
         <option value="$PROJECT_DIR$/interface/static/interface/css/interface.css" />
-        <option value="$PROJECT_DIR$/interface/models.py" />
-        <option value="$PROJECT_DIR$/computation/laplaceTools.py" />
         <option value="$PROJECT_DIR$/interface/urls.py" />
         <option value="$PROJECT_DIR$/interface/views.py" />
         <option value="$PROJECT_DIR$/interface/templates/addjob.html" />
-        <option value="$PROJECT_DIR$/interface/management/commands/processor.py" />
         <option value="$PROJECT_DIR$/interface/templates/results.html" />
-        <option value="$PROJECT_DIR$/interface/templates/queue.html" />
-        <option value="$PROJECT_DIR$/computation/main.py" />
         <option value="$PROJECT_DIR$/compgraph_web/settings.py" />
+        <option value="$PROJECT_DIR$/computation/laplaceTools_dist.py" />
+        <option value="$PROJECT_DIR$/interface/templates/queue.html" />
+        <option value="$PROJECT_DIR$/interface/models.py" />
+        <option value="$PROJECT_DIR$/interface/management/commands/maxima_server.py" />
+        <option value="$PROJECT_DIR$/computation/laplaceTools.py" />
+        <option value="$PROJECT_DIR$/computation/tasks.py" />
+        <option value="$PROJECT_DIR$/interface/glue/maxima_proxy.py" />
+        <option value="$PROJECT_DIR$/computation/main.py" />
+        <option value="$PROJECT_DIR$/interface/management/commands/processor.py" />
+        <option value="$PROJECT_DIR$/computation/maximaTools.py" />
       </list>
     </option>
   </component>
@@ -3624,7 +3647,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="1" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
@@ -3643,6 +3666,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -3671,7 +3695,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="computation" />
+              <option name="myItemId" value="interface" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3685,13 +3709,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="interface" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="management" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
               <option name="myItemId" value="compgraph_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="compgraph_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="interface" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="management" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commands" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3707,9 +3756,9 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
     <property name="FullScreen" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PublishConfig" serverName="Analysis Local" serverId="b305e647-f063-49d3-ac61-25b014d08f8a" autoUpload="true">
     <servers>
@@ -3761,8 +3810,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Faisal\PycharmProjects\compgraph_web\interface\static\interface" />
       <recent name="C:\Users\Faisal\PycharmProjects\compgraph_web\computation" />
+      <recent name="C:\Users\Faisal\PycharmProjects\compgraph_web\interface\static\interface" />
       <recent name="C:\Users\Faisal\PycharmProjects\compgraph_web\computation\tests" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -3791,29 +3840,6 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="compgraph_web" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
     <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -3835,6 +3861,29 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="compgraph_web" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -3925,24 +3974,24 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1374" height="748" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.672" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19242424" sideWeight="0.672" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20151515" sideWeight="0.672" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -4007,94 +4056,115 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/interface/static/interface/css/interface.css">
+    <entry file="file://$PROJECT_DIR$/interface/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="9" selection-start="292" selection-end="292" vertical-scroll-proportion="0.0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interface/models.py">
+    <entry file="file://$PROJECT_DIR$/compgraph_web/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="27" selection-start="729" selection-end="729" vertical-scroll-proportion="0.0" />
+        <state line="134" column="18" selection-start="4674" selection-end="4674" vertical-scroll-proportion="0.20534223" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/computation/graphModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="14" selection-start="140" selection-end="140" vertical-scroll-proportion="0.22704507">
+        <state line="20" column="18" selection-start="372" selection-end="372" vertical-scroll-proportion="-0.70283806">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../compgraph/output.txt">
+    <entry file="file://$PROJECT_DIR$/computation/graphTools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="99" column="22" selection-start="2948" selection-end="2948" vertical-scroll-proportion="2.5542572" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/computation/candidate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="37" selection-start="343" selection-end="343" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/static/interface/css/interface_NEW.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../compgraph/output 3compartment.txt">
+    <entry file="file://$PROJECT_DIR$/interface/static/interface/css/interface.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="14" selection-start="654" selection-end="654" vertical-scroll-proportion="0.36894825" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/computation/laplaceTools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="41" selection-start="289" selection-end="289" vertical-scroll-proportion="0.39732888" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interface/management/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interface/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="651" selection-end="651" vertical-scroll-proportion="0.34056762" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interface/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="1755" selection-end="1755" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm20/system/python_stubs/-832489255/time.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="18" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interface/management/commands/processor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="39" selection-start="1124" selection-end="1124" vertical-scroll-proportion="0.5392321" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interface/templates/addjob.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="17" selection-start="1609" selection-end="1609" vertical-scroll-proportion="1.4505119" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interface/templates/results.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="55" selection-start="415" selection-end="415" vertical-scroll-proportion="0.0" />
+        <state line="19" column="23" selection-start="370" selection-end="370" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/interface/templates/queue.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="17" selection-start="786" selection-end="786" vertical-scroll-proportion="0.0">
+        <state line="13" column="14" selection-start="343" selection-end="343" vertical-scroll-proportion="0.36894825" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="5" selection-start="1503" selection-end="1503" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/management/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/computation/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="17" selection-start="149" selection-end="149" vertical-scroll-proportion="0.28380635">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/glue/maxima_proxy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="29" selection-start="1066" selection-end="1066" vertical-scroll-proportion="0.9283276">
+          <folding>
+            <element signature="e#0#23#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/computation/laplaceTools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="599" column="38" selection-start="17305" selection-end="17305" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+            <marker date="1369995667181" expanded="false" signature="802:858" placeholder="import ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/management/commands/processor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="30" selection-start="648" selection-end="648" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#65#0" expanded="true" />
+            <marker date="1370000466685" expanded="true" signature="345:2925" placeholder="..." />
+            <marker date="1370000466685" expanded="true" signature="727:2925" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/computation/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="23" selection-start="748" selection-end="748" vertical-scroll-proportion="0.0">
+        <state line="302" column="0" selection-start="10943" selection-end="10943" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/compgraph_web/settings.py">
+    <entry file="file://$PROJECT_DIR$/computation/maximaTools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="130" column="15" selection-start="4610" selection-end="4610" vertical-scroll-proportion="0.31719533">
+        <state line="15" column="0" selection-start="470" selection-end="470" vertical-scroll-proportion="0.42570952">
           <folding />
         </state>
       </provider>

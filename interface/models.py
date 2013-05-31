@@ -37,17 +37,26 @@ m = %(m)s""" % model_to_dict(self)
     STATUS_RUNNING = 'running'
     STATUS_COMPLETE = 'complete'
     STATUS_ERROR = 'error'
+    STATUS_INTERRUPTED = 'interrupted'
+    STATUS_CANCELLING = 'cancelling'
+    STATUS_CANCELLED = 'cancelled'
+
     STATUS_CHOICES = (
         (STATUS_PENDING, 'Pending'),
         (STATUS_RUNNING, 'Running'),
         (STATUS_COMPLETE, 'Completed'),
-        (STATUS_ERROR, 'Error')
+        (STATUS_ERROR, 'Error'),
+        (STATUS_ERROR, 'Interrupted'),
+        (STATUS_CANCELLING, 'Cancelling'),
+        (STATUS_CANCELLED, 'Cancelled')
     )
 
     status = models.CharField(max_length=30, choices=STATUS_CHOICES, default=STATUS_PENDING)
 
+    # field to store log of stdout while running
+    log = models.TextField(blank=True)
     # fields for results
-    result = models.TextField()
+    result = models.TextField(blank=True)
 
 class SubmissionForm(ModelForm):
     class Meta:

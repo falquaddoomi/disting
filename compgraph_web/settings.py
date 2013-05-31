@@ -129,8 +129,10 @@ INSTALLED_APPS = (
     'south',
     'django_extensions',
     'djcelery',
+    'kombu.transport.django',
 
     # my apps
+    'computation',
     'interface'
 )
 
@@ -162,6 +164,10 @@ LOGGING = {
         },
     }
 }
+
+# celery settings
+BROKER_URL = 'django://'
+
 
 # FAISAL: celery config
 import djcelery

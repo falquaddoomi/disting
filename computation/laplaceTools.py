@@ -1,6 +1,7 @@
 import itertools
 import os
 import subprocess
+from computation import maximaTools
 
 __author__ = 'Natalie'
 import scipy
@@ -455,9 +456,9 @@ def calcRank(in_mat):
     n = in_mat.rows
     m = in_mat.cols
 
-    in_mat.expand()
-    in_mat.simplify()
-    in_mat.expand()
+    # in_mat.expand()
+    # in_mat.simplify()
+    # in_mat.expand()
 
     #for rowIndex in range(n):
     #    if rowIndex == n-1:
@@ -516,87 +517,93 @@ def reducedJacMat(in_mat):
 
     return reducedMat
 
-
-
-
-import time
-def compareOverallRank(in_mat, maxLen, allCombos):
-
-    n = in_mat.rows
-    m = in_mat.cols
-
-
-    #this makes a list of all the rows I need to get
-    #allCombos = kbits(n, maxLen)
-
-    #print 'All Combos'
-    #print allCombos
-    #print 'Orig Matrix'
-    #for rowIndex in range(n):
-    #    print in_mat[rowIndex:rowIndex+1,:]
-
-    #now write the file
+def calculateOverallRanks(in_mat, allCombos):
     ranks = []
-    #rankFile = open("rankCombo.nb", "w+", buffering=1024)
-    
-    print '###########################----------------compareOverallRank---------------###############################'
-    totalLen = len(allCombos)
-    currPos = 0
-    
-    F = vfield("a_(1:5)(1:5)", ZZ)
     
     for i, currCombo in enumerate(allCombos):
-        currPos+=1
-        print '%d out of %d' % (currPos, totalLen)
-
         #make the matrix
         newSubMat = makeNewMat(currCombo, in_mat)
-        n = newSubMat.rows
-        m = newSubMat.cols
-        
-
         myRawMat = RawMatrix(newSubMat.rows, newSubMat.cols, map(F.to_domain().convert, newSubMat))
-
-        #(row_reduced, pivots) = rrefMine(newSubMat, simplify=True)
-        
-        start = time.time()
-        rank = calcAltRankMini(myRawMat)
-
-        end = time.time()-start
-        if end > 10:
-            print myRawMat
-            print ('it took:', end)
-            
+        rank = calcRank(myRawMat)
         ranks.append(rank)
 
-        #rankFile.write('myA%d = {' % i)
-        #for rowIndex in range(n):
-        #    if rowIndex == n-1:
-        #        rankFile.write(str(newSubMat[rowIndex:rowIndex+1,:]).replace("[","{").replace("]","}").replace("_",""))
-        #    else:
-        #        rankFile.write(str(newSubMat[rowIndex:rowIndex+1,:]).replace("[","{").replace("]","},").replace("_",""))
-        #rankFile.write('};')
-        #rankFile.write('rank%d = MatrixRank[myA%d];' % (i, i))
-
-    #now write the code to summarize the output
-    #rankFile.write('totRanks = {')
-    #for i, currCombo in enumerate(allCombos):
-    #    if i == len(allCombos) - 1:
-    #        rankFile.write('rank%d' % i)
-    #    else:
-    #        rankFile.write('rank%d,'% i)
-
-    #rankFile.write('};')
-
-    #rankFile.write('Export["rankCombo.txt",totRanks];')
-    #rankFile.write('Exit[];')
-    #rankFile.close()
-
-    #subprocess.call(["MathKernel","-noprompt","-initfile","rankCombo.nb"])
-    #with open("rankCombo.txt", 'r') as f:
-    #    ranks = [int(line.strip()) for line in f]
-
-    #print 'RESULTS'
-    #print ranks
     return ranks
 
+# ===============================================
+# === tree-based rank calculations below
+# ===============================================
+
+def kbits_tree(n, k):
+    already_genned = set()
+    IDs = tuple(range(n))
+    return [kbits_tree_sub(x, k-1, already_genned) for x in itertools.combinations(IDs, k) if x not in already_genned]
+
+def kbits_tree_sub(IDs, k, already_genned):
+    # keep track of matrices we've already generated
+    already_genned.add(IDs)
+
+    # end recursion if we're at the base case (a matrix with no meaningful children)
+    if k < 2:
+        return IDs, []
+
+    # otherwise, keep producing children of the given matrix
+    return IDs, [kbits_tree_sub(x, k-1, already_genned) for x in itertools.combinations(IDs, k) if x not in already_genned]
+
+# borrowed from http://stackoverflow.com/questions/2158395/flatten-an-irregular-list-of-lists-in-python
+
+import collections
+def flatten(l):
+    for el in l:
+        if isinstance(el, collections.Iterable) and not isinstance(el, basestring):
+            for sub in flatten(el):
+                yield sub
+        else:
+            yield el
+
+def countTreeNodes(toplist):
+    return sum([countTreeNodesRecurse(i) for i in toplist])
+
+def countTreeNodesRecurse(top):
+    toprows, topkids = top
+    return 1 + sum([countTreeNodesRecurse(i) for i in topkids])
+
+TOTAL = 0
+SOFAR = 0
+INDEPENDENT = 0
+
+def calcAllSubranks(in_mat, k):
+    global TOTAL, SOFAR, INDEPENDENT
+
+    print "in calcAllSubranks(%d, %d)..." % (in_mat.rows, k)
+
+    rowTree = kbits_tree(in_mat.rows, k)
+    TOTAL = countTreeNodes(rowTree)
+    SOFAR = 0
+    INDEPENDENT = 0
+    print "Total of %d nodes to visit..." % TOTAL
+    return flatten([calcChildRank(x, in_mat, False) for x in rowTree])
+
+def calcChildRank(top, in_mat, alreadyRanked):
+    global TOTAL, SOFAR, INDEPENDENT
+
+    toprows, topkids = top
+
+    # F = vfield("a_(1:%d)(1:%d)" % (len(toprows), in_mat.cols), ZZ)
+    F = vfield("a_(1:5)(1:5)", ZZ)
+
+    if alreadyRanked:
+        rank = len(toprows)
+    else:
+        newSubMat = makeNewMat(toprows, in_mat)
+        myRawMat = RawMatrix(newSubMat.rows, newSubMat.cols, map(F.to_domain().convert, newSubMat))
+        # rank = calcRank(myRawMat)
+        rank = maximaTools.getMatrixRank(myRawMat)
+        alreadyRanked = (rank == len(toprows))
+
+        if alreadyRanked: INDEPENDENT += 1
+
+    SOFAR += 1
+
+    print "(%d of %d : %d ind) => Rank for row indices %s: %d" % (SOFAR, TOTAL, INDEPENDENT, str(toprows), rank)
+
+    return rank, [calcChildRank(x, in_mat, alreadyRanked) for x in topkids]
