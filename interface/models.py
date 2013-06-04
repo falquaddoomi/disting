@@ -1,3 +1,6 @@
+from datetime import datetime
+import dateutil
+import django.utils.timezone
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -31,6 +34,8 @@ m = %(m)s""" % model_to_dict(self)
     # submission time
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+    started_on = models.DateTimeField(blank=True, null=True)
+    ended_on = models.DateTimeField(blank=True, null=True)
 
     # status field
     STATUS_PENDING = 'pending'
@@ -57,6 +62,17 @@ m = %(m)s""" % model_to_dict(self)
     log = models.TextField(blank=True)
     # fields for results
     result = models.TextField(blank=True)
+
+    def interval(self):
+        if self.started_on is None:
+            return "(never started)"
+        elif self.ended_on is None:
+            end = django.utils.timezone.now()
+        else:
+            end = self.ended_on
+
+        rd = dateutil.relativedelta.relativedelta (end, self.started_on)
+        return "%d:%02d:%02d.%d" % (rd.hours, rd.minutes, rd.seconds, rd.microseconds)
 
 class SubmissionForm(ModelForm):
     class Meta:

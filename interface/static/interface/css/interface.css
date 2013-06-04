@@ -12,6 +12,7 @@ body {
     background: white;
     margin: 20px auto;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 10px;
+    position: relative;
 }
 
 #header {
@@ -31,6 +32,24 @@ body {
 
 #content {
     padding: 10px;
+}
+
+#infopanel {
+    position: absolute; width: 220px; top: 0px; bottom: 0px; right: 0px; border-left: solid 1px #aaa; background: #ddd;
+}
+
+#infopanel .login_widget {
+    position: absolute;
+    left: 2px; top: 42px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    border-bottom: solid 1px #aaa;
+}
+
+#infopanel #infosection {
+    position: absolute;
+    left: 2px; top: 82px;
+    padding-left: 10px;
 }
 
 /* page-level styles */

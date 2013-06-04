@@ -10,6 +10,7 @@ Queue
 .status_running { font-weight: bold; color: #cab336; }
 .status_complete { font-weight: bold; color: #72ba2c; }
 .status_error { font-weight: bold; color: #c64b46; }
+.status_interrupted { font-weight: bold; color: #aa52c6; }
 </style>
 {% endblock %}
 
@@ -20,7 +21,7 @@ Queue
         <table class="task_list" style="width: 700px;" cellpadding="0" cellspacing="0">
             <tr class="task_header">
                 <td>Submitted @</td>
-                <td>Modified @</td>
+                <td>Running For</td>
                 <td>Status</td>
                 <td>&nbsp;</td>
             </tr>
@@ -28,7 +29,7 @@ Queue
             {% for job in jobs %}
                 <tr class="{% cycle 'reg' 'alt' %}">
                     <td>{{ job.created_on }}</td>
-                    <td>{{ job.updated_on }}</td>
+                    <td>{{ job.interval }}</td>
                     <td><span class="status_{{ job.status }}">&bullet; {{ job.status }}</span></td>
                     <td style="text-align: right;">
                         <a class="button icon search" style="width: 80px;" href="{% url 'interface:viewjob' job.id %}">View Details</a>

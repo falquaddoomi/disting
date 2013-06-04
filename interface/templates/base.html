@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 
+{% load statuses %}
+
 <html>
     <head>
         <title>Compgraph: {% block childpagename %}base{% endblock %}</title>
@@ -25,11 +27,22 @@
             </div>
 
             <div id="content">
-                {% block content %}{% endblock %}
+            {% block content %}{% endblock %}
             </div>
 
-            <div id="footer">
-            </div>
+            <div id="footer"></div>
+
+{#            <div id="infopanel">#}
+{#                {% if user.is_authenticated %}#}
+{#                <div class="login_widget">#}
+{#                logged in as <b>{{ user }}</b> - <a href="{% url 'interface:interface_logout' %}">log out</a>#}
+{#                </div>#}
+{#                {% endif %}#}
+{##}
+{#                <div id="infosection">#}
+{#                {% processor_status %}#}
+{#                </div>#}
+{#            </div>#}
         </div>
     </body>
 </html>

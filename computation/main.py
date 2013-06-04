@@ -1,5 +1,5 @@
 from StringIO import StringIO
-from celery.task import task
+from computation.maximaTools import getMatrixRank
 
 __author__ = 'Natalie'
 
@@ -12,12 +12,16 @@ import networkx
 import laplaceTools
 
 # bring in the distributed task processor
-from computation.tasks import deal_with_matrix
+from computation.tasks import processSingleTotalJacobian
+
+DISTRIBUTED = True
 
 def default_notify(msg):
     print msg
 
 def processInput(data, notify=default_notify):
+    global DISTRIBUTED
+
     # take in the data in the given format and extract all of the fields from it
     inputParams = [str(line.strip().split('=')[1]) for line in data.split('\n')]
 
@@ -289,17 +293,16 @@ def processInput(data, notify=default_notify):
     #get the ranks
     myGraphModel.JacComboRanks = laplaceTools.calcAllSubranks(myGraphModel.Jac, myGraphModel.Rank)
 
-    print "About to process candidates: "
+    print "About to process candidates (distributed: %s)..." % DISTRIBUTED
 
-    # for now, we'll do it in the non-iterative way
-    passSubJacobianRank = [x for x in [processSingleTotalJacobian(myGraphModel, i) for i in passJacobianRank] if x is not None]
-
-    # print "About to do the distributed thing..."
-    #
-    # # compute ranks of all submatrices of the jacobian of the original model
-    # passSubJacobianRankTask = processSingleTotalJacobian.chunks([(myGraphModel, i) for i in passJacobianRank], 10)()
-    # result = passSubJacobianRankTask.get()
-    # passSubJacobianRank = [item for sublist in result for item in sublist if item]
+    if DISTRIBUTED:
+        # compute ranks of all submatrices of the jacobian of the original model
+        passSubJacobianRankTask = processSingleTotalJacobian.chunks([(myGraphModel, i) for i in passJacobianRank], 10)()
+        result = passSubJacobianRankTask.get()
+        passSubJacobianRank = [item for sublist in result for item in sublist if item]
+    else:
+        # for now, we'll do it in the non-iterative way
+        passSubJacobianRank = [x for x in [processSingleTotalJacobian(myGraphModel, i) for i in passJacobianRank] if x is not None]
 
     print ('num of candidates left at the end', len(passSubJacobianRank), 'out of', len(allCandidates))
     output.write('num of candidates left at the end %d output %d' % (len(passSubJacobianRank), len(allCandidates)))
@@ -318,13 +321,3 @@ def processInput(data, notify=default_notify):
     output.close()
 
     return result
-
-@task()
-def processSingleTotalJacobian(myGraphModel, cand):
-    #first get the simplified jacobian
-    cand.Jac = laplaceTools.reducedJacMat(cand.Jac)
-    #get the ranks
-    cand.JacComboRanks = laplaceTools.calcAllSubranks(cand.Jac, myGraphModel.Rank)
-
-    if myGraphModel.JacComboRanks == cand.JacComboRanks:
-        return cand

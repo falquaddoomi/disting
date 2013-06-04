@@ -10,13 +10,16 @@ def getMatrixRank(in_mat):
 
     # first, see if we have a memoized version, which will save us a lot of time...
     # if we don't, make one!
-    if command not in getMatrixRank.memoized:
-        result = calculate(command)
-        getMatrixRank.memoized[command] = int(result)
-
-    return getMatrixRank.memoized[command]
+    # if command not in getMatrixRank.memoized:
+    #     getMatrixRank.memohit += 1
+    #     result = calculate(command)
+    #     getMatrixRank.memoized[command] = int(result)
+    #
+    # return getMatrixRank.memoized[command]
+    return int(calculate(command))
 
 getMatrixRank.memoized = {}
+getMatrixRank.memohit = 0
 
 def calculate(calc):
     """

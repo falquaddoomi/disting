@@ -574,14 +574,11 @@ INDEPENDENT = 0
 def calcAllSubranks(in_mat, k):
     global TOTAL, SOFAR, INDEPENDENT
 
-    print "in calcAllSubranks(%d, %d)..." % (in_mat.rows, k)
-
     rowTree = kbits_tree(in_mat.rows, k)
     TOTAL = countTreeNodes(rowTree)
     SOFAR = 0
     INDEPENDENT = 0
-    print "Total of %d nodes to visit..." % TOTAL
-    return flatten([calcChildRank(x, in_mat, False) for x in rowTree])
+    return list(flatten([calcChildRank(x, in_mat, False) for x in rowTree]))
 
 def calcChildRank(top, in_mat, alreadyRanked):
     global TOTAL, SOFAR, INDEPENDENT
@@ -604,6 +601,6 @@ def calcChildRank(top, in_mat, alreadyRanked):
 
     SOFAR += 1
 
-    print "(%d of %d : %d ind) => Rank for row indices %s: %d" % (SOFAR, TOTAL, INDEPENDENT, str(toprows), rank)
+    # print "(%d of %d : %d ind) => Rank for row indices %s: %d" % (SOFAR, TOTAL, INDEPENDENT, str(toprows), rank)
 
     return rank, [calcChildRank(x, in_mat, alreadyRanked) for x in topkids]

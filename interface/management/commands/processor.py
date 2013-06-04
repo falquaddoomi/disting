@@ -1,8 +1,11 @@
+from datetime import datetime
+import django.utils.timezone
 from django.core.management.base import BaseCommand, CommandError
 import time, traceback
 import sys
 from django.db.models import Q
 import computation.main
+from computation.tasks import processSingleTotalJacobian
 from interface.glue.maxima_proxy import MaximaProxyServer
 from interface.models import Submission
 import atexit
@@ -48,17 +51,22 @@ class Command(BaseCommand):
 
                     # indicate that we're about to run this job
                     job.status = Submission.STATUS_RUNNING
+                    job.started_on = django.utils.timezone.now()
                     job.save()
 
                     # run the job
                     try:
+                        start_time = datetime.now()
                         result = computation.main.processInput(job.makeInput())
+                        print "Run time: %s" % str(datetime.now() - start_time)
                         # indicate that we're done
+                        job.ended_on = django.utils.timezone.now()
                         job.result = result
                         job.status = Submission.STATUS_COMPLETE
                     except Exception as ex:
                         # indicate that we failed :(
                         exc_type, exc_value, exc_traceback = sys.exc_info()
+                        job.ended_on = django.utils.timezone.now()
                         job.result = "".join(traceback.format_exception(exc_type, exc_value, exc_traceback))
                         traceback.print_exc()
                         job.status = Submission.STATUS_ERROR
