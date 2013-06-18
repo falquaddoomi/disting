@@ -1,15 +1,30 @@
 {% extends "base.html" %}
 
-{% block childpagename %}
-Details for Job #{{ job.id }}
-{% endblock %}
+{% block childpagename %}Details for '{{ job.name }}'{% endblock %}
 
 {% block content %}
-    <h1>Details for Job #{{ job.id }}</h1>
+    <h1>Details for '{{ job.name }}'</h1>
+
+    <div style="margin-top: 2em;">
+        <a class="button" style="width: 100px;" href="{% url 'interface:home' %}">Return to Queue</a>
+        <a class="button icon reload" style="width: 80px; margin-left: 2px;" href="{% url 'interface:viewjob' job.id %}">Refresh</a>
+        {% if job.status != "pending" and job.status != "running" %}
+        <a class="button icon edit" style="width: 80px; margin-left: 2px;" href="{% url 'interface:editjob' job.id %}">Edit Job</a>
+        <a class="button icon loop" style="width: 80px; margin-left: 2px;" href="{% url 'interface:resubmitjob' job.id %}">Resubmit Job</a>
+        {% elif job.status == "running" %}
+        <a class="button icon settings danger" onclick="return confirm('Are you sure that you want to cancel this job?');" style="width: 80px; margin-left: 2px;" href="{% url 'interface:canceljob' job.id %}">Cancel Job</a>
+        {% endif %}
+        <a class="button icon remove danger" onclick="return confirm('Are you sure that you want to delete this job?');" style="width: 80px; margin-left: 2px;" href="{% url 'interface:removejob' job.id %}">Remove Job</a>
+    </div>
 
     <div style="margin-left: 20px;">
         <h2>Input</h2>
         <pre style="margin-left: 20px; overflow-x: auto;">{{ job.makeInput }}</pre>
+
+        {% if job.status != "pending" and job.status != "completed" and job.log %}
+        <h2>Log</h2>
+        <pre style="margin-left: 20px; overflow-x: auto;">{{ job.log }}</pre>
+        {% endif %}
 
         <h2>Result</h2>
         {% if job.result %}
@@ -17,13 +32,5 @@ Details for Job #{{ job.id }}
         {% else %}
         <div style="margin-left: 20px; font-style: italic;">(results pending completion or error...)</div>
         {% endif %}
-    </div>
-
-    <div style="margin-top: 2em;">
-        <a class="button" style="width: 100px;" href="{% url 'interface:home' %}">Return to Queue</a>
-        {% if job.status != "pending" and job.status != "running" %}
-        <a class="button icon loop" style="width: 80px;" href="{% url 'interface:resubmitjob' job.id %}">Resubmit Job</a>
-        {% endif %}
-        <a class="button icon remove" onclick="return confirm('Are you sure that you want to delete this job?');" style="width: 80px;" href="{% url 'interface:removejob' job.id %}">Remove Job</a>
     </div>
 {% endblock %}

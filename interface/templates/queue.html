@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-{% block childpagename %}
-Queue
-{% endblock %}
+{% block childpagename %}Queue{% endblock %}
 
 {% block style %}
 <style>
@@ -11,6 +9,8 @@ Queue
 .status_complete { font-weight: bold; color: #72ba2c; }
 .status_error { font-weight: bold; color: #c64b46; }
 .status_interrupted { font-weight: bold; color: #aa52c6; }
+.status_cancelling { font-weight: bold; color: #8b8d8c; }
+.status_cancelled { font-weight: bold; color: #aa52c6; }
 </style>
 {% endblock %}
 
@@ -18,8 +18,9 @@ Queue
 <p>Below is your job queue, which shows the jobs that you've added that are pending, in progress, and completed.</p>
 
     <div class="queue">
-        <table class="task_list" style="width: 700px;" cellpadding="0" cellspacing="0">
+        <table class="task_list" style="width: 100%;" cellpadding="0" cellspacing="0">
             <tr class="task_header">
+                <td>Name</td>
                 <td>Submitted @</td>
                 <td>Running For</td>
                 <td>Status</td>
@@ -28,14 +29,15 @@ Queue
 
             {% for job in jobs %}
                 <tr class="{% cycle 'reg' 'alt' %}">
+                    <td>{{ job.name }}</td>
                     <td>{{ job.created_on }}</td>
                     <td>{{ job.interval }}</td>
                     <td><span class="status_{{ job.status }}">&bullet; {{ job.status }}</span></td>
                     <td style="text-align: right;">
-                        <a class="button icon search" style="width: 80px;" href="{% url 'interface:viewjob' job.id %}">View Details</a>
                         {% if job.status == 'error' %}
-                        <a class="button icon loop" style="width: 80px; margin-left: 2px;" href="{% url 'interface:resubmitjob' job.id %}">Resubmit</a>
+                        <a class="button icon loop" style="width: 80px;" href="{% url 'interface:resubmitjob' job.id %}">Resubmit</a>
                         {% endif %}
+                        <a class="button icon search" style="width: 80px; margin-left: 2px;" href="{% url 'interface:viewjob' job.id %}">View Details</a>
                     </td>
                 </tr>
             {% empty %}

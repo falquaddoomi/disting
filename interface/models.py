@@ -12,6 +12,9 @@ class Submission(models.Model):
     # store the user who submitted this request
     user = models.ForeignKey(User)
 
+    # and the name of the request
+    name = models.CharField(max_length=300)
+
     # and the data for the job
     A = models.CharField(max_length=300)
     B = models.CharField(max_length=300)
