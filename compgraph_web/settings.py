@@ -1,5 +1,9 @@
 # Django settings for compgraph_web project.
 
+# find where this file is located so we can do our STATIC_ROOT thing properly
+import os
+SETTINGS_DIR = os.path.dirname(__file__)
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -61,7 +65,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(SETTINGS_DIR, 'static-all')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -132,6 +136,7 @@ INSTALLED_APPS = (
     'kombu.transport.django',
 
     # my apps
+    'compgraph_web',
     'computation',
     'interface'
 )
@@ -166,8 +171,10 @@ LOGGING = {
 }
 
 # celery settings
-BROKER_URL = 'django://'
-
+# BROKER_URL = 'django://'
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+# BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}  # 1 hour.
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 # FAISAL: celery config
 import djcelery
