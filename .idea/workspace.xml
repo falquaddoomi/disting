@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Faisal\PycharmProjects\compgraph_web\interface\static\interface\css\interface.css" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compgraph_web/static/icons/cc/black/2x2_grid_icon&amp;16.png" afterPath="$PROJECT_DIR$/compgraph_web/static/icons/cc/black/2x2_grid_icon&amp;16.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compgraph_web/static/icons/cc/white/2x2_grid_icon&amp;16.png" afterPath="$PROJECT_DIR$/compgraph_web/static/icons/cc/white/2x2_grid_icon&amp;16.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compgraph_web/static/icons/cc/black/2x2_grid_icon&amp;24.png" afterPath="$PROJECT_DIR$/compgraph_web/static/icons/cc/black/2x2_grid_icon&amp;24.png" />
@@ -3448,6 +3447,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/glue/__init__.py" afterPath="$PROJECT_DIR$/interface/glue/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/management/__init__.py" afterPath="$PROJECT_DIR$/interface/management/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/management/commands/__init__.py" afterPath="$PROJECT_DIR$/interface/management/commands/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/templatetags/__init__.py" afterPath="$PROJECT_DIR$/interface/templatetags/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/templates/addjob.html" afterPath="$PROJECT_DIR$/interface/templates/addjob.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/admin.py" afterPath="$PROJECT_DIR$/interface/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/templates/base.html" afterPath="$PROJECT_DIR$/interface/templates/base.html" />
@@ -3460,6 +3460,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/static/interface/res/gh-buttons.css" afterPath="$PROJECT_DIR$/interface/static/interface/res/gh-buttons.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/computation/graphModel.py" afterPath="$PROJECT_DIR$/computation/graphModel.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/computation/graphTools.py" afterPath="$PROJECT_DIR$/computation/graphTools.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/static/interface/css/interface.css" afterPath="$PROJECT_DIR$/interface/static/interface/css/interface.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/static/interface/css/interface_NEW.css" afterPath="$PROJECT_DIR$/interface/static/interface/css/interface_NEW.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compgraph_web/static/js/jquery-1.7.1.min.js" afterPath="$PROJECT_DIR$/compgraph_web/static/js/jquery-1.7.1.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compgraph_web/static/js/jquery-ui-1.8.18.custom.min.js" afterPath="$PROJECT_DIR$/compgraph_web/static/js/jquery-ui-1.8.18.custom.min.js" />
@@ -3492,6 +3493,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/other.xml" afterPath="$PROJECT_DIR$/.idea/other.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/management/commands/processor.py" afterPath="$PROJECT_DIR$/interface/management/commands/processor.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/templates/templatetags/processor_status.html" afterPath="$PROJECT_DIR$/interface/templates/templatetags/processor_status.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compgraph_web/static/js/pubsub.js" afterPath="$PROJECT_DIR$/compgraph_web/static/js/pubsub.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/templates/queue.html" afterPath="$PROJECT_DIR$/interface/templates/queue.html" />
@@ -3500,6 +3502,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runserver.bat" afterPath="$PROJECT_DIR$/runserver.bat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compgraph_web/settings.py" afterPath="$PROJECT_DIR$/compgraph_web/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compgraph_web/static/js/springy.js" afterPath="$PROJECT_DIR$/compgraph_web/static/js/springy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compgraph_web/static/js/springyui.js" afterPath="$PROJECT_DIR$/compgraph_web/static/js/springyui.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/templatetags/statuses.py" afterPath="$PROJECT_DIR$/interface/templatetags/statuses.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/computation/tasks.py" afterPath="$PROJECT_DIR$/computation/tasks.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/testrunner.xml" afterPath="$PROJECT_DIR$/.idea/testrunner.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interface/tests.py" afterPath="$PROJECT_DIR$/interface/tests.py" />
@@ -3512,34 +3517,49 @@
     </list>
     <ignored path="compgraph_web.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/models.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1370065891138" ignored="false" />
-    <file path="/views.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369145419143" ignored="false" />
-    <file path="/settings.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369762486732" ignored="false" />
-    <file path="/urls.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369145196246" ignored="false" />
-    <file path="/base.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1370038419221" ignored="false" />
+    <file path="/models.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371121726508" ignored="false" />
+    <file path="/views.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371122372711" ignored="false" />
+    <file path="/settings.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371257990804" ignored="false" />
+    <file path="/urls.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371122422330" ignored="false" />
+    <file path="/base.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371251464652" ignored="false" />
     <file path="/home.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1367298760013" ignored="false" />
     <file path="/request.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369133491214" ignored="false" />
     <file path="/dummy.xml" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369131736949" ignored="false" />
     <file path="/thanks.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1367300449534" ignored="false" />
     <file path="/admin.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1367300588761" ignored="false" />
-    <file path="/main.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1370067149244" ignored="false" />
+    <file path="/main.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371022221459" ignored="false" />
     <file path="$PROJECT_DIR$/computation/sympy/utilities/runtests.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369117997775" ignored="false" />
     <file path="/interface.css" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1370037892226" ignored="false" />
-    <file path="/queue.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1370051839750" ignored="false" />
+    <file path="/queue.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371121901023" ignored="false" />
     <file path="/login.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369141998714" ignored="false" />
-    <file path="/processor.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1370065520536" ignored="false" />
-    <file path="/addjob.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369144898843" ignored="false" />
+    <file path="/processor.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371022068767" ignored="false" />
+    <file path="/addjob.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371121941693" ignored="false" />
     <file path="/laplaceTools.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1370014167869" ignored="false" />
-    <file path="/results.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369147227359" ignored="false" />
-    <file path="/Dummy.txt" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1370323106259" ignored="false" />
+    <file path="/results.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371122410346" ignored="false" />
+    <file path="/Dummy.txt" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371590089653" ignored="false" />
     <file path="/tasks.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369997671740" ignored="false" />
     <file path="/laplaceTools_dist.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369765780750" ignored="false" />
     <file path="/maxima_server.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369959914137" ignored="false" />
-    <file path="/maxima_proxy.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369998547946" ignored="false" />
+    <file path="/maxima_proxy.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371590738292" ignored="false" />
     <file path="/maximaTools.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1370067544868" ignored="false" />
     <file path="/a.dummy" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1369994721885" ignored="false" />
     <file path="/statuses.py" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1370038602993" ignored="false" />
     <file path="/processor_status.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1370038301163" ignored="false" />
+    <file path="/addjob_alt.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371121141141" ignored="false" />
+    <file path="/equation_editor.js" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371121420986" ignored="false" />
+    <file path="/editjob.html" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371123056710" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/openapi.jar!/standardSchemas/xhtml1-strict.xsd" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371573802314" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/pycharm.jar!/resources/relaxng.rng" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371573802335" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/openapi.jar!/standardSchemas/catalog.xsd" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371573802353" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/openapi.jar!/standardSchemas/html5/xhtml5.xsd" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371573802370" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/openapi.jar!/standardSchemas/XMLSchema.xsd" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371573802387" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/openapi.jar!/standardSchemas/xinclude.xsd" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371573802489" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/openapi.jar!/standardSchemas/xslt-1_0.xsd" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371573802504" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/openapi.jar!/standardSchemas/XMLSchema-instance.xsd" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371573802524" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/openapi.jar!/standardSchemas/xslt-2_0.xsd" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371573802540" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/openapi.jar!/standardSchemas/xml.xsd" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371573802646" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/openapi.jar!/standardSchemas/xhtml1-frameset.xsd" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371573802747" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/openapi.jar!/standardSchemas/xhtml1-transitional.xsd" changelist="11c0b2c6-7516-44d3-9a92-e1d3e2d7b2e6" time="1371573802761" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -3558,7 +3578,46 @@
     <favorites_list name="compgraph_web" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interface/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="24" selection-start="621" selection-end="621" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/compgraph_web/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="149" column="17" selection-start="5214" selection-end="5214" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="processor.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interface/management/commands/processor.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="55" column="41" selection-start="1875" selection-end="1875" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="maxima_proxy.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/interface/glue/maxima_proxy.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="76" column="34" selection-start="2805" selection-end="2805" vertical-scroll-proportion="0.38120106">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -3576,22 +3635,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/interface/templates/results.html" />
-        <option value="$PROJECT_DIR$/compgraph_web/settings.py" />
-        <option value="$PROJECT_DIR$/computation/laplaceTools_dist.py" />
-        <option value="$PROJECT_DIR$/interface/management/commands/maxima_server.py" />
-        <option value="$PROJECT_DIR$/interface/glue/maxima_proxy.py" />
-        <option value="$PROJECT_DIR$/computation/laplaceTools.py" />
-        <option value="$PROJECT_DIR$/interface/static/interface/css/interface.css" />
-        <option value="$PROJECT_DIR$/interface/templates/templatetags/processor_status.html" />
-        <option value="$PROJECT_DIR$/interface/templatetags/statuses.py" />
         <option value="$PROJECT_DIR$/computation/tasks.py" />
-        <option value="$PROJECT_DIR$/interface/templates/base.html" />
-        <option value="$PROJECT_DIR$/interface/templates/queue.html" />
-        <option value="$PROJECT_DIR$/interface/management/commands/processor.py" />
-        <option value="$PROJECT_DIR$/interface/models.py" />
-        <option value="$PROJECT_DIR$/computation/main.py" />
         <option value="$PROJECT_DIR$/computation/maximaTools.py" />
+        <option value="$PROJECT_DIR$/interface/management/commands/processor.py" />
+        <option value="$PROJECT_DIR$/computation/main.py" />
+        <option value="$PROJECT_DIR$/interface/templates/addjob_alt.html" />
+        <option value="$PROJECT_DIR$/interface/static/interface/js/equation_editor.js" />
+        <option value="$PROJECT_DIR$/interface/models.py" />
+        <option value="$PROJECT_DIR$/interface/templates/addjob.html" />
+        <option value="$PROJECT_DIR$/interface/urls.py" />
+        <option value="$PROJECT_DIR$/interface/templates/results.html" />
+        <option value="$PROJECT_DIR$/interface/templates/editjob.html" />
+        <option value="$PROJECT_DIR$/interface/views.py" />
+        <option value="$PROJECT_DIR$/interface/templates/queue.html" />
+        <option value="$PROJECT_DIR$/interface/templates/base.html" />
+        <option value="$PROJECT_DIR$/compgraph_web/settings.py" />
+        <option value="$PROJECT_DIR$/interface/glue/maxima_proxy.py" />
       </list>
     </option>
   </component>
@@ -3627,6 +3686,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -3655,13 +3715,66 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="interface" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="compgraph_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="compgraph_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="interface" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="management" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="compgraph_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="compgraph_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="interface" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="management" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commands" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="compgraph_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="compgraph_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="compgraph_web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3731,6 +3844,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Faisal\PycharmProjects\compgraph_web\interface\templates" />
       <recent name="C:\Users\Faisal\PycharmProjects\compgraph_web\interface\static\interface\css" />
       <recent name="C:\Users\Faisal\PycharmProjects\compgraph_web\computation" />
       <recent name="C:\Users\Faisal\PycharmProjects\compgraph_web\interface\static\interface" />
@@ -3916,20 +4030,20 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1374" height="748" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32695374" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.672" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21969697" sideWeight="0.67304623" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2659091" sideWeight="0.67304623" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32695374" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3998,93 +4112,97 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/interface/glue/maxima_proxy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="29" selection-start="1066" selection-end="1066" vertical-scroll-proportion="0.9283276" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/computation/graphTools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="164" column="22" selection-start="4780" selection-end="4780" vertical-scroll-proportion="-0.44259566" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/computation/candidate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="37" selection-start="343" selection-end="343" vertical-scroll-proportion="0.1797005" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/computation/laplaceTools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="579" column="19" selection-start="16620" selection-end="16620" vertical-scroll-proportion="0.09484193" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interface/templates/addjob.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="27" selection-start="243" selection-end="243" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interface/static/interface/css/interface.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="23" selection-start="483" selection-end="483" vertical-scroll-proportion="0.23627287" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interface/templates/templatetags/processor_status.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="24" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interface/templatetags/statuses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="38" selection-start="466" selection-end="466" vertical-scroll-proportion="0.39600664" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/computation/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="189" selection-end="189" vertical-scroll-proportion="0.33943427" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interface/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="35" selection-start="1014" selection-end="1014" vertical-scroll-proportion="0.40599" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interface/templates/queue.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="31" selection-start="828" selection-end="828" vertical-scroll-proportion="0.18686868" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/compgraph_web/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="150" column="6" selection-start="5186" selection-end="5186" vertical-scroll-proportion="0.04292929" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interface/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="0" selection-start="1949" selection-end="1949" vertical-scroll-proportion="0.17171717" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interface/management/commands/processor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="23" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0" />
+        <state line="596" column="36" selection-start="17199" selection-end="17199" vertical-scroll-proportion="0.547421" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/computation/maximaTools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="25" selection-start="653" selection-end="653" vertical-scroll-proportion="0.0">
+        <state line="0" column="21" selection-start="21" selection-end="21" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="29" selection-start="699" selection-end="699" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/templates/addjob.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="17" selection-start="1404" selection-end="1404" vertical-scroll-proportion="1.2721088" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="82" selection-start="540" selection-end="540" vertical-scroll-proportion="0.22628951" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="5" selection-start="2240" selection-end="2240" vertical-scroll-proportion="1.2445923" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/templates/editjob.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="64" selection-start="590" selection-end="590" vertical-scroll-proportion="0.028911564" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/templates/results.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="1288" selection-end="1288" vertical-scroll-proportion="0.335034" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/static/interface/js/equation_editor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="102" column="0" selection-start="3359" selection-end="3359" vertical-scroll-proportion="0.6705491" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/templates/addjob_alt.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="0" selection-start="1396" selection-end="1396" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/templates/queue.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="31" selection-start="970" selection-end="970" vertical-scroll-proportion="0.4808652" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="24" selection-start="621" selection-end="621" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/computation/main.py">
+    <entry file="file://$PROJECT_DIR$/compgraph_web/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="170" column="20" selection-start="5330" selection-end="5330" vertical-scroll-proportion="0.28911564">
+        <state line="19" column="71" selection-start="903" selection-end="903" vertical-scroll-proportion="0.46256238" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compgraph_web/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="149" column="17" selection-start="5214" selection-end="5214" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/management/commands/processor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="41" selection-start="1875" selection-end="1875" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interface/glue/maxima_proxy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="34" selection-start="2805" selection-end="2805" vertical-scroll-proportion="0.38120106">
+          <folding />
         </state>
       </provider>
     </entry>
