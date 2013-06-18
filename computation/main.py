@@ -59,30 +59,36 @@ def processInput(data, notify=default_notify):
     #num outputs
     #m = 2
 
+    notify(" => Inside input processor!")
+
     #after this everything we need is computed, the Jacobian, alphas, betas, etc
     myGraphModel = graphModel.graphModel(A, B, C, n, r, m, AdjMat)
 
+    notify(" => completed graphModel.graphModel")
+
     if myGraphModel.QRank != n:
         output.write('q rank != n nonobservable')
-        print 'q rank != n nonobservable'
-        print 'process ended'
-        exit()
+        notify('q rank != n nonobservable')
+        notify('process ended')
+        return "model nonobservable"
+
     if myGraphModel.RRank != n:
         output.write('r rank != n noncontrollable')
-        print 'r rank != n noncontrollable'
-        print 'process ended'
-        exit()
-    print 'DONE MAKING ORIG MODEL'
+        notify('r rank != n noncontrollable')
+        notify('process ended')
+        return "model noncontrollable"
+
+    notify('DONE MAKING ORIG MODEL')
 
 
-    print n
-    print myGraphModel.Rank
+    notify(n)
+    notify(myGraphModel.Rank)
 
     allCandidates = graphTools.generateAllGraphs(myGraphModel.myGraph, n, myGraphModel.Rank, myGraphModel.Rank)
-    print 'my original model graph (transposed)'
-    print  networkx.to_numpy_matrix(myGraphModel.myGraph)
-    print 'my original model edges'
-    print list(myGraphModel.myGraph.edges())
+    notify('my original model graph (transposed)')
+    notify( networkx.to_numpy_matrix(myGraphModel.myGraph))
+    notify('my original model edges')
+    notify(list(myGraphModel.myGraph.edges()))
     #find number of paths from node to observation
     numOrigPathsToObs = graphTools.findNumPathsToObs(myGraphModel, C)
 
@@ -103,7 +109,7 @@ def processInput(data, notify=default_notify):
         try:
             origPathsList.append([p for p in shortestPathsOrig[0]])
         except networkx.exception.NetworkXNoPath:
-            print "No Orig Path"
+            notify("No Orig Path")
     else:
         output.write('No path from input to output in the original graph')
         output.close()
@@ -121,7 +127,7 @@ def processInput(data, notify=default_notify):
     numTrapsWrong = 0
     numPathsListWrong = 0
 
-    print ('number of candidates', len(allCandidates))
+    notify('number of candidates: %d' % len(allCandidates))
     output.write('num of candidates %d' % len(allCandidates))
     output.write('\n')
     for candidate in allCandidates:
@@ -181,7 +187,7 @@ def processInput(data, notify=default_notify):
 
 
 
-    print ('num of candidates left after graph properties checked', len(passGraphCand), 'out of', len(allCandidates))
+    notify('num of candidates left after graph properties checked: %d out of %d' % (len(passGraphCand), len(allCandidates)))
     output.write('num of candidates left after graph properties checked %d output %d' % (len(passGraphCand), len(allCandidates)))
     output.write('\n')
 
@@ -272,10 +278,15 @@ def processInput(data, notify=default_notify):
                     #print candAlphaKeysList
                     #print candBetaKeysList
 
+    notify('the alphas: %s' % str(myGraphModel.alphaKeys))
+    notify('the betas: %s' % str(myGraphModel.betaKeys))
+    output.write('the alphas: %s' % str(myGraphModel.alphaKeys))
+    output.write('\n')
+    output.write('the betas: %s' % str(myGraphModel.betaKeys))
+    output.write('\n')
 
-
-    print ('num of candidates left alpha betas checked', len(passLaplaceCand), 'out of', len(allCandidates))
-    output.write('num of candidates left alpha betas checked %d output %d' % (len(passLaplaceCand), len(allCandidates)))
+    notify('num of candidates left alpha betas checked: %d out of %d' % (len(passLaplaceCand), len(allCandidates)))
+    output.write('num of candidates left alpha betas checked %d out of %d' % (len(passLaplaceCand), len(allCandidates)))
     output.write('\n')
     passJacobianRank = []
     for cand in passLaplaceCand:
@@ -284,8 +295,8 @@ def processInput(data, notify=default_notify):
         if myGraphModel.Rank == cand.Rank:
             passJacobianRank.append(cand)
 
-    print ('num of candidates left after calc rank full jacobian', len(passJacobianRank), 'out of', len(allCandidates))
-    output.write('num of candidates left after calc rank full jacobian %d output %d' % (len(passJacobianRank), len(allCandidates)))
+    notify('num of candidates left after calc rank full jacobian: %d out of %d' % (len(passJacobianRank), len(allCandidates)))
+    output.write('num of candidates left after calc rank full jacobian %d out of %d' % (len(passJacobianRank), len(allCandidates)))
     output.write('\n')
 
     #first get the simplified jacobian
@@ -293,7 +304,7 @@ def processInput(data, notify=default_notify):
     #get the ranks
     myGraphModel.JacComboRanks = laplaceTools.calcAllSubranks(myGraphModel.Jac, myGraphModel.Rank)
 
-    print "About to process candidates (distributed: %s)..." % DISTRIBUTED
+    notify("About to process candidates (distributed: %s)..." % DISTRIBUTED)
 
     if DISTRIBUTED:
         # compute ranks of all submatrices of the jacobian of the original model
@@ -304,17 +315,21 @@ def processInput(data, notify=default_notify):
         # for now, we'll do it in the non-iterative way
         passSubJacobianRank = [x for x in [processSingleTotalJacobian(myGraphModel, i) for i in passJacobianRank] if x is not None]
 
-    print ('num of candidates left at the end', len(passSubJacobianRank), 'out of', len(allCandidates))
+    notify('num of candidates left at the end: %d out of %d' % (len(passSubJacobianRank), len(allCandidates)))
     output.write('num of candidates left at the end %d output %d' % (len(passSubJacobianRank), len(allCandidates)))
     output.write('\n')
     output.write('Adjacency graphs\n')
     output.write('Original Model\n')
     output.write(str(networkx.to_numpy_matrix(myGraphModel.myGraph).T))
+    output.write('A matrix %s \n' % str(myGraphModel.A))
     output.write('\n')
 
     for i, cand in enumerate(passSubJacobianRank):
         output.write('Model %d \n' % i)
         output.write(str(networkx.to_numpy_matrix(cand.myGraph).T))
+        output.write('\n')
+        output.write('A matrix %s \n' % str(cand.A))
+        output.write('\n')
         output.write('\n')
 
     result = output.getvalue()

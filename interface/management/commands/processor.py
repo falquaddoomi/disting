@@ -13,6 +13,25 @@ import atexit
 class JobCancelledException(Exception):
     pass
 
+def logger_notify(msg, job):
+    """
+    Prints job output to the screen as well as makes it available on the interface.
+    Also checks the interface each time it's called
+    :type job: Submission
+    """
+
+    # refresh, log to, and save the object
+    # we refresh so we can detect if it's been cancelled
+    job = Submission.objects.get(id=job.id)
+    job.log += "%s\n" % msg
+    job.save()
+
+    if job.status == Submission.STATUS_CANCELLING:
+        print "Job cancelled, quitting..."
+        raise JobCancelledException
+
+    print msg
+
 class Command(BaseCommand):
     args = ''
     help = 'Iterates over the job queue and processes jobs intermittently'
@@ -20,6 +39,7 @@ class Command(BaseCommand):
     def on_exit(self):
         print '=== ENDING TASK PROCESSOR ==='
         Submission.objects.filter(status=Submission.STATUS_RUNNING).update(status=Submission.STATUS_INTERRUPTED)
+        Submission.objects.filter(status=Submission.STATUS_CANCELLING).update(status=Submission.STATUS_CANCELLED)
         if self.maxima_server:
             self.maxima_server.stop()
 
@@ -52,17 +72,22 @@ class Command(BaseCommand):
                     # indicate that we're about to run this job
                     job.status = Submission.STATUS_RUNNING
                     job.started_on = django.utils.timezone.now()
+                    job.ended_on = None
+                    job.log = ''
+                    job.result = ''
                     job.save()
 
                     # run the job
                     try:
                         start_time = datetime.now()
-                        result = computation.main.processInput(job.makeInput())
+                        result = computation.main.processInput(job.makeInput(), notify=lambda x: logger_notify(x, job))
                         print "Run time: %s" % str(datetime.now() - start_time)
                         # indicate that we're done
                         job.ended_on = django.utils.timezone.now()
                         job.result = result
                         job.status = Submission.STATUS_COMPLETE
+                    except JobCancelledException:
+                        job.status = Submission.STATUS_CANCELLED
                     except Exception as ex:
                         # indicate that we failed :(
                         exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -70,9 +95,10 @@ class Command(BaseCommand):
                         job.result = "".join(traceback.format_exception(exc_type, exc_value, exc_traceback))
                         traceback.print_exc()
                         job.status = Submission.STATUS_ERROR
-
-                    # either way, save the result
-                    job.save()
+                    finally:
+                        # no matter what, save the result
+                        job.ended_on = django.utils.timezone.now()
+                        job.save()
 
                     self.stdout.write('Executed "%s" with final status %s' % (job, job.status))
 
