@@ -385,7 +385,7 @@ def calcAltRank(in_mat):
     m = in_mat.cols
 
     
-    F = vfield("a_(1:5)(1:5)", ZZ)
+    F = vfield("a_(1:50)(1:50)", ZZ)
 
     myRawMat = RawMatrix(in_mat.rows, in_mat.cols, map(F.to_domain().convert, in_mat))
     
