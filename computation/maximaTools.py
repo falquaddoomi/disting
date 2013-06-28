@@ -1,3 +1,6 @@
+import random
+from compgraph_web.settings import PYMAX_INSTANCES, PYMAX_STARTING_PORT
+
 __author__ = 'Faisal'
 
 import socket
@@ -14,12 +17,12 @@ def getMatrixRank(in_mat):
     #     getMatrixRank.memohit += 1
     #     result = calculate(command)
     #     getMatrixRank.memoized[command] = int(result)
-    #
+
     # return getMatrixRank.memoized[command]
     return int(calculate(command))
 
-getMatrixRank.memoized = {}
-getMatrixRank.memohit = 0
+# getMatrixRank.memoized = {}
+# getMatrixRank.memohit = 0
 
 def calculate(calc):
     """
@@ -29,7 +32,10 @@ def calculate(calc):
     :param calc: The calculation to send to the Maxima proxy server
     :type calc: str
     """
-    HOST, PORT = "localhost", 8523
+    HOST, PORT = "localhost", PYMAX_STARTING_PORT
+
+    # choose a random service running on some port and access that
+    PORT += random.randint(0, PYMAX_INSTANCES-1)
 
     # Create a socket (SOCK_STREAM means a TCP socket)
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

@@ -11,6 +11,10 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+ALLOWED_HOSTS = [
+    '*' # errbody; just for testing, since this is a private webserver anyway
+]
+
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -50,7 +54,7 @@ USE_I18N = True
 USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = True
+USE_TZ = False
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
@@ -130,6 +134,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 
     # third-party apps
+    'gunicorn',
     'south',
     'django_extensions',
     'djcelery',
@@ -176,6 +181,17 @@ BROKER_URL = 'amqp://guest:guest@localhost:5672//'
 # BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}  # 1 hour.
 # CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
+CELERY_DISABLE_RATE_LIMITS = True
+
 # FAISAL: celery config
 import djcelery
 djcelery.setup_loader()
+
+# compgraph-specific settings
+DISTRIBUTED = True # if true, allows the process to be sped up across multiple cores; true is better
+COMPUTE_ALL_SUBMAT_RANKS = True # if true, doesn't cull the submatrix tree; false is better
+
+PYMAX_INSTANCES = 20 # number of maxima (or pymax) instances that end up getting spawned
+# the port on which the first instance of the pymax server
+# is created (or the only one if there's only one)
+PYMAX_STARTING_PORT = 8523

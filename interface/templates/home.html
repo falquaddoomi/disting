@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block childpagename %}Home{% endblock %}
+
+{% block style %}
+<style>
+p { text-indent: 1em; }
+
+#choices_tray {
+    padding: 5px 20px 20px;
+}
+
+#choices_tray a {
+    width: 400px;
+    background: #f4f4f4;
+    border: solid 1px #ccc;
+    border-bottom: solid 5px #ccc;
+    padding: 15px;
+    text-decoration: none; display: block;
+    padding-left: 75px;
+    background-repeat: no-repeat;
+    background-position: 14px 45%;
+    margin-bottom: 1em;
+    color: #3884cd;
+    position: relative;
+}
+
+#choices_tray a:hover {
+    color: #599bdc;
+    background-color: white;
+    top: -1px;
+}
+
+#choices_tray a h3 { margin: 0px; }
+#choices_tray a p {
+    text-indent: 0; color: #555;
+    margin: 5px 3px 3px 0px;
+}
+
+#choices_tray a#queue_selection { background-image: url('{{ STATIC_URL }}icons/cc/black/list_bullets_icon&48.png'); }
+#choices_tray a#addjob_selection { background-image: url('{{ STATIC_URL }}icons/cc/black/round_plus_icon&48.png'); background-position: 11px 45%; }
+</style>
+{% endblock %}
+
+{% block content %}
+    <p>
+    Welcome to <b>DISTING</b>, a tool for establishing the distinguishability of linear compartmental models.
+    </p>
+
+    <h2>Overview</h2>
+
+    <p>The site is centered around a <b>job queue</b>, which shows the status of jobs that you've created as well as allows you to access the results of jobs that have previously run. From the queue page, you can create new jobs, restart jobs that have failed or run previously, view detailed statuses about jobs, or remove jobs from the queue.</p>
+
+    <p>Jobs are run one at a time. They start in the <b class="status_pending">pending</b> status, then move to <b class="status_running">running</b>, and finally to <b class="status_complete">complete</b>. If an error occurs, the status of the job will instead change to <b class="status_error">error</b>. Once a job has completed or failed, the next job in the queue will execute until all jobs are complete. Note that the one-job limit applies to all users, so if other users are using the system it may take some time for your job to be processed. This is in the interest of providing the fastest turnaround time for a single job, although this may be changed in the future.</p>
+
+    <p>
+    The job queue itself stores <b>jobs</b>, which are descriptions of the problems that you'd like to solve. These jobs are created from the <b>add job</b> page, which requires that you enter the adjacency matrix describing your linear compartment model as well as identify which nodes are the inputs to the system and which are the outputs. Once you've entered your problem, you may add it to the queue and it will be processed.
+    </p>
+
+    <h2>Actions</h2>
+    {% if user.is_authenticated %}
+        <div id="choices_tray">
+            <a id="queue_selection" href="{% url 'interface:queue' %}">
+                <h3>View the Job Queue</h3>
+                <p>view jobs, modify job statuses, edit individual jobs</p>
+            </a>
+
+            <a id="addjob_selection" href="{% url 'interface:addjob' %}">
+                <h3>Create a New Job</h3>
+                <p>add new jobs to the queue</p>
+            </a>
+        </div>
+    {% else %}
+        <p>
+        You'll need an account to use this tool, which you can obtain by contacting the site administrator, faisal (at) cs.ucla.edu.
+        </p>
+    {% endif %}
+
+{% endblock %}

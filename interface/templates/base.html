@@ -4,7 +4,7 @@
 
 <html>
     <head>
-        <title>Compgraph: {% block childpagename %}base{% endblock %}</title>
+        <title>DISTING: {% block childpagename %}base{% endblock %}</title>
 
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}interface/res/gh-buttons.css" />
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}interface/css/interface.css" />
@@ -21,13 +21,15 @@
     <body>
         <div id="trunk">
             <div id="header">
-                <h1>Compgraph : Model Distinguishability Tool</h1>
+                <h1><a id="homelink" href="{% url 'interface:home' %}">DISTING</a> : {% block childpagename2 %}Model Distinguishability Tool{% endblock %}</h1>
 
-                {% if user.is_authenticated %}
                 <div class="login_widget">
+                {% if user.is_authenticated %}
                 logged in as <b>{{ user }}</b> - <a href="{% url 'interface:interface_logout' %}">log out</a>
-                </div>
+                {% else %}
+                not logged in - <a href="{% url 'interface:queue' %}">log in</a>
                 {% endif %}
+                </div>
             </div>
 
             <div id="content">

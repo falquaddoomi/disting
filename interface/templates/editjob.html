@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block childpagename %}Editing Job '{{ job.name }}'{% endblock %}
+{% block childpagename2 %}Editing Job '{{ job.name }}'{% endblock %}
 
 {% block style %}
     <style>
@@ -72,7 +73,8 @@
                 <td></td>
                 <td>
                     <input type="submit" style="width: 100px;" class="button icon approve" name="sub" value="Save Job" />
-                    <input type="button" style="width: 100px; margin-left: 2px;" class="button icon reload" onclick="parent.location = '{% url 'interface:home' %}'" value="Cancel" />
+                    <input type="button" style="width: 100px; margin-left: 2px;" class="button icon reload" onclick="parent.location = '{% url 'interface:queue' %}'" value="Cancel" />
+                    <a class="button" style="margin-left: 2px;" href="{% url 'interface:editjob_alt' job.id %}">Alternate Interface...</a>
                 </td>
                 <td></td>
             </tr>

@@ -1,6 +1,7 @@
 import itertools
 import os
 import subprocess
+from compgraph_web.settings import COMPUTE_ALL_SUBMAT_RANKS
 from computation import maximaTools
 
 __author__ = 'Natalie'
@@ -380,11 +381,11 @@ def calcJacobian(symbolAdjMat, Alphas, Betas):
     return myJac
 
 from sympy import S
+
 def calcAltRank(in_mat):
     n = in_mat.rows
     m = in_mat.cols
 
-    
     F = vfield("a_(1:50)(1:50)", ZZ)
 
     myRawMat = RawMatrix(in_mat.rows, in_mat.cols, map(F.to_domain().convert, in_mat))
@@ -471,10 +472,11 @@ def calcRank(in_mat):
     #print 'my row rank'
     #print rank
 
-
-    rank2 = calcAltRank(in_mat)
+    # rank2 = calcAltRank(in_mat)
     #print 'mat rank'
     #print rank2
+
+    rank2 = maximaTools.getMatrixRank(in_mat)
 
     return rank2
 
@@ -567,28 +569,17 @@ def countTreeNodesRecurse(top):
     toprows, topkids = top
     return 1 + sum([countTreeNodesRecurse(i) for i in topkids])
 
-TOTAL = 0
-SOFAR = 0
-INDEPENDENT = 0
-
 def calcAllSubranks(in_mat, k):
-    global TOTAL, SOFAR, INDEPENDENT
-
     rowTree = kbits_tree(in_mat.rows, k)
-    TOTAL = countTreeNodes(rowTree)
-    SOFAR = 0
-    INDEPENDENT = 0
     return list(flatten([calcChildRank(x, in_mat, False) for x in rowTree]))
 
 def calcChildRank(top, in_mat, alreadyRanked):
-    global TOTAL, SOFAR, INDEPENDENT
-
     toprows, topkids = top
 
     # F = vfield("a_(1:%d)(1:%d)" % (len(toprows), in_mat.cols), ZZ)
     F = vfield("a_(1:5)(1:5)", ZZ)
 
-    if alreadyRanked:
+    if alreadyRanked and not COMPUTE_ALL_SUBMAT_RANKS:
         rank = len(toprows)
     else:
         newSubMat = makeNewMat(toprows, in_mat)
@@ -596,11 +587,5 @@ def calcChildRank(top, in_mat, alreadyRanked):
         # rank = calcRank(myRawMat)
         rank = maximaTools.getMatrixRank(myRawMat)
         alreadyRanked = (rank == len(toprows))
-
-        if alreadyRanked: INDEPENDENT += 1
-
-    SOFAR += 1
-
-    # print "(%d of %d : %d ind) => Rank for row indices %s: %d" % (SOFAR, TOTAL, INDEPENDENT, str(toprows), rank)
 
     return rank, [calcChildRank(x, in_mat, alreadyRanked) for x in topkids]

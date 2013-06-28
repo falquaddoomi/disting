@@ -25,6 +25,16 @@ body {
     padding: 0px; margin: 0; font-size: 32px;
 }
 
+#header #homelink {
+    color: #3c8dde;
+    text-decoration: none;
+}
+
+#header #homelink:hover {
+    color: #8dc0f0;
+    text-decoration: none;
+}
+
 #header .login_widget {
     position: absolute;
     right: 5px; bottom: 15px;
@@ -54,6 +64,8 @@ body {
 
 /* page-level styles */
 
+.error_msg { font-weight: bold; color: darkred; margin-bottom: 0.5em; }
+
 .task_list {
     padding: 3px; border: solid 1px #aaa; width: 600px;
     margin-bottom: 1em;
@@ -79,3 +91,12 @@ body {
 /* vertical tables */
 .vertical td { padding: 6px; }
 /*.vertical tr.action_tray td { border-top: solid 1px #ccc; }*/
+
+/* special styles */
+.status_pending { font-weight: bold; color: #4674a3; }
+.status_running { font-weight: bold; color: #cab336; }
+.status_complete { font-weight: bold; color: #72ba2c; }
+.status_error { font-weight: bold; color: #c64b46; }
+.status_interrupted { font-weight: bold; color: #9247aa; }
+.status_cancelling { font-weight: bold; color: #8b8d8c; }
+.status_cancelled { font-weight: bold; color: #c69da2; }

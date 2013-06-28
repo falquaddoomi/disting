@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block childpagename %}Editing Job '{{ job.name }}'{% endblock %}
+{% block childpagename2 %}Editing Job '{{ job.name }}'{% endblock %}
+
+{% block style %}
+    <style>
+    #id_A { width: 300px; }
+    #id_B { width: 300px; }
+    #id_C { width: 300px; }
+    #id_Adj { width: 300px; }
+    #id_n { width: 100px; }
+    #id_r { width: 100px; }
+    #id_m { width: 100px; }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <p>Edit your input problem in the fields below.</p>
+
+    <form method="POST" action="{% url 'interface:editjob_alt' job.id %}">
+        {% csrf_token %}
+        <table class="vertical" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>{{ requestform.name.label_tag }}:</th>
+                <td>{{ requestform.name }}</td>
+                <td class="example">(ex. "My Job")</td>
+            </tr>
+
+            <tr>
+                <th>{{ requestform.A.label_tag }}:</th>
+                <td>{{ requestform.A }}</td>
+                <td class="example">(ex. [1 1 0 0; 1 1 0 0; 1 0 1 1; 0 0 1 1])</td>
+            </tr>
+
+            <tr>
+                <th>{{ requestform.B.label_tag }}:</th>
+                <td>{{ requestform.B }}</td>
+                <td class="example">(ex. [1; 0; 0; 0])</td>
+            </tr>
+
+            <tr>
+                <th>{{ requestform.C.label_tag }}:</th>
+                <td>{{ requestform.C }}</td>
+                <td class="example">(ex. [1 0 0 0; 0 0 1 0])</td>
+            </tr>
+
+            <tr>
+                <th>{{ requestform.Adj.label_tag }}:</th>
+                <td>{{ requestform.Adj }}</td>
+                <td class="example">(ex. [1 1 0 0; 1 1 0 0; 1 0 1 1; 0 0 1 1])</td>
+            </tr>
+
+            <tr>
+                <th>{{ requestform.n.label_tag }}:</th>
+                <td>{{ requestform.n }}</td>
+                <td class="example">(ex. 4)</td>
+            </tr>
+
+            <tr>
+                <th>{{ requestform.r.label_tag }}:</th>
+                <td>{{ requestform.r }}</td>
+                <td class="example">(ex. 1)</td>
+            </tr>
+
+            <tr>
+                <th>{{ requestform.m.label_tag }}:</th>
+                <td>{{ requestform.m }}</td>
+                <td class="example">(ex. 2)</td>
+            </tr>
+
+            <tr class="action_tray">
+                <td></td>
+                <td>
+                    <input type="submit" style="width: 100px;" class="button icon approve" name="sub" value="Save Job" />
+                    <input type="button" style="width: 100px; margin-left: 2px;" class="button icon reload" onclick="parent.location = '{% url 'interface:queue' %}'" value="Cancel" />
+                    <a class="button" style="margin-left: 2px;" href="{% url 'interface:editjob' job.id %}">Regular Interface...</a>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}

@@ -1,23 +1,17 @@
 {% extends "base.html" %}
 
 {% block childpagename %}Queue{% endblock %}
-
-{% block style %}
-<style>
-.status_pending { font-weight: bold; color: #4674a3; }
-.status_running { font-weight: bold; color: #cab336; }
-.status_complete { font-weight: bold; color: #72ba2c; }
-.status_error { font-weight: bold; color: #c64b46; }
-.status_interrupted { font-weight: bold; color: #aa52c6; }
-.status_cancelling { font-weight: bold; color: #8b8d8c; }
-.status_cancelled { font-weight: bold; color: #aa52c6; }
-</style>
-{% endblock %}
+{% block childpagename2 %}Queue{% endblock %}
 
 {% block content %}
 <p>Below is your job queue, which shows the jobs that you've added that are pending, in progress, and completed.</p>
 
     <div class="queue">
+        <div style="margin-bottom: 1em; text-align: left; width: 600px;">
+            <a class="button icon add" style="width: 80px;" href="{% url 'interface:addjob' %}">Add Job</a>
+            <a class="button icon reload" style="width: 80px; margin-left: 2px;" href="{% url 'interface:queue' %}">Refresh</a>
+        </div>
+
         <table class="task_list" style="width: 100%;" cellpadding="0" cellspacing="0">
             <tr class="task_header">
                 <td>Name</td>
@@ -44,10 +38,5 @@
                 <tr><td colspan="4"><i>no jobs have been submitted yet...</i></td></tr>
             {% endfor %}
         </table>
-
-        <div style="margin-top: 1em; text-align: left; width: 600px;">
-            <a class="button icon add" style="width: 80px;" href="{% url 'interface:addjob' %}">Add Job</a>
-            <a class="button icon reload" style="width: 80px; margin-left: 2px;" href="{% url 'interface:home' %}">Refresh</a>
-        </div>
     </div>
 {% endblock %}

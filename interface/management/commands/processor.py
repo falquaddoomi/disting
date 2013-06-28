@@ -4,8 +4,10 @@ from django.core.management.base import BaseCommand, CommandError
 import time, traceback
 import sys
 from django.db.models import Q
+from compgraph_web.settings import PYMAX_INSTANCES
 import computation.main
 from computation.tasks import processSingleTotalJacobian
+from interface.glue.maxima_multiproxy import MaximaMultiProxyServer
 from interface.glue.maxima_proxy import MaximaProxyServer
 from interface.models import Submission
 import atexit
@@ -40,8 +42,12 @@ class Command(BaseCommand):
         print '=== ENDING TASK PROCESSOR ==='
         Submission.objects.filter(status=Submission.STATUS_RUNNING).update(status=Submission.STATUS_INTERRUPTED)
         Submission.objects.filter(status=Submission.STATUS_CANCELLING).update(status=Submission.STATUS_CANCELLED)
-        if self.maxima_server:
-            self.maxima_server.stop()
+
+        # if self.maxima_server:
+        #     self.maxima_server.stop()
+
+        for server in self.max_servers:
+            server.stop()
 
     def handle(self, *args, **options):
         self.stdout.write('=== compgraph job processing daemon v0.1 ===')
@@ -53,12 +59,24 @@ class Command(BaseCommand):
         # start up the maxima server
         self.stdout.write(" => starting maxima server...")
 
-        self.maxima_server = MaximaProxyServer()
-        self.maxima_server.start()
+        # self.maxima_server = MaximaMultiProxyServer(instances=3)
+        # self.maxima_server.start()
+        #
+        # # wait until the server's up and ready...
+        # while not self.maxima_server.all_ready():
+        #     continue
 
-        # wait until the server's up and ready...
-        while not self.maxima_server.maxima_server.ready:
+        # instead, let's try to start multiple copies of the same server
+        self.max_servers = []
+        for i in range(PYMAX_INSTANCES):
+            newServer = MaximaProxyServer(client_port=8523+i)
+            newServer.start()
+            self.max_servers.append(newServer)
+
+        while not all([server.maxima_server.ready for server in self.max_servers]):
             continue
+
+        self.stdout.write(" => ...all maxima instances online")
 
         # and then start processing jobs
         try:

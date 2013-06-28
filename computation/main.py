@@ -1,5 +1,6 @@
 from StringIO import StringIO
-from computation.maximaTools import getMatrixRank
+import re
+from compgraph_web.settings import DISTRIBUTED
 
 __author__ = 'Natalie'
 
@@ -14,16 +15,12 @@ import laplaceTools
 # bring in the distributed task processor
 from computation.tasks import processSingleTotalJacobian
 
-DISTRIBUTED = True
-
 def default_notify(msg):
     print msg
 
 def processInput(data, notify=default_notify):
-    global DISTRIBUTED
-
     # take in the data in the given format and extract all of the fields from it
-    inputParams = [str(line.strip().split('=')[1]) for line in data.split('\n')]
+    inputParams = [re.sub(r"\s\s+", " ", str(line.strip().split('=')[1])) for line in data.split('\n')]
 
     A = scipy.mat(inputParams[0])
     B = scipy.mat(inputParams[1])
@@ -61,8 +58,12 @@ def processInput(data, notify=default_notify):
 
     notify(" => Inside input processor!")
 
+    # ============================================================================
+    # === STEP 1. generate the original graph model
+    # ============================================================================
+
     #after this everything we need is computed, the Jacobian, alphas, betas, etc
-    myGraphModel = graphModel.graphModel(A, B, C, n, r, m, AdjMat)
+    myGraphModel = graphModel.graphModel(A, B, C, n, r, m, AdjMat, notify=notify)
 
     notify(" => completed graphModel.graphModel")
 
@@ -83,6 +84,10 @@ def processInput(data, notify=default_notify):
 
     notify(n)
     notify(myGraphModel.Rank)
+
+    # ============================================================================
+    # === STEP 2. generate all other graphs, check properties
+    # ============================================================================
 
     allCandidates = graphTools.generateAllGraphs(myGraphModel.myGraph, n, myGraphModel.Rank, myGraphModel.Rank)
     notify('my original model graph (transposed)')
@@ -130,6 +135,13 @@ def processInput(data, notify=default_notify):
     notify('number of candidates: %d' % len(allCandidates))
     output.write('num of candidates %d' % len(allCandidates))
     output.write('\n')
+
+    # if we never had any candidates, terminate here
+    if len(allCandidates) <= 0:
+        result = output.getvalue()
+        output.close()
+        return result
+
     for candidate in allCandidates:
         #find number of paths from node to observation
         numCandPathsToObs = graphTools.findNumPathsToObs(candidate, C)
@@ -188,7 +200,7 @@ def processInput(data, notify=default_notify):
 
 
     notify('num of candidates left after graph properties checked: %d out of %d' % (len(passGraphCand), len(allCandidates)))
-    output.write('num of candidates left after graph properties checked %d output %d' % (len(passGraphCand), len(allCandidates)))
+    output.write('num of candidates left after graph properties checked: %d out of %d' % (len(passGraphCand), len(allCandidates)))
     output.write('\n')
 
     output.write('number of candidates that had incorrect # paths to obs %d' % numPathToObsWrong)
@@ -209,13 +221,23 @@ def processInput(data, notify=default_notify):
     output.write('number of candidates that have incorrect shortestpaths %d' % numPathsListWrong)
     output.write('\n')
 
+    # if we don't have any candidates left, terminate here
+    if len(passGraphCand) <= 0:
+        result = output.getvalue()
+        output.close()
+        return result
+
+    # ============================================================================
+    # === STEP 3. check alphas, betas
+    # ============================================================================
+
     numRank = 0
     rankFailedCand = None
     passLaplaceCand = []
     failAlphaLaplaceCand = []
     failBetaLaplaceCand = []
-    for cand in passGraphCand:
 
+    for cand in passGraphCand:
         #step one rank(A|B) = n
         candAB = laplaceTools.makeSymMat(numpy.append(cand.A, B, axis=1))
 
@@ -288,6 +310,17 @@ def processInput(data, notify=default_notify):
     notify('num of candidates left alpha betas checked: %d out of %d' % (len(passLaplaceCand), len(allCandidates)))
     output.write('num of candidates left alpha betas checked %d out of %d' % (len(passLaplaceCand), len(allCandidates)))
     output.write('\n')
+
+    # if we don't have any candidates left, terminate here
+    if len(passLaplaceCand) <= 0:
+        result = output.getvalue()
+        output.close()
+        return result
+
+    # ============================================================================
+    # === STEP 3. check submatrix jacobians
+    # ============================================================================
+
     passJacobianRank = []
     for cand in passLaplaceCand:
         #now calculate the jacobian
@@ -299,8 +332,19 @@ def processInput(data, notify=default_notify):
     output.write('num of candidates left after calc rank full jacobian %d out of %d' % (len(passJacobianRank), len(allCandidates)))
     output.write('\n')
 
+    # if we don't have any candidates left, terminate here
+    if len(passJacobianRank) <= 0:
+        result = output.getvalue()
+        output.close()
+        return result
+
+    notify("About to compute laplaceTools.reducedJacMat()...")
+
     #first get the simplified jacobian
     myGraphModel.Jac = laplaceTools.reducedJacMat(myGraphModel.Jac)
+
+    notify("About to compute laplaceTools.calcAllSubranks()...")
+
     #get the ranks
     myGraphModel.JacComboRanks = laplaceTools.calcAllSubranks(myGraphModel.Jac, myGraphModel.Rank)
 
@@ -316,11 +360,18 @@ def processInput(data, notify=default_notify):
         passSubJacobianRank = [x for x in [processSingleTotalJacobian(myGraphModel, i) for i in passJacobianRank] if x is not None]
 
     notify('num of candidates left at the end: %d out of %d' % (len(passSubJacobianRank), len(allCandidates)))
-    output.write('num of candidates left at the end %d output %d' % (len(passSubJacobianRank), len(allCandidates)))
+    output.write('num of candidates left at the end: %d out of %d' % (len(passSubJacobianRank), len(allCandidates)))
     output.write('\n')
+
+    # if we don't have any candidates left, terminate here
+    if len(passSubJacobianRank) <= 0:
+        result = output.getvalue()
+        output.close()
+        return result
+
     output.write('Adjacency graphs\n')
     output.write('Original Model\n')
-    output.write(str(networkx.to_numpy_matrix(myGraphModel.myGraph).T))
+    output.write("%s\n" % str(networkx.to_numpy_matrix(myGraphModel.myGraph).T))
     output.write('A matrix %s \n' % str(myGraphModel.A))
     output.write('\n')
 
@@ -328,7 +379,7 @@ def processInput(data, notify=default_notify):
         output.write('Model %d \n' % i)
         output.write(str(networkx.to_numpy_matrix(cand.myGraph).T))
         output.write('\n')
-        output.write('A matrix %s \n' % str(cand.A))
+        output.write('A matrix \n%s \n' % str(cand.A))
         output.write('\n')
         output.write('\n')
 

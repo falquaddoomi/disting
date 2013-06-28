@@ -21,8 +21,11 @@ function buildMatrix(nodeCount, graphID, matrixID) {
     // clear the matrix
     $matHolder.empty();
 
-    // label for the equation section
-    $('<tr class="inline_header"><td colspan="' + nodeCount + '">Adjacency</td></tr>')
+    // ===============================
+    // === equation section
+    // ===============================
+
+    $('<tr class="inline_header"><td colspan="' + nodeCount + '">Adjacency <a id="adj_tooltip">[?]</a>:</td></tr>')
         .appendTo($matHolder);
 
     // build the matrix itself
@@ -37,8 +40,13 @@ function buildMatrix(nodeCount, graphID, matrixID) {
             $("<input type='checkbox' name='item_" + k + "-" + j + "' id='item_" + k + "-" + j + "' />")
                 .data('to', k)
                 .data('from', j)
+                .val(1)
                 .change(function() {
                     var $mylabel = $("label[for='" + $(this).attr('id') + "']");
+
+                    if ($(this).data('from') == $(this).data('to'))
+                        nodes[$(this).data('from')].isEnvEdge = this.checked;
+
                     if (this.checked) {
                         graph.newEdge(nodes[$(this).data('from')], nodes[$(this).data('to')], {color: '#6A4A3C'});
                         $mylabel.removeClass("unselected");
@@ -68,8 +76,11 @@ function buildMatrix(nodeCount, graphID, matrixID) {
         $row.appendTo($matHolder);
     }
 
-    // label for the inputs section
-    $('<tr class="inline_header"><td colspan="' + nodeCount + '">Inputs</td></tr>')
+    // ===============================
+    // === inputs section
+    // ===============================
+
+    $('<tr class="inline_header"><td colspan="' + nodeCount + '">Inputs:</td></tr>')
         .appendTo($matHolder);
 
     var $input_row = $("<tr class='row' />");
@@ -79,24 +90,19 @@ function buildMatrix(nodeCount, graphID, matrixID) {
 
         // add the cell at this row
         $("<input type='checkbox' name='input_" + j + "' id='input_" + j + "' />")
-            .data('to', k)
             .data('from', j)
+            .val(1)
             .change(function() {
                 var $mylabel = $("label[for='" + $(this).attr('id') + "']");
-                if (this.checked) {
-                }
-                else {
-                }
+
+                // make the node visibly an input node (or not)
+                nodes[$(this).data('from')].isInput = this.checked;
+                springy.renderer.start();
             }).appendTo($cell);
 
         $("<label for='input_" + j + "' />")
-            .html("a<sub>" + k + "," + j + "</sub>")
+            .html("b<sub>" + j + "</sub>")
             .appendTo($cell);
-
-        if (parseInt(j) < parseInt(nodeCount)-1) {
-            $("<span>, </span>")
-                .appendTo($cell);
-        }
 
         $cell.appendTo($input_row);
     }
@@ -104,7 +110,38 @@ function buildMatrix(nodeCount, graphID, matrixID) {
     // add that row to the thing
     $input_row.appendTo($matHolder);
 
-    // label for the outputs section
-    $('<tr class="inline_header"><td colspan="' + nodeCount + '">Outputs</td></tr>')
+    // ===============================
+    // === outputs section
+    // ===============================
+
+
+    $('<tr class="inline_header"><td colspan="' + nodeCount + '">Outputs:</td></tr>')
         .appendTo($matHolder);
+
+    var $output_row = $("<tr class='row' />");
+
+    for (var j in nodes) {
+        var $cell = $("<td />");
+
+        // add the cell at this row
+        $("<input type='checkbox' name='output_" + j + "' id='output_" + j + "' />")
+            .data('from', j)
+            .val(1)
+            .change(function() {
+                var $mylabel = $("label[for='" + $(this).attr('id') + "']");
+
+                // make the node visibly an input node (or not)
+                nodes[$(this).data('from')].isOutput = this.checked;
+                springy.renderer.start();
+            }).appendTo($cell);
+
+        $("<label for='output_" + j + "' />")
+            .html("c<sub>" + j + "</sub>")
+            .appendTo($cell);
+
+        $cell.appendTo($output_row);
+    }
+
+    // add that row to the thing
+    $output_row.appendTo($matHolder);
 }

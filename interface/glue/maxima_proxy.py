@@ -4,6 +4,7 @@ import random
 import subprocess
 import threading
 import SocketServer
+from compgraph_web.settings import PYMAX_STARTING_PORT
 
 __author__ = 'Faisal'
 
@@ -37,6 +38,8 @@ class CalculateRequest(object):
 class MaximaTCPServer(SocketServer.ThreadingMixIn, SocketServer.TCPServer):
     def __init__(self, server_address, RequestHandlerClass, bind_and_activate=True):
         SocketServer.TCPServer.__init__(self, server_address, RequestHandlerClass, bind_and_activate)
+        # ensure that we can handle more than the usual number of pending requests
+        self.request_queue_size = 30
 
         # initialize the request queue
         self.ready = False
@@ -81,13 +84,14 @@ class MaximaQueryTCPServer(SocketServer.ThreadingMixIn, SocketServer.TCPServer):
     def __init__(self, server_address, RequestHandlerClass, query_server, bind_and_activate=True):
         SocketServer.TCPServer.__init__(self, server_address, RequestHandlerClass, bind_and_activate)
         self.query_server = query_server
+        self.request_queue_size = 30
 
 # ===========================================================================
 # === Maxima Proxy Server (spawns both MaximaTCPServer and MaximaQueryTCPServer)
 # ===========================================================================
 
 class MaximaProxyServer(object):
-    def __init__(self, host="localhost", client_port=8523):
+    def __init__(self, host="localhost", client_port=PYMAX_STARTING_PORT):
         self.host = host
         self.client_port = client_port
 
@@ -97,7 +101,8 @@ class MaximaProxyServer(object):
         # ===========================================
 
         # initialize the maxima-facing server
-        randport = random.randrange(7000, 8000)
+        # randport = random.randrange(7000, 8000)
+        randport = 0
         self.maxima_server = MaximaTCPServer((self.host, randport), MaximaHandler)
         self.maxima_ip, self.maxima_port = self.maxima_server.server_address
 

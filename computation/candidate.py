@@ -1,3 +1,5 @@
+from computation import maximaTools
+
 __author__ = 'Natalie'
 import scipy
 import numpy
@@ -33,6 +35,6 @@ class candidate(object):
     def calcJacobianRank(self):
         self.Jac = laplaceTools.calcJacobian(self.AdjMat, self.Alphas, self.Betas)
         #self.Rank = laplaceTools.calcRank(self.Jac)
-        self.Rank = laplaceTools.calcRank(self.Jac)
+        self.Rank = maximaTools.getMatrixRank(self.Jac)
 
 

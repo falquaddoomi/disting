@@ -1,81 +1,167 @@
 {% extends "base.html" %}
 
 {% block childpagename %}Add New Job{% endblock %}
+{% block childpagename2 %}Add New Job{% endblock %}
 
 {% block style %}
     <style>
-    #id_A { width: 300px; }
-    #id_B { width: 300px; }
-    #id_C { width: 300px; }
-    #id_Adj { width: 300px; }
-    #id_n { width: 100px; }
-    #id_r { width: 100px; }
-    #id_m { width: 100px; }
+    #matrix_holder td { text-align: center; vertical-align: top; }
+
+    #matrix_holder .inline_header td { font-weight: bold; text-align: left; }
+
+    #matrix_holder, #graphbox {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    #matrix_holder label.unselected { color: #aaa; }
+
+    .note { font-size: smaller; color: #555; }
+
+    .input_field { margin-bottom: 0.5em; }
+    .input_field label { font-weight: bold; display: block; }
+    
+    /* popup dialog style */
+    #adj_tooltip { color: #599bdc; cursor: pointer; }
+
+    .popup {
+        font-weight: normal;
+        color: black;
+        display: none;
+        position: absolute;
+        left: 100px;
+        width: 600px;
+        padding: 10px; border: solid 1px gray; background: white;
+        border-top: solid 10px gray;
+    }
     </style>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" language="JavaScript" src="{{ STATIC_URL }}js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" language="JavaScript" src="{{ STATIC_URL }}js/springy.js"></script>
+
+    {#<script type="text/javascript" language="JavaScript" src="{{ STATIC_URL }}js/springyui.js"></script>#}
+    <script type="text/javascript" language="JavaScript" src="{{ STATIC_URL }}interface/js/springyui_custom.js"></script>
+
+    <script type="text/javascript" language="JavaScript" src="{{ STATIC_URL }}interface/js/equation_editor.js"></script>
+
+    <script type="text/javascript" language="JavaScript">
+    $(document).ready(function() {
+        // populate nodecount dropdown
+        for (var i = 2; i <= 15; i++) {
+            $("<option />")
+                .attr('value', i)
+                .text(i)
+                .appendTo("#nodecount");
+        }
+
+        // make a 4x4 matrix the default
+        $("#nodecount").val('4');
+
+        $("#nodecount").change(function() {
+            buildMatrix($(this).val(), "#graphbox", "#matrix_holder");
+        });
+
+        // and invoke it to build the initial matrix
+        $("#nodecount").change();
+
+        // finally, add a popup handler to the soon-to-be-present adjacency tooltip toggle
+        var $popup = $("#adj_popup_msg");
+
+        $popup.click(function() {
+            $(this).fadeOut();
+        });
+
+        $("#adj_tooltip").click(function() {
+            if (!$popup.is(":visible"))
+                $popup.detach().appendTo($(this)).fadeIn();
+        })
+    })
+    </script>
 {% endblock %}
 
 {% block content %}
     <p>Enter the description of your input problem in the fields below.</p>
 
+    {% if error %}
+    <div class="error_msg">&bullet; {{ error }}</div>
+    {% endif %}
+
     <form method="POST" action="{% url 'interface:addjob' %}">
         {% csrf_token %}
-        <table class="vertical" cellpadding="0" cellspacing="0">
-            <tr>
-                <th>{{ requestform.name.label_tag }}:</th>
-                <td>{{ requestform.name }}</td>
-                <td class="example">(ex. "My Job")</td>
-            </tr>
 
-            <tr>
-                <th>{{ requestform.A.label_tag }}:</th>
-                <td>{{ requestform.A }}</td>
-                <td class="example">(ex. [1 1 0 0; 1 1 0 0; 1 0 1 1; 0 0 1 1])</td>
-            </tr>
+        <div id="input_pane">
 
-            <tr>
-                <th>{{ requestform.B.label_tag }}:</th>
-                <td>{{ requestform.B }}</td>
-                <td class="example">(ex. [1; 0; 0; 0])</td>
-            </tr>
+            <div id="eqn_graph_box">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 50%; vertical-align: top; overflow-x: auto;">
+                            <div id="equationbox">
+                                <div class="input_field">
+                                    <label for="job_name">Name:</label>
+                                    <input type="text" name="job_name" id="job_name" />
+                                </div>
 
-            <tr>
-                <th>{{ requestform.C.label_tag }}:</th>
-                <td>{{ requestform.C }}</td>
-                <td class="example">(ex. [1 0 0 0; 0 0 1 0])</td>
-            </tr>
+                                <div class="input_field">
+                                    <label for="nodecount">Number of Nodes:</label>
+                                    <select id="nodecount" name="nodecount"></select>
+                                </div>
 
-            <tr>
-                <th>{{ requestform.Adj.label_tag }}:</th>
-                <td>{{ requestform.Adj }}</td>
-                <td class="example">(ex. [1 1 0 0; 1 1 0 0; 1 0 1 1; 0 0 1 1])</td>
-            </tr>
+                                <table id="matrix_holder"></table>
+                            </div>
+                        </td>
 
-            <tr>
-                <th>{{ requestform.n.label_tag }}:</th>
-                <td>{{ requestform.n }}</td>
-                <td class="example">(ex. 4)</td>
-            </tr>
+                        <td style="width: 50%; vertical-align: top;">
+                            <div id="graphbox"></div>
+                            <div class="note">
+                                - click and drag nodes to move them around<br />
+                                - double click a node to freeze its position relative to the other nodes
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
-            <tr>
-                <th>{{ requestform.r.label_tag }}:</th>
-                <td>{{ requestform.r }}</td>
-                <td class="example">(ex. 1)</td>
-            </tr>
-
-            <tr>
-                <th>{{ requestform.m.label_tag }}:</th>
-                <td>{{ requestform.m }}</td>
-                <td class="example">(ex. 2)</td>
-            </tr>
-
-            <tr class="action_tray">
-                <td></td>
-                <td>
-                    <input type="submit" style="width: 100px;" class="button icon add" name="sub" value="Submit Job" />
-                    <input type="button" style="width: 100px; margin-left: 2px;" class="button icon reload" onclick="parent.location = '{% url 'interface:home' %}'" value="Cancel" />
-                </td>
-                <td></td>
-            </tr>
-        </table>
+            <div id="action_tray">
+                <input type="submit" style="width: 100px;" class="button icon add" name="sub" value="Submit Job" />
+                <input type="button" style="width: 100px; margin-left: 2px;" class="button icon reload" onclick="parent.location = '{% url 'interface:queue' %}'" value="Cancel" />
+                <a class="button" style="margin-left: 2px;" href="{% url 'interface:addjob_alt' %}">Alternate Interface...</a>
+            </div>
+        </div>
     </form>
+
+    <div id="adj_popup_msg" class="popup">
+    <b>NOTE:</b> The adjacency matrix is not the same as the A matrix. In the A matrix, the values along the diagonal represent the turnover rates,
+    whereas in the adjacency matrix they represent leaks to the environment. The adjacency matrix is a physical representation of the
+    model.
+
+    <p>
+    For example,
+<pre>
+Adj = 0   0      A = a12 0
+      a12 0          a12 (-a12)
+</pre>
+    </p>
+
+    <p>
+    Example 2,
+<pre>
+Adj = a11 0      A = (a12-a11) 0
+      a12 0          a12       (-a12)
+</pre>
+    </p>
+
+    <p>
+    A unique A matrix can always be derived from the adjacency matrix, but there are several matrices which can be derived from a particular A matrix.
+    </p>
+    </div>
+
+    <img id="input_arrow_glyph" style="display: none;" src="{{ STATIC_URL }}interface/images/input_arrow.png" />
+    <img id="output_sink_glyph" style="display: none;" src="{{ STATIC_URL }}interface/images/output_sink.png" />
+    <img id="env_arrow_glyph" style="display: none;" src="{{ STATIC_URL }}interface/images/env_arrow.png" />
 {% endblock %}

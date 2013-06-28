@@ -65,6 +65,7 @@ def findNumPathsToObs(model, obs):
         for currNode in model.myGraph.nodes():
             #(G, source, target)
             if currNode != currObsNode and networkx.has_path(model.myGraph, currNode, currObsNode):
+            #if networkx.has_path(model.myGraph, currNode, currObsNode):
                 #print 'path from %d to %d' % (currNode, currObsNode)
                 totPaths = totPaths + 1
                 numPaths = numPaths + 1
@@ -95,6 +96,7 @@ def findNumPathsFromIn(model, input):
         numPaths = 0
         for currNode in model.myGraph.nodes():
             if currNode != currObsNode and networkx.has_path(model.myGraph, currObsNode, currNode):
+            #if networkx.has_path(model.myGraph, currObsNode, currNode):
                 numPaths = numPaths + 1
         allNumPaths.append(numPaths)
     return allNumPaths
@@ -116,6 +118,7 @@ def ensureInputConn(model, input):
     for currNode in model.myGraph.nodes():
         for currInNode in inputnodes:
             if currNode != currInNode and not networkx.has_path(model.myGraph, currInNode, currNode):
+            #if not networkx.has_path(model.myGraph, currInNode, currNode):
                 hasPath = False
                 break
 
@@ -136,6 +139,7 @@ def ensureOutputConn(model, input):
     for currNode in model.myGraph.nodes():
         for currInNode in inputnodes:
             if currNode != currInNode and not networkx.has_path(model.myGraph, currNode, currInNode):
+            #if not networkx.has_path(model.myGraph, currNode, currInNode):
                 hasPath = False
                 break
 
@@ -162,9 +166,9 @@ def shortestInOutPaths(model, input, output):
 
     for i in inputnodes:
         for o in outputnodes:
-            if i != o:
+            #if i != o: NOT SURE?!?!?!!?!??!?!?!?
                 #from perturbed to the inputs
-                shortestPaths.append(networkx.all_shortest_paths(model.myGraph, i, o))
+            shortestPaths.append(networkx.all_shortest_paths(model.myGraph, i, o))
 
     return shortestPaths
 

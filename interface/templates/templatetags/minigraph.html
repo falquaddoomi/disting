@@ -1,0 +1,28 @@
+<div style="float: left; width: 280; border: solid 1px #ccc; margin-right: 10px; margin-bottom: 10px;">
+    <canvas id="{{ name | slugify }}_canvas" width="280" height="250"></canvas>
+    <div style="font-weight: bold;">{{ name }}</div>
+
+    <script>
+    $(document).ready(function() {
+        // make a new graph
+        var graph = new Springy.Graph();
+
+        // create all the nodes we'll need
+        var nodes = {};
+        {% for i in nodes %}
+        nodes[{{ i }}] = graph.newNode({label: '{{ i }}' });
+        nodes[{{ i }}].isInput = {% if i in inputs %}true{% else %}false{% endif %};
+        nodes[{{ i }}].isOutput = {% if i in outputs %}true{% else %}false{% endif %};
+        nodes[{{ i }}].isEnvEdge = {% if i in leaks %}true{% else %}false{% endif %};
+        {% endfor %}
+
+        // iterate through the adjacencies to make edges
+        {% for fr, to in adjacencies %}
+        graph.newEdge(nodes[{{ fr }}], nodes[{{ to }}]);
+        {% endfor %}
+
+        var canvasID = "#{{ name | slugify }}_canvas";
+        $(canvasID).springy({ graph: graph });
+    });
+    </script>
+</div>
