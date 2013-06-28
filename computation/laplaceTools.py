@@ -14,8 +14,8 @@ import sys
 import networkx
 # from sympy.core.sympify import sympify
 from sympy.polys.domains import ZZ
-from sympy.polys.solvers import RawMatrix
-from sympy.polys.fields import vfield
+# from sympy.polys.solvers import RawMatrix
+# from sympy.polys.fields import vfield
 
 #faster rref calculation!
 def _iszero(x):
@@ -93,32 +93,8 @@ def calcQ(B, n, A):
     for i in range(1, n):
         symQ = symQ.row_join(symA**i * symB)
 
-    #rankFile = open("ranks.nb", "w+")
-
-    #print 'calculating the RREF'
-    #rankFile.write('myA = {')
-    #for rowIndex in range(n):
-    #    if rowIndex == n-1:
-    #        rankFile.write(str(symQ[rowIndex:rowIndex+1,:]).replace("[","{").replace("]","}").replace("_",""))
-    #    else:
-    #        rankFile.write(str(symQ[rowIndex:rowIndex+1,:]).replace("[","{").replace("]","},").replace("_",""))
-    #rankFile.write('};')
-    #rankFile.write('rank = MatrixRank[myA];')
-    #rankFile.write('Export["ranks.txt",rank];')
-    #rankFile.write('Exit[];')
-    #rankFile.close()
-
-    #subprocess.call(["MathKernel","-noprompt","-initfile","ranks.nb"])
-    #f = open("ranks.txt", 'r')
-    #rank = int(f.readlines()[0])
-    #print rank
-
-    #(row_reduced, pivots) = rrefMine(symQ, simplify=True)
-    
-    #rank = len(pivots)
-
     rank = calcRank(symQ)
-    return (Q, rank)
+    return Q, rank
 
 # must ensure rank of q = rank of r = n
 def calcR(A, C, n):
@@ -128,36 +104,9 @@ def calcR(A, C, n):
     symR = makeSymMat(R)
     symR = symC
 
-    #print n
-
     for i in range(1, n):
         temp = symC * symA**i
         symR = symR.col_join(temp)
-
-
-
-
-    #rankFile = open("ranks.nb", "w+")
-
-    #print 'calculating the RREF'
-    #rankFile.write('myA = {')
-    #for rowIndex in range(n):
-    #    if rowIndex == n-1:
-    #        rankFile.write(str(symR[rowIndex:rowIndex+1,:]).replace("[","{").replace("]","}").replace("_",""))
-    #    else:
-    #        rankFile.write(str(symR[rowIndex:rowIndex+1,:]).replace("[","{").replace("]","},").replace("_",""))
-    #rankFile.write('};')
-    #rankFile.write('rank = MatrixRank[myA];')
-    #rankFile.write('Export["ranks.txt",rank];')
-    #rankFile.write('Exit[];')
-    #rankFile.close()
-
-    #subprocess.call(["MathKernel","-noprompt","-initfile","ranks.nb"])
-    #f = open("ranks.txt", 'r')
-    #rank = int(f.readlines()[0])
-
-    #(row_reduced, pivots) = rrefMine(symR, simplify=True)
-    #rank = len(pivots)
 
     rank = calcRank(symR)
     
@@ -167,11 +116,6 @@ def calcR(A, C, n):
 def makeSymMat(mat):
     row, col = mat.shape
     M = sympy.Matrix(row, col, lambda i,j: sympy.Symbol('a_%d%d' % (i+1,j+1)) if mat.getA()[i][j] == 1 else 0)
-    return M
-
-def makeFieldMat(mat):
-    row, col = mat.shape
-    M = RawMatrix(row, col, lambda i,j: vfield("a_%d%d" % (i+1,j+1), ZZ) if mat.getA()[i][j] == 1 else 0)
     return M
 
 #TF is returned as symbolic
@@ -380,105 +324,8 @@ def calcJacobian(symbolAdjMat, Alphas, Betas):
 
     return myJac
 
-from sympy import S
-
-def calcAltRank(in_mat):
-    n = in_mat.rows
-    m = in_mat.cols
-
-    F = vfield("a_(1:50)(1:50)", ZZ)
-
-    myRawMat = RawMatrix(in_mat.rows, in_mat.cols, map(F.to_domain().convert, in_mat))
-    
-    (row_reduced, pivots) = myRawMat.rref(iszerofunc=lambda x: not x, simplify=lambda x: x)
-    
-    rank = len(pivots)
-    
-    return rank
-
-def calcAltRankMini(in_mat):
-    
-    (row_reduced, pivots) = in_mat.rref(iszerofunc=lambda x: not x, simplify=lambda x: x)
-    
-    rank = len(pivots)
-    
-    return rank
-
-#play with this for COLUMNS!!!
-def calcRank2(in_mat):
-    #print 'started calculating the rank'
-    in_mat = in_mat
-    n = in_mat.rows
-    m = in_mat.cols
-
-    #print in_mat
-    #print 'rows: %d, cols %d' % (n, m)
-    #non transpose rank, row reduced
-    rank = n
-
-    rankFile = open("ranks.nb", "w+")
-
-    #print 'calculating the RREF'
-    rankFile.write('myA = {')
-    for rowIndex in range(n):
-        if rowIndex == n-1:
-            rankFile.write(str(in_mat[rowIndex:rowIndex+1,:]).replace("[","{").replace("]","}").replace("_",""))
-        else:
-            rankFile.write(str(in_mat[rowIndex:rowIndex+1,:]).replace("[","{").replace("]","},").replace("_",""))
-    rankFile.write('};')
-    rankFile.write('rank = MatrixRank[myA];')
-    rankFile.write('Export["ranks.txt",rank];')
-    rankFile.write('Exit[];')
-    rankFile.close()
-
-    subprocess.call(["MathKernel","-noprompt","-initfile","ranks.nb"])
-    f = open("ranks.txt", 'r')
-    rank = int(f.readlines()[0])
-    #print "RESULTS: %d" % rank
-
-    # (row_reduced, pivots) = in_mat.rref(simplify=False)
-    # rank = len(pivots)
-    #row_reduced = in_mat.rref(simplify=True)[0]
-    #pivots = in_mat.rref(simplify=True)[1]
-    #print 'row reduced'
-    #print row_reduced
-    #print 'row pivots'
-    #print pivots
-
-    #for i in range(row_reduced.rows):
-    #    if sympy.Matrix(row_reduced[i*m:(i+1)*m]).norm() == 0:
-    #        rank -= 1
-
-
-    return rank
-
 def calcRank(in_mat):
-    in_mat = in_mat
-    n = in_mat.rows
-    m = in_mat.cols
-
-    # in_mat.expand()
-    # in_mat.simplify()
-    # in_mat.expand()
-
-    #for rowIndex in range(n):
-    #    if rowIndex == n-1:
-    #        print(str(in_mat[rowIndex:rowIndex+1,:]).replace("[","{").replace("]","}").replace("_",""))
-    #    else:
-    #        print(str(in_mat[rowIndex:rowIndex+1,:]).replace("[","{").replace("]","},").replace("_",""))
-
-    #(row_reduced, pivots) = in_mat.rref(simplify=True)
-    #rank = len(pivots)
-    #print 'my row rank'
-    #print rank
-
-    # rank2 = calcAltRank(in_mat)
-    #print 'mat rank'
-    #print rank2
-
-    rank2 = maximaTools.getMatrixRank(in_mat)
-
-    return rank2
+    return maximaTools.getMatrixRank(in_mat)
 
 #this makes a list of all the sets of rows we need to analyze
 def kbits(n, k):
@@ -525,8 +372,8 @@ def calculateOverallRanks(in_mat, allCombos):
     for i, currCombo in enumerate(allCombos):
         #make the matrix
         newSubMat = makeNewMat(currCombo, in_mat)
-        myRawMat = RawMatrix(newSubMat.rows, newSubMat.cols, map(F.to_domain().convert, newSubMat))
-        rank = calcRank(myRawMat)
+        # myRawMat = RawMatrix(newSubMat.rows, newSubMat.cols, map(F.to_domain().convert, newSubMat))
+        rank = calcRank(newSubMat)
         ranks.append(rank)
 
     return ranks
@@ -577,15 +424,15 @@ def calcChildRank(top, in_mat, alreadyRanked):
     toprows, topkids = top
 
     # F = vfield("a_(1:%d)(1:%d)" % (len(toprows), in_mat.cols), ZZ)
-    F = vfield("a_(1:5)(1:5)", ZZ)
+    # F = vfield("a_(1:5)(1:5)", ZZ)
 
     if alreadyRanked and not COMPUTE_ALL_SUBMAT_RANKS:
         rank = len(toprows)
     else:
         newSubMat = makeNewMat(toprows, in_mat)
-        myRawMat = RawMatrix(newSubMat.rows, newSubMat.cols, map(F.to_domain().convert, newSubMat))
+        # myRawMat = RawMatrix(newSubMat.rows, newSubMat.cols, map(F.to_domain().convert, newSubMat))
         # rank = calcRank(myRawMat)
-        rank = maximaTools.getMatrixRank(myRawMat)
+        rank = maximaTools.getMatrixRank(newSubMat)
         alreadyRanked = (rank == len(toprows))
 
     return rank, [calcChildRank(x, in_mat, alreadyRanked) for x in topkids]
