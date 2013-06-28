@@ -127,7 +127,7 @@ def addjob_alt(request):
     else:
         form = SubmissionForm() # An unbound form
 
-    return render_to_response("addjob_alt.html", {'requestform': form}, context_instance=RequestContext(request))
+    return render_to_response("addjob_direct.html", {'requestform': form}, context_instance=RequestContext(request))
 
 
 @login_required
@@ -150,7 +150,7 @@ def editjob_alt(request, jobID):
         'job': job
     }
 
-    return render_to_response("editjob_alt.html", context, context_instance=RequestContext(request))
+    return render_to_response("editjob_direct.html", context, context_instance=RequestContext(request))
 
 # ==============================================================
 # === job result views
