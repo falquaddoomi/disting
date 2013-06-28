@@ -1,0 +1,18 @@
+setenv HOMEDIR /home/ubuntu/projects/disting
+setenv VENV_ACTIVATE /home/ubuntu/projects/virtualenvs/disting_env/bin/activate
+chdir $HOMEDIR
+
+screen -t server
+stuff "source $VENV_ACTIVATE\012"
+stuff "./manage.py run_gunicorn 0.0.0.0:5580\012"
+
+screen -t processor 
+stuff "source $VENV_ACTIVATE\012"
+stuff "./manage.py processor\012"
+
+screen -t workers
+stuff "source $VENV_ACTIVATE\012"
+stuff "./manage.py celery worker --c 3 --autoreload\012"
+
+screen -t shell
+stuff "source $VENV_ACTIVATE\012\012"
