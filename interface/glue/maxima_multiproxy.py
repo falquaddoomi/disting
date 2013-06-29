@@ -38,6 +38,10 @@ class CalculateRequest(object):
 class MaximaTCPServer(SocketServer.ThreadingMixIn, SocketServer.TCPServer):
     def __init__(self, server_address, RequestHandlerClass, bind_and_activate=True):
         SocketServer.TCPServer.__init__(self, server_address, RequestHandlerClass, bind_and_activate)
+        self.daemon_threads = True
+
+        # ensure that we can handle more than the usual number of pending requests
+        self.request_queue_size = 30
 
         # initialize the request queue
         self.ready = False
@@ -86,6 +90,10 @@ class MaximaQueryHandler(SocketServer.StreamRequestHandler):
 class MaximaQueryTCPServer(SocketServer.ThreadingMixIn, SocketServer.TCPServer):
     def __init__(self, server_address, RequestHandlerClass, query_servers, bind_and_activate=True):
         SocketServer.TCPServer.__init__(self, server_address, RequestHandlerClass, bind_and_activate)
+        self.daemon_threads = True
+        # ensure that we can handle more than the usual number of pending requests
+        self.request_queue_size = 30
+
         self.query_servers = query_servers
         self.cur_mfs = 0
 
