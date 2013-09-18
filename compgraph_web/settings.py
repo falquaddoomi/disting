@@ -191,7 +191,7 @@ djcelery.setup_loader()
 DISTRIBUTED = True # if true, allows the process to be sped up across multiple cores; true is better
 COMPUTE_ALL_SUBMAT_RANKS = False # if true, doesn't cull the submatrix tree; false is better
 
-PYMAX_INSTANCES = 5 # number of maxima (or pymax) instances that end up getting spawned
+PYMAX_INSTANCES = 3 # number of maxima (or pymax) instances that end up getting spawned
 # the port on which the first instance of the pymax server
 # is created (or the only one if there's only one)
 PYMAX_STARTING_PORT = 8523
