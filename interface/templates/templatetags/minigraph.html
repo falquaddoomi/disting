@@ -10,7 +10,7 @@
         // create all the nodes we'll need
         var nodes = {};
         {% for i in nodes %}
-        nodes[{{ i }}] = graph.newNode({label: '{{ i }}' });
+        nodes[{{ i }}] = graph.newNode({label: '{{ i|add:"1" }}' });
         nodes[{{ i }}].isInput = {% if i in inputs %}true{% else %}false{% endif %};
         nodes[{{ i }}].isOutput = {% if i in outputs %}true{% else %}false{% endif %};
         nodes[{{ i }}].isEnvEdge = {% if i in leaks %}true{% else %}false{% endif %};

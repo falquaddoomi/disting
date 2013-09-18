@@ -77,10 +77,26 @@
         {% if job.graphs %}
         <h2>Graphs</h2>
             <div>
-                {% for name, model in job.graphs.items %}
+                {% for name, model in jobgraph_items %}
                     {% minigraph job name model  %}
                 {% endfor %}
                 <div style="clear: both;"></div>
+            </div>
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if jobgraph_items.has_previous %}
+                        <a name="graphs_prev" href="?page={{ jobgraph_items.previous_page_number }}#graphs_prev">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ jobgraph_items.number }} of {{ jobgraph_items.paginator.num_pages }}.
+                    </span>
+
+                    {% if jobgraph_items.has_next %}
+                        <a name="graphs_next" href="?page={{ jobgraph_items.next_page_number }}"#graphs_next>next</a>
+                    {% endif %}
+                </span>
             </div>
 
             <img id="input_arrow_glyph" style="display: none;" src="{{ STATIC_URL }}interface/images/input_arrow.png" />

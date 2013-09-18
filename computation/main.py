@@ -376,7 +376,7 @@ def processInput(data, notify=default_notify):
     output.write('\n')
 
     for i, cand in enumerate(passSubJacobianRank):
-        output.write('Model %d \n' % i)
+        output.write('Model %d \n' % (i+1))
         output.write(str(networkx.to_numpy_matrix(cand.myGraph).T))
         output.write('\n')
         output.write('A matrix \n%s \n' % str(cand.A))

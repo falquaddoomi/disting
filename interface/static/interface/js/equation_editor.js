@@ -5,7 +5,7 @@ function buildMatrix(nodeCount, graphID, matrixID) {
     var graph = new Springy.Graph();
 
     var nodes = {};
-    for (var i = 0; i < nodeCount; i++)
+    for (var i = 1; i <= nodeCount; i++)
         nodes[i] = graph.newNode({label: i});
 
     // destroy and recreate the canvas
