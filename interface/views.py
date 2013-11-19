@@ -1,6 +1,8 @@
 # Create your views here.
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.core import paginator
+from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
@@ -50,16 +52,19 @@ def addjob(request):
             Bmat = Sparse2DMat(rows=request.POST['nodecount'])
             Cmat = Sparse2DMat(cols=request.POST['nodecount'])
 
+            # NOTE: added the -1's on the to's and fr's below
+            # because they're now 1-indexed versus 0-indexed in the interface
+
             for k, v in request.POST.items():
                 if str(k).startswith("item_"):
                     to, fr = (str(k).split("_"))[1].split("-")
-                    Adjmat[to, fr] = 1
+                    Adjmat[int(to)-1, int(fr)-1] = 1
                 elif str(k).startswith("input_"):
                     fr = (str(k).split("_"))[1]
-                    Bmat[fr, Bmat.cols] = 1
+                    Bmat[int(fr)-1, Bmat.cols] = 1
                 elif str(k).startswith("output_"):
                     fr = (str(k).split("_"))[1]
-                    Cmat[Cmat.rows, fr] = 1
+                    Cmat[Cmat.rows, int(fr)-1] = 1
 
             # transform the adjacency matrix into the A matrix
             for i in range(0, Amat.rows):
@@ -158,8 +163,23 @@ def editjob_alt(request, jobID):
 
 @login_required
 def viewresults(request, jobID):
+    job = Submission.objects.get(id=jobID)
+    paginator = Paginator(job.graphs().items(), 18) # show 21 graphs per page
+
+    # enable the paginator
+    page = request.GET.get('page')
+    try:
+        jobgraphs_page = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        jobgraphs_page = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        jobgraphs_page = paginator.page(paginator.num_pages)
+
     context = {
-        'job': Submission.objects.get(id=jobID),
+        'job': job,
+        'jobgraph_items': jobgraphs_page
     }
     return render_to_response("results.html", context, context_instance=RequestContext(request))
 

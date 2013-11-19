@@ -1,10 +1,10 @@
-setenv HOMEDIR /home/ubuntu/projects/disting
-setenv VENV_ACTIVATE /home/ubuntu/projects/virtualenvs/disting_env/bin/activate
+setenv HOMEDIR /home/faisal/projects/disting
+setenv VENV_ACTIVATE /home/faisal/projects/virtualenvs/disting_env/bin/activate
 chdir $HOMEDIR
 
 screen -t server
 stuff "source $VENV_ACTIVATE\012"
-stuff "./manage.py runserver 0.0.0.0:5580\012"
+stuff "./manage.py runserver --insecure 0.0.0.0:5580\012"
 
 screen -t processor 
 stuff "source $VENV_ACTIVATE\012"
