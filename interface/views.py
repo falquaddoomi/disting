@@ -164,18 +164,24 @@ def editjob_alt(request, jobID):
 @login_required
 def viewresults(request, jobID):
     job = Submission.objects.get(id=jobID)
-    paginator = Paginator(job.graphs().items(), 18) # show 21 graphs per page
 
-    # enable the paginator
-    page = request.GET.get('page')
     try:
-        jobgraphs_page = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        jobgraphs_page = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        jobgraphs_page = paginator.page(paginator.num_pages)
+        paginator = Paginator(job.graphs().items(), 18) # show 21 graphs per page
+
+        # enable the paginator
+        page = request.GET.get('page')
+        try:
+            jobgraphs_page = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            jobgraphs_page = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            jobgraphs_page = paginator.page(paginator.num_pages)
+
+    except AttributeError:
+        # we don't have any items, i guess; just return an empty set for now
+        jobgraphs_page = []
 
     context = {
         'job': job,
