@@ -8,6 +8,8 @@ from compgraph_web.settings import PYMAX_STARTING_PORT
 
 __author__ = 'Faisal'
 
+VERBOSE = False
+
 # ===========================================================================
 # === Maxima Server, handles communicating calculation tasks to the Maxima instance
 # ===========================================================================
@@ -75,7 +77,9 @@ class MaximaQueryHandler(SocketServer.StreamRequestHandler):
     def handle(self):
         # grab whatever line they send us, and post it as a calculation
         incmd = self.rfile.readline().strip()
+        if VERBOSE: print "MAXIMA: Sending command: %s" % incmd
         result = self.server.query_server.calculate(incmd)
+        if VERBOSE: print "MAXIMA: Received response: %s" % result
         # send the result back to the caller...
         self.wfile.write(result.strip())
         # and close the connection
