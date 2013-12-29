@@ -8,7 +8,7 @@ from compgraph_web.settings import PYMAX_STARTING_PORT
 
 __author__ = 'Faisal'
 
-VERBOSE = False
+VERBOSE = True
 
 # ===========================================================================
 # === Maxima Server, handles communicating calculation tasks to the Maxima instance
