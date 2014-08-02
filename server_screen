@@ -2,7 +2,7 @@
 setenv BASEDIR ~/projects
 
 # change this to where you've checked out the code
-setenv HOMEDIR $BASEDIR/compgraph_web
+setenv HOMEDIR $BASEDIR/disting
 
 # change this to the full path to 'activate', usually inside bin in
 # the virtualenv dir (it'll be called 'activate.bat' in Scripts on Windows)

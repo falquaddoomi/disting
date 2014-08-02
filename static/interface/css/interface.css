@@ -1,0 +1,102 @@
+body {
+    font-family: Tahoma, sans-serif; font-size: 14px;
+    background: #ccc;
+    margin: 0; padding: 0;
+}
+
+/* structural styles */
+
+#trunk {
+    width: 960px;
+    padding: 10px;
+    background: white;
+    margin: 20px auto;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 10px;
+    position: relative;
+}
+
+#header {
+    border-bottom: solid 1px #ccc;
+    padding: 10px;
+    position: relative;
+}
+
+#header h1 {
+    padding: 0px; margin: 0; font-size: 32px;
+}
+
+#header #homelink {
+    color: #3c8dde;
+    text-decoration: none;
+}
+
+#header #homelink:hover {
+    color: #8dc0f0;
+    text-decoration: none;
+}
+
+#header .login_widget {
+    position: absolute;
+    right: 5px; bottom: 15px;
+}
+
+#content {
+    padding: 10px;
+}
+
+#infopanel {
+    position: absolute; width: 220px; top: 0px; bottom: 0px; right: 0px; border-left: solid 1px #aaa; background: #ddd;
+}
+
+#infopanel .login_widget {
+    position: absolute;
+    left: 2px; top: 42px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    border-bottom: solid 1px #aaa;
+}
+
+#infopanel #infosection {
+    position: absolute;
+    left: 2px; top: 82px;
+    padding-left: 10px;
+}
+
+/* page-level styles */
+
+.error_msg { font-weight: bold; color: darkred; margin-bottom: 0.5em; }
+
+.task_list {
+    padding: 3px; border: solid 1px #aaa; width: 600px;
+    margin-bottom: 1em;
+}
+
+.task_list tr.task_header td {
+    background: black; padding: 5px; color: white; font-weight: bold;
+    text-align: left;
+}
+
+.task_list td {
+    padding: 5px;
+    text-align: left;
+    background: white;
+}
+
+.task_list tr.alt td {
+    background: #eee;
+}
+
+.example { font-family: "Courier New", sans-serif; }
+
+/* vertical tables */
+.vertical td { padding: 6px; }
+/*.vertical tr.action_tray td { border-top: solid 1px #ccc; }*/
+
+/* special styles */
+.status_pending { font-weight: bold; color: #4674a3; }
+.status_running { font-weight: bold; color: #cab336; }
+.status_complete { font-weight: bold; color: #72ba2c; }
+.status_error { font-weight: bold; color: #c64b46; }
+.status_interrupted { font-weight: bold; color: #9247aa; }
+.status_cancelling { font-weight: bold; color: #8b8d8c; }
+.status_cancelled { font-weight: bold; color: #c69da2; }
