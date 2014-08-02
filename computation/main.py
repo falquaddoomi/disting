@@ -66,25 +66,36 @@ def processInput(data, notify=default_notify):
     myGraphModel = graphModel.graphModel(A, B, C, n, r, m, AdjMat, notify=notify)
 
     notify(" => completed graphModel.graphModel")
-    ######
-	##MB Additions/Modifications
-#    if myGraphModel.QRank != n:
-#        output.write('q rank != n nonobservable')
-#        notify('q rank != n nonobservable')
-#        notify('process ended')
-#        return "model nonobservable"
+#     ######
+# 	##MB Additions/Modifications
+# #    if myGraphModel.QRank != n:
+# #        output.write('q rank != n nonobservable')
+# #        notify('q rank != n nonobservable')
+# #        notify('process ended')
+# #        return "model nonobservable"
+# #
+# #    if myGraphModel.RRank != n:
+# #        output.write('r rank != n noncontrollable')
+# #        notify('r rank != n noncontrollable')
+# #        notify('process ended')
+# #        return "model noncontrollable"
 #
-#    if myGraphModel.RRank != n:
-#        output.write('r rank != n noncontrollable')
-#        notify('r rank != n noncontrollable')
-#        notify('process ended')
-#        return "model noncontrollable"
+#
+#     if laplaceTools.hasComplexEigenvalues(A):
+#         output.write('Complex eigenvalues--not all models may be discovered! (Michael Bilow)')
+#     ## <end> MB Additions/Modifications
 
+    if myGraphModel.QRank != n:
+       output.write('q rank != n nonobservable')
+       notify('q rank != n nonobservable')
+       notify('process ended')
+       return "model nonobservable"
 
-    if laplaceTools.hasComplexEigenvalues(A):
-        output.write('Complex eigenvalues--not all models may be discovered! (Michael Bilow)')
-    ## <end> MB Additions/Modifications
-
+    if myGraphModel.RRank != n:
+       output.write('r rank != n noncontrollable')
+       notify('r rank != n noncontrollable')
+       notify('process ended')
+       return "model noncontrollable"
 
     notify('DONE MAKING ORIG MODEL')
 

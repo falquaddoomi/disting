@@ -1,10 +1,20 @@
-setenv HOMEDIR /home/ubuntu/projects/disting
-setenv VENV_ACTIVATE /home/ubuntu/projects/virtualenvs/disting_env/bin/activate
+# change this to the parent dir that contains both the virtualenv and checked out code
+setenv BASEDIR ~/projects
+
+# change this to where you've checked out the code
+setenv HOMEDIR $BASEDIR/compgraph_web
+
+# change this to the full path to 'activate', usually inside bin in
+# the virtualenv dir (it'll be called 'activate.bat' in Scripts on Windows)
+setenv VENV_ACTIVATE $BASEDIR/virtualenvs/disting_env/bin/activate
+
+# --- the rest of this should just work without modification --
+
 chdir $HOMEDIR
 
 screen -t server
 stuff "source $VENV_ACTIVATE\012"
-stuff "./manage.py runserver 0.0.0.0:5580\012"
+stuff "./manage.py runserver --insecure 0.0.0.0:5580\012"
 
 screen -t processor 
 stuff "source $VENV_ACTIVATE\012"
