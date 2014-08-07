@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from datetime import datetime
 import json
 from dateutil import relativedelta
@@ -85,7 +86,7 @@ m = %(m)s""" % model_to_dict(self)
             return None
 
         # parse out the graph data
-        results = {}
+        results = OrderedDict()
         matches = re.finditer(r"(Model [0-9]+)[^\n]*\n(\[([ ]*\[[01. ]+\]\n?)+\])", self.result, re.MULTILINE|re.DOTALL)
 
         for m in matches:
