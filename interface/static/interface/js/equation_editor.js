@@ -145,3 +145,26 @@ function buildMatrix(nodeCount, graphID, matrixID) {
     // add that row to the thing
     $output_row.appendTo($matHolder);
 }
+
+function updateMatrix(Adj, B, C) {
+    // iterate over the rows of the matrix
+    $.each(Adj.replace(/(\[|\])/gm, '').split(";"), function(k, row) {
+        k += 1;
+        $.each(row.trim().split(' '), function(j, col) {
+            j += 1;
+            $("#item_" + k + "-" + j).prop('checked', (col == 1)).val(col).change();
+        });
+    });
+
+    // iterate over elements of input (;-delimited)
+    $.each(B.replace(/(\[|\])/gm, '').split(";"), function(idx, val) {
+        idx += 1;
+        $("#input_" + idx).prop('checked', (val == 1)).val(val).change();
+    });
+
+    // iterate over elements of output (space-delimited)
+    $.each(C.replace(/(\[|\])/gm, '').split(" "), function(idx, val) {
+        idx += 1;
+        $("#output_" + idx).prop('checked', (val == 1)).val(val).change();
+    });
+}
