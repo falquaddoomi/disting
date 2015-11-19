@@ -5,9 +5,10 @@ This project aims to provide a means to identify the family of compartment model
 
 ## How to install and run DISTING
 
-Clone this repository to a location of your choice on the server. Once it's there, run the setup.sh script and it will install all the requisite packages.
+Clone this repository to a location of your choice on the server. Once it's there, run the **setup.sh** script and it will install all the requisite packages.
 
-Run the launch.sh script and it will start a screen session with four subscreens, described below:
+Run the **launch.sh** script and it will start a screen session with four subscreens, described below:
+
 - server, which is the webserver that handles the interface (running on port 5580 by default),
 - processor, which is a daemon that processes incoming jobs,
 - workers, a celery instance that processes small asynchronous incoming tasks (mostly matrix rank calculations),
