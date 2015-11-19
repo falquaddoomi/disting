@@ -24,7 +24,7 @@ DISTING consists of three components:
 3. a pool of worker processes that handle running computations asynchronously for each job
 
 ### Web Interface
-The **web interrface** is implemented in a Python web framework called Django (https://www.djangoproject.com/). If you wish to work on the interface, it's recommended that you read the Django documentation, or at least follow the "getting started" tutorial on the site.
+The **web interface** is implemented in a Python web framework called Django (https://www.djangoproject.com/). If you wish to work on the interface, it's recommended that you read the Django documentation, or at least follow the "getting started" tutorial on the site.
 
 The majority of the site's implementation can be found in
 https://github.com/falquaddoomi/disting/tree/master/interface
