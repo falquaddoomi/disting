@@ -14,7 +14,7 @@ Run the **launch.sh** script and it will start a screen session with four subscr
 - workers, a celery instance that processes small asynchronous incoming tasks (mostly matrix rank calculations),
 - shell, a shell that's already activated in the disting virtualenv that you can use for management, if need be.
 
-You can safely detach from the screen session at this point by invoking Ctrl-a, Ctrl-d.
+You can safely detach from the screen session at this point by entering <kbd>Ctrl</kbd>-<kbd>a</kbd>, <kbd>Ctrl</kbd>-<kbd>d</kbd>.
 
 ## Project details
 
