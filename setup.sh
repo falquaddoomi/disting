@@ -6,7 +6,7 @@ echo -e "\n=== STEP 1. Install system packages via apt-get"
 
 sudo apt-get install rabbitmq-server
 sudo apt-get install maxima
-sudo apt-get install python python-pip
+sudo apt-get install python python-dev python-pip
 sudo apt-get install gfortran libopenblas-dev liblapack-dev
 sudo apt-get install screen
 
