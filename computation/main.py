@@ -28,6 +28,30 @@ def processInput(data, notify=default_notify):
     tempAdj = scipy.mat(inputParams[3])
     AdjMat = tempAdj.T
 
+    n = B.size
+    m = scipy.count_nonzero(B)
+    newB = scipy.zeros((n,m))
+    cnt = 0
+    rng = scipy.arange(n)
+    for i in rng:
+      if B[i,0]==1:
+        newB[i,cnt] = 1
+        cnt=cnt+1
+    B = scipy.mat(newB)
+    B=B.astype(int)
+
+    n = C.size
+    m = scipy.count_nonzero(C)
+    newC = scipy.zeros((m,n))
+    cnt = 0
+    rng = scipy.arange(n)
+    for i in rng:
+      if C[0,i]==1:
+        newC[cnt,i] = 1
+        cnt=cnt+1
+    C = scipy.mat(newC)
+    C=C.astype(int)
+
     #num compartments
     n = int(inputParams[4])
 
