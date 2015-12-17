@@ -3,7 +3,7 @@ from collections import defaultdict
 __author__ = 'Faisal'
 
 class Sparse2DMat(object):
-    def __init__(self, rows=0, cols=0, default=0):
+    def __init__(self, rows=1, cols=1, default=0):
         self.mat = {}
         self.rows = int(rows)
         self.cols = int(cols)

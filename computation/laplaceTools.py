@@ -17,6 +17,28 @@ from sympy.polys.domains import ZZ
 # from sympy.polys.solvers import RawMatrix
 # from sympy.polys.fields import vfield
 
+#################
+# MB Additions
+
+def hasComplexEigenvalues(M):
+    eigvs = numpy.linalg.eig(M)[0]
+    print eigvs
+    for eigv in eigvs:
+        print eigv
+        if numpy.iscomplexobj(eigv):
+            return True
+        else:
+            pass
+    return False
+
+#x = numpy.mat([[3,-9],[4,-3]], numpy.float32)
+
+#check_complex_eigenvalues(x)
+
+## <end> MB Additions
+################
+
+
 #faster rref calculation!
 def _iszero(x):
     """Returns True if x is zero."""
@@ -42,6 +64,7 @@ def rrefMine(self, simplified=False, iszerofunc=_iszero,
     pivot, r = 0, self[:,:].as_mutable()        # pivot: index of next row to contain a pivot
     pivotlist = []                  # indices of pivot variables (non-free)
     for i in range(r.cols):
+	
         #print "col: %s out of %s" % (i, r.cols)
         if pivot == r.rows:
             break
@@ -117,7 +140,7 @@ def makeSymMat(mat):
     row, col = mat.shape
     M = sympy.Matrix(row, col, lambda i,j: sympy.Symbol('a_%d%d' % (i+1,j+1)) if mat.getA()[i][j] == 1 else 0)
     return M
-
+	
 #TF is returned as symbolic
 #A, B, C are not expected to be symbolic
 def calcTF(A, B, C, n):

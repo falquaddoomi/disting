@@ -1,6 +1,7 @@
+from collections import OrderedDict
 from datetime import datetime
 import json
-import dateutil
+from dateutil import relativedelta
 import django.utils.timezone
 from django.contrib.auth.models import User
 from django.db import models
@@ -76,7 +77,7 @@ m = %(m)s""" % model_to_dict(self)
         else:
             end = self.ended_on
 
-        rd = dateutil.relativedelta.relativedelta (end, self.started_on)
+        rd = relativedelta.relativedelta (end, self.started_on)
         return "%d:%02d:%02d.%d" % (rd.hours, rd.minutes, rd.seconds, rd.microseconds)
 
     def graphs(self):
@@ -85,7 +86,7 @@ m = %(m)s""" % model_to_dict(self)
             return None
 
         # parse out the graph data
-        results = {}
+        results = OrderedDict()
         matches = re.finditer(r"(Model [0-9]+)[^\n]*\n(\[([ ]*\[[01. ]+\]\n?)+\])", self.result, re.MULTILINE|re.DOTALL)
 
         for m in matches:

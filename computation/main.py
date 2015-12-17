@@ -28,6 +28,30 @@ def processInput(data, notify=default_notify):
     tempAdj = scipy.mat(inputParams[3])
     AdjMat = tempAdj.T
 
+    n = B.size
+    m = scipy.count_nonzero(B)
+    newB = scipy.zeros((n,m))
+    cnt = 0
+    rng = scipy.arange(n)
+    for i in rng:
+      if B[i,0]==1:
+        newB[i,cnt] = 1
+        cnt=cnt+1
+    B = scipy.mat(newB)
+    B=B.astype(int)
+
+    n = C.size
+    m = scipy.count_nonzero(C)
+    newC = scipy.zeros((m,n))
+    cnt = 0
+    rng = scipy.arange(n)
+    for i in rng:
+      if C[0,i]==1:
+        newC[cnt,i] = 1
+        cnt=cnt+1
+    C = scipy.mat(newC)
+    C=C.astype(int)
+
     #num compartments
     n = int(inputParams[4])
 
@@ -66,21 +90,38 @@ def processInput(data, notify=default_notify):
     myGraphModel = graphModel.graphModel(A, B, C, n, r, m, AdjMat, notify=notify)
 
     notify(" => completed graphModel.graphModel")
+#     ######
+# 	##MB Additions/Modifications
+# #    if myGraphModel.QRank != n:
+# #        output.write('q rank != n nonobservable')
+# #        notify('q rank != n nonobservable')
+# #        notify('process ended')
+# #        return "model nonobservable"
+# #
+# #    if myGraphModel.RRank != n:
+# #        output.write('r rank != n noncontrollable')
+# #        notify('r rank != n noncontrollable')
+# #        notify('process ended')
+# #        return "model noncontrollable"
+#
+#
+#     if laplaceTools.hasComplexEigenvalues(A):
+#         output.write('Complex eigenvalues--not all models may be discovered! (Michael Bilow)')
+#     ## <end> MB Additions/Modifications
 
     if myGraphModel.QRank != n:
-        output.write('q rank != n nonobservable')
-        notify('q rank != n nonobservable')
-        notify('process ended')
-        return "model nonobservable"
+       output.write('q rank != n nonobservable')
+       notify('q rank != n nonobservable')
+       notify('process ended')
+       return "model nonobservable"
 
     if myGraphModel.RRank != n:
-        output.write('r rank != n noncontrollable')
-        notify('r rank != n noncontrollable')
-        notify('process ended')
-        return "model noncontrollable"
+       output.write('r rank != n noncontrollable')
+       notify('r rank != n noncontrollable')
+       notify('process ended')
+       return "model noncontrollable"
 
     notify('DONE MAKING ORIG MODEL')
-
 
     notify(n)
     notify(myGraphModel.Rank)
