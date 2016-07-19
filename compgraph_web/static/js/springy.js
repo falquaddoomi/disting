@@ -213,7 +213,6 @@
 				this.nodes.splice(i, 1);
 			}
 		}
-
 		this.detachNode(node);
 	};
 
@@ -225,7 +224,6 @@
 				this.removeEdge(e);
 			}
 		}, this);
-
 		this.notify();
 	};
 
@@ -258,7 +256,6 @@
 				delete this.adjacency[x];
 			}
 		}
-
 		this.notify();
 	};
 
@@ -330,7 +327,9 @@
 		this.stiffness = stiffness; // spring stiffness constant
 		this.repulsion = repulsion; // repulsion constant
 		this.damping = damping; // velocity damping factor
-
+		this.orig_damping = damping;
+		this.bottomleftc = new Vector(-1.8,-1.8);
+                this.toprightc = new Vector(1.8,1.8);
 		this.nodePoints = {}; // keep track of points associated with nodes
 		this.edgeSprings = {}; // keep track of springs associated with edges
 	};
@@ -456,8 +455,40 @@
 		this.eachNode(function(node, point) {
 			// Same question as above; along with updateVelocity, is this all of
 			// your integration code?
-			point.p = point.p.add(point.v.multiply(timestep));
-		});
+			if (point.m<1000)
+			{
+				point.p = point.p.add(point.v.multiply(timestep));
+			}
+
+
+
+		var direction = point.p.multiply(-1.0);
+
+		if (point.p.x < this.bottomleftc.x) {
+			var mag = Math.min(3,Math.max(.01,Math.abs(point.p.x - this.bottomleftc.x)));
+                        point.applyForce(direction.multiply((mag*this.repulsion)));
+                        this.damping/=1+.0005;		
+		}
+		if (point.p.y < this.bottomleftc.y) {
+		        var mag = Math.min(3,Math.max(.01,Math.abs(point.p.y - this.bottomleftc.y)));
+                        point.applyForce(direction.multiply((mag*this.repulsion)));
+                        this.damping/=1+.0005;
+		}
+		if (point.p.x > this.toprightc.x) {
+			var mag = Math.min(3,Math.max(.01,Math.abs(point.p.x - this.toprightc.x)));
+                        point.applyForce(direction.multiply((mag*this.repulsion)));
+			this.damping/=1+.0005;
+		}
+		if (point.p.y > this.toprightc.y) {
+                        var mag = Math.min(3,Math.max(.01,Math.abs(point.p.y - this.toprightc.y)));
+                        point.applyForce(direction.multiply((mag*this.repulsion)));
+                        this.damping/=1+.0005;
+		}
+
+		this.damping=Math.max(this.damping,this.orig_damping/10);
+
+
+});
 	};
 
 	// Calculate the total kinetic energy of the system
@@ -552,7 +583,7 @@
 			}
 		});
 
-		var padding = topright.subtract(bottomleft).multiply(0.07); // ~5% padding
+		var padding = topright.subtract(bottomleft).multiply(0.10); // ~5% padding
 
 		return {bottomleft: bottomleft.subtract(padding), topright: topright.add(padding)};
 	};
@@ -636,6 +667,7 @@
 	}
 
 	Renderer.prototype.graphChanged = function(e) {
+		this.layout.damping = this.layout.orig_damping;
 		this.start();
 	};
 

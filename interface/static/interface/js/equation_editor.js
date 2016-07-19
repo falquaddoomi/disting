@@ -7,7 +7,7 @@ function buildMatrix(nodeCount, graphID, matrixID) {
     var nodes = {};
     for (var i = 1; i <= nodeCount; i++)
         nodes[i] = graph.newNode({label: i});
-
+    graph.nodeCount = nodeCount;
     // destroy and recreate the canvas
     $graphHolder.empty();
     $('<canvas class="graph_canvas" width="400" height="400" style="border: solid 1px gray;" />')

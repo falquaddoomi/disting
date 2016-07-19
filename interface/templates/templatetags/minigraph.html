@@ -1,8 +1,12 @@
 <div style="float: left; width: 280; border: solid 1px #ccc; margin-right: 10px; margin-bottom: 10px;">
     <canvas id="{{ name | slugify }}_canvas" width="280" height="250"></canvas>
     <div style="font-weight: bold;">{{ name }}</div>
-
+    <a href="#" class="link" id="{{ name | slugify }}_btn" download="{{ name }}.png"  target="_blank">Download</a>
+    
     <script>
+
+
+
     $(document).ready(function() {
         // make a new graph
         var graph = new Springy.Graph();
@@ -22,7 +26,16 @@
         {% endfor %}
 
         var canvasID = "#{{ name | slugify }}_canvas";
+	
+
+	$(document).on("click", $("#{{ name }}_btn"), function(){
+var dataURL = $(document).find(canvasID).get(0).toDataURL('image/png');
+$("#{{ name | slugify }}_btn").prop('href', dataURL);
+	
+});
+
         $(canvasID).springy({ graph: graph });
+
     });
     </script>
 </div>

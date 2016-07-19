@@ -457,7 +457,8 @@
 			// Same question as above; along with updateVelocity, is this all of
 			// your integration code?
 			point.p = point.p.add(point.v.multiply(timestep));
-		});
+
+	});
 	};
 
 	// Calculate the total kinetic energy of the system

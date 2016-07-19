@@ -30,8 +30,10 @@ jQuery.fn.springy = function(params) {
 
 	var stiffness = params.stiffness || 400.0;
 	var repulsion = params.repulsion || 400.0;
-	var damping = params.damping || 0.5;
+	var damping = params.damping || 0.4;
 	var nodeSelected = params.nodeSelected || null;
+	
+	var fixed_points = 0;
 
 	var canvas = this[0];
 	var ctx = canvas.getContext("2d");
@@ -41,6 +43,7 @@ jQuery.fn.springy = function(params) {
 	// calculate bounding box of graph layout.. with ease-in
 	var currentBB = layout.getBoundingBox();
 	var targetBB = {bottomleft: new Springy.Vector(-2, -2), topright: new Springy.Vector(2, 2)};
+
 
 	// auto adjusting bounding box
 	Springy.requestAnimationFrame(function adjust() {
@@ -52,54 +55,70 @@ jQuery.fn.springy = function(params) {
 			topright: currentBB.topright.add( targetBB.topright.subtract(currentBB.topright)
 				.divide(10))
 		};
-
-		Springy.requestAnimationFrame(adjust);
-	});
-
-	// convert to/from screen coordinates
-	var toScreen = function(p) {
-		var size = currentBB.topright.subtract(currentBB.bottomleft);
-		var sx = p.subtract(currentBB.bottomleft).divide(size.x).x * canvas.width;
-		var sy = p.subtract(currentBB.bottomleft).divide(size.y).y * canvas.height;
-		return new Springy.Vector(sx, sy);
-	};
-
-	var fromScreen = function(s) {
-		var size = currentBB.topright.subtract(currentBB.bottomleft);
-		var px = (s.x / canvas.width) * size.x + currentBB.bottomleft.x;
-		var py = (s.y / canvas.height) * size.y + currentBB.bottomleft.y;
-		return new Springy.Vector(px, py);
-	};
-
-	// half-assed drag and drop
-	var selected = null;
-	var nearest = null;
-	var dragged = null;
-
-	jQuery(canvas).mousedown(function(e) {
-		var pos = jQuery(this).offset();
-		var p = fromScreen({x: e.pageX - pos.left, y: e.pageY - pos.top});
-		selected = nearest = dragged = layout.nearest(p);
-
-		if (selected.node !== null) {
-			// dragged.point.m = 10000.0;
-
-			if (nodeSelected) {
-				nodeSelected(selected.node);
+		pad = .75;
+		layout.bottomleftc.x=currentBB.bottomleft.x*pad;
+		layout.bottomleftc.y=currentBB.bottomleft.y*pad;
+                layout.toprightc.x=currentBB.topright.x*pad;
+                layout.toprightc.y=currentBB.topright.y*pad;
+		if (fixed_points <=0)
+			{
+				Springy.requestAnimationFrame(adjust);
 			}
+		});
+
+		// convert to/from screen coordinates
+		var toScreen = function(p) {
+			var size = currentBB.topright.subtract(currentBB.bottomleft);
+			var sx = p.subtract(currentBB.bottomleft).divide(size.x).x * canvas.width;
+			var sy = p.subtract(currentBB.bottomleft).divide(size.y).y * canvas.height;
+			return new Springy.Vector(sx, sy);
+		};
+
+		var fromScreen = function(s) {
+			var size = currentBB.topright.subtract(currentBB.bottomleft);
+			var px = (s.x / canvas.width) * size.x + currentBB.bottomleft.x;
+			var py = (s.y / canvas.height) * size.y + currentBB.bottomleft.y;
+			return new Springy.Vector(px, py);
+		};
+
+		// half-assed drag and drop
+		var selected = null;
+		var nearest = null;
+		var dragged = null;
+		
+
+		jQuery(canvas).mousedown(function(e) {
+			var pos = jQuery(this).offset();
+			var p = fromScreen({x: e.pageX - pos.left, y: e.pageY - pos.top});
+			selected = nearest = dragged = layout.nearest(p);
+
+			if (selected.node !== null) {
+				if (dragged.point.m==1.0)
+				{ 
+					fixed_points++;
+					dragged.point.m = 10000.0;
+				}
+
+				if (nodeSelected) {
+					nodeSelected(selected.node);
+				}
+			}
+
+			renderer.start();
+		});
+
+		// Basic double click handler
+		jQuery(canvas).dblclick(function(e) {
+			var pos = jQuery(this).offset();
+			var p = fromScreen({x: e.pageX - pos.left, y: e.pageY - pos.top});
+			selected = layout.nearest(p);
+
+		// make the double clicked node static
+		if (selected.point.m > 1.0)
+		{	
+        		fixed_points--;
+			selected.point.m = 1.0;
 		}
-
-		renderer.start();
-	});
-
-	// Basic double click handler
-	jQuery(canvas).dblclick(function(e) {
-		var pos = jQuery(this).offset();
-		var p = fromScreen({x: e.pageX - pos.left, y: e.pageY - pos.top});
-		selected = layout.nearest(p);
-
-        // make the double clicked node static
-        selected.point.m = 10000.0;
 
 		node = selected.node;
 		if (node && node.data && node.data.ondoubleclick) {
@@ -115,13 +134,16 @@ jQuery.fn.springy = function(params) {
 		if (dragged !== null && dragged.node !== null) {
 			dragged.point.p.x = p.x;
 			dragged.point.p.y = p.y;
+			renderer.start();
 		}
 
-		renderer.start();
 	});
 
 	jQuery(window).bind('mouseup',function(e) {
+		fixed_points=0;
 		dragged = null;
+		layout.damping = layout.orig_damping;
+		renderer.start();
 	});
 
 	Springy.Node.prototype.getWidth = function() {
@@ -151,7 +173,8 @@ jQuery.fn.springy = function(params) {
 
 	var renderer = this.renderer = new Springy.Renderer(layout,
 		function clear() {
-			ctx.clearRect(0,0,canvas.width,canvas.height);
+			ctx.fillStyle="white";
+			ctx.fillRect(0,0,canvas.width,canvas.height);
 		},
 		function drawEdge(edge, p1, p2) {
 			var x1 = toScreen(p1).x;
