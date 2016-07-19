@@ -92,7 +92,7 @@ m = %(m)s""" % model_to_dict(self)
         # but it handles the case where it's not present at all gracefully)
         orig_matches = re.finditer(r"(Original Model)[^\n]*\n(\[([ ]*\[[01. ]+\]\n?)+\])", self.result, re.MULTILINE|re.DOTALL)
 
-        for m in matches:
+        for m in orig_matches:
             results["Model 0"] = json.loads(m.group(2).replace(". ",",").replace(".]", "]").replace("\n", ", "))
             # note this breaks on the first result, since there should be just one original model
             break
