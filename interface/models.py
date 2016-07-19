@@ -85,8 +85,19 @@ m = %(m)s""" % model_to_dict(self)
         if self.result.strip() == "":
             return None
 
-        # parse out the graph data
         results = OrderedDict()
+
+        # find and the original graph (aka "model 0")
+        # (NOTE: there's really no need for re.finditer since we're just getting one result,
+        # but it handles the case where it's not present at all gracefully)
+        orig_matches = re.finditer(r"(Original Model)[^\n]*\n(\[([ ]*\[[01. ]+\]\n?)+\])", self.result, re.MULTILINE|re.DOTALL)
+
+        for m in matches:
+            results["Model 0"] = json.loads(m.group(2).replace(". ",",").replace(".]", "]").replace("\n", ", "))
+            # note this breaks on the first result, since there should be just one original model
+            break
+
+        # parse out the rest of the graph data
         matches = re.finditer(r"(Model [0-9]+)[^\n]*\n(\[([ ]*\[[01. ]+\]\n?)+\])", self.result, re.MULTILINE|re.DOTALL)
 
         for m in matches:
