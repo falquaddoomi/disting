@@ -37,13 +37,22 @@ p { text-indent: 1em; }
     margin: 5px 3px 3px 0px;
 }
 
+strong.uber { font-size: larger; }
+
+ol.refs {
+    list-style-type: none; margin-left: 0; padding-left: 0;
+}
+
+p { text-indent: 0; }
+div.notes { font-size: smaller; }
+
 hr.dotted {
     border:none;
     border-top:1px dotted #aaa;
     color:#fff;
     background-color:#fff;
     height:1px;
-    width:50%;
+    width:100%;
 }
 
 #choices_tray a#queue_selection { background-image: url('{{ STATIC_URL }}icons/cc/black/list_bullets_icon&48.png'); }
@@ -53,34 +62,34 @@ hr.dotted {
 
 {% block content %}
     <p>
-    Welcome to <strong>DISTING</strong>, a tool for generating alternative structurally identifiable <em>linear compartmental (LC) models</em>* that are    <strong><em>input-output indistinguishable</em></strong> from a postulated LC model [1,2].
+    Welcome to <strong class="uber">DISTING</strong>, a tool for generating alternative structurally identifiable <em>linear compartmental (LC) models</em>* that are    <strong><em>input-output indistinguishable</em></strong> from a postulated LC model [1,2].
     </p>
 
-    <h2>App Usage</h2>
-
     <p>
+       <strong class="uber">App Usage</strong><br />
         The site is centered around a <strong>job queue</strong> showing job status and results. Users can create, rerun or check job status in the queue.
     </p>
 
     <p>
-        <strong>User Entry of Model to be Tested (Model 0): </strong>
-        This is done on the <strong>add job</strong> page simply by <em>checking boxes</em> where entries exist in one matrix and 2 vectors. The first is the
+        <strong class="uber">User Entry of Model to be Tested (Model 0): </strong>
+        This is done on the <strong class="uber">add job</strong> page simply by <em>checking boxes</em> where entries exist in one matrix and 2 vectors. The first is the
         adjacency (connection) matrix <em>A </em>of graph theory, where <em>entry a<sub>i,j </sub></em>is checked to indicate a link to compartment <em>i</em> from
     compartment <em>j;</em> and <em>a<sub>i,i </sub> </em>is checked to indicate elimination (a leak) from compartment <em>i.</em> Vectors <em>M</em> and    <em>N </em>get<em> </em>checked entries to specify the <em>input and output locations</em> in the LC model.
     </p>
 
     <p>
-        <strong>Graphical results</strong>
-        show the original Model 0 and the structurally identifiable Models 1, 2,…., all downloadable in png format using Google Chrome.
+        <strong class="uber">Graphical results</strong>
+        show the original Model 0 and the structurally identifiable Models 1, 2, &hellip;, all downloadable in png format using Google Chrome.
     </p>
 
     <p>
-        Jobs start in <strong>pending</strong> status, move to <strong>running</strong> (one at a time) and finally to <strong>complete</strong>. If an error
-        occurs, the status changes to <strong>error</strong>. Job processing time depends on the number of simultaneous server job requests.
+        Jobs start in <strong class="uber">pending</strong> status, move to <strong class="uber">running</strong> (one at a time) and finally to <strong class="uber">complete</strong>. If an error
+        occurs, the status changes to <strong class="uber">error</strong>. Job processing time depends on the number of simultaneous server job requests.
     </p>
 
     <hr class="dotted" />
 
+    <div class="notes">
     <p>
     * <em>LC models</em> can be expressed by a set of first-order differential equations in vector-matrix form: <em>d<strong>x</strong>/dt</em> = <em>Kx</em> +    <em>Bu</em> with outputs: <em>y</em> = C<em>x.</em> Here <strong><em>x</em></strong><em> </em>are state variables (quantities or concentrations). The
         compartment matrix <em>K </em>consists of rate constants between compartments (off-diagonal); and of the negative of the sum of rate constants from each
@@ -89,10 +98,11 @@ hr.dotted {
         representation A, M, N.
     </p>
 
-    <ol style="list-style-type: none; margin-left: 0;">
+    <ol class="refs">
         <li>[1] M.J. Chapman and K.R. Godfrey (1989): A methodology for compartmental model indistinguishability, <em>Math Biosci</em>, <strong>96</strong>, pp. 141-164</li>
         <li>[2] L-Q. Zhang, J.C. Collins and P.H. King (1991): Indistinguishability and identifiability analysis of linear compartmental models, <em>Math Biosci</em>,    <strong>103</strong>, pp.77-95</li>
     </ol>
+    </div>
 
     <h2>Actions</h2>
 
