@@ -69,7 +69,18 @@
 
         <h2 id="results_bar">Results</h2>
         {% if job.result %}
-        <pre id="results_pre" style="margin-left: 20px; overflow-x: auto;">{{ job.result }}</pre>
+        {# <pre id="results_pre" style="margin-left: 20px; overflow-x: auto;">{{ job.result }}</pre> #}
+        <div id="results_pre" style="margin-left: 20px; overflow-x: auto;">
+        {% for name, model in job.extracted_results.items %}
+            <div style="margin-bottom: 0.5em;">
+                <h3>{{ name }}:</h3>
+                <pre>{{ model.matrix }}</pre>
+
+                <strong>A matrix:</strong><br />
+                <pre>{{ model.a_matrix }}</pre>
+            </div>
+        {% endfor %}
+        </div>
         {% else %}
         <div style="margin-left: 20px; font-style: italic;">(results pending completion or error...)</div>
         {% endif %}

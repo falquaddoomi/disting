@@ -80,6 +80,30 @@ m = %(m)s""" % model_to_dict(self)
         rd = relativedelta.relativedelta (end, self.started_on)
         return "%d:%02d:%02d.%d" % (rd.hours, rd.minutes, rd.seconds, rd.microseconds)
 
+    def extracted_results(self):
+        # we can only extract results if there actually were results
+        if self.result.strip() == "":
+            return None
+
+        # take the normal output and match only the models, return just that
+        models = OrderedDict()
+
+        orig_matches = re.finditer(r"(Original Model)[^\n]*\n(\[([ ]*\[[01. ]+\]\n?)+\])\nA matrix[ \n]*(\[([ ]*\[[01. ]+\]\n?)+\])", self.result,
+                               re.MULTILINE | re.DOTALL)
+
+        for m in orig_matches:
+            models["Model 0"] = { 'matrix': m.group(2), 'a_matrix': m.group(3) }
+            # note this breaks on the first result, since there should be just one original model
+            break
+
+        # parse out the rest of the graph data
+        matches = re.finditer(r"(Model [0-9]+)[^\n]*\n(\[([ ]*\[[01. ]+\]\n?)+\])\nA matrix[ \n]*(\[([ ]*\[[01. ]+\]\n?)+\])", self.result, re.MULTILINE | re.DOTALL)
+
+        for m in matches:
+            models[m.group(1)] = { 'matrix': m.group(2), 'a_matrix': m.group(3) }
+
+        return models
+
     def graphs(self):
         # we can only produce a gallery of graph data if there actually were results
         if self.result.strip() == "":
