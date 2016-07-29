@@ -92,7 +92,7 @@ m = %(m)s""" % model_to_dict(self)
                                re.MULTILINE | re.DOTALL)
 
         for m in orig_matches:
-            models["Model 0"] = { 'matrix': m.group(2), 'a_matrix': m.group(3) }
+            models["Model 0"] = { 'matrix': m.group(2).replace("1", "X"), 'a_matrix': m.group(3).replace("1", "X") }
             # note this breaks on the first result, since there should be just one original model
             break
 
@@ -100,7 +100,7 @@ m = %(m)s""" % model_to_dict(self)
         matches = re.finditer(r"(Model [0-9]+)[^\n]*\n(\[([ ]*\[[01. ]+\]\n?)+\])\nA matrix[ \n]*(\[([ ]*\[[01. ]+\]\n?)+\])", self.result, re.MULTILINE | re.DOTALL)
 
         for m in matches:
-            models[m.group(1)] = { 'matrix': m.group(2), 'a_matrix': m.group(3) }
+            models[m.group(1)] = { 'matrix': m.group(2).replace("1", "X"), 'a_matrix': m.group(3).replace("1", "X") }
 
         return models
 
