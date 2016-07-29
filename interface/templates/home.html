@@ -37,6 +37,15 @@ p { text-indent: 1em; }
     margin: 5px 3px 3px 0px;
 }
 
+hr.dotted {
+    border:none;
+    border-top:1px dotted #aaa;
+    color:#fff;
+    background-color:#fff;
+    height:1px;
+    width:50%;
+}
+
 #choices_tray a#queue_selection { background-image: url('{{ STATIC_URL }}icons/cc/black/list_bullets_icon&48.png'); }
 #choices_tray a#addjob_selection { background-image: url('{{ STATIC_URL }}icons/cc/black/round_plus_icon&48.png'); background-position: 11px 45%; }
 </style>
@@ -44,30 +53,59 @@ p { text-indent: 1em; }
 
 {% block content %}
     <p>
-    Welcome to <b>DISTING</b>, a tool for establishing the distinguishability of linear compartmental models.
+    Welcome to <strong>DISTING</strong>, a tool for generating alternative structurally identifiable <em>linear compartmental (LC) models</em>* that are    <strong><em>input-output indistinguishable</em></strong> from a postulated LC model [1,2].
     </p>
 
-    <h2>Overview</h2>
-
-    <p>The site is centered around a <b>job queue</b>, which shows the status of jobs that you've created as well as allows you to access the results of jobs that have previously run. From the queue page, you can create new jobs, restart jobs that have failed or run previously, view detailed statuses about jobs, or remove jobs from the queue.</p>
-
-    <p>Jobs are run one at a time. They start in the <b class="status_pending">pending</b> status, then move to <b class="status_running">running</b>, and finally to <b class="status_complete">complete</b>. If an error occurs, the status of the job will instead change to <b class="status_error">error</b>. Once a job has completed or failed, the next job in the queue will execute until all jobs are complete. Note that the one-job limit applies to all users, so if other users are using the system it may take some time for your job to be processed. This is in the interest of providing the fastest turnaround time for a single job, although this may be changed in the future.</p>
+    <h2>App Usage</h2>
 
     <p>
-    The job queue itself stores <b>jobs</b>, which are descriptions of the problems that you'd like to solve. These jobs are created from the <b>add job</b> page, which requires that you enter the adjacency matrix describing your linear compartment model as well as identify which nodes are the inputs to the system and which are the outputs. Once you've entered your problem, you may add it to the queue and it will be processed.
+        The site is centered around a <strong>job queue</strong> showing job status and results. Users can create, rerun or check job status in the queue.
     </p>
 
-    <h2>Actions</h2>
-        <div id="choices_tray">
-            <a id="queue_selection" href="{% url 'interface:queue' %}">
-                <h3>View the Job Queue</h3>
-                <p>view jobs, modify job statuses, edit individual jobs</p>
-            </a>
+    <p>
+        <strong>User Entry of Model to be Tested (Model 0): </strong>
+        This is done on the <strong>add job</strong> page simply by <em>checking boxes</em> where entries exist in one matrix and 2 vectors. The first is the
+        adjacency (connection) matrix <em>A </em>of graph theory, where <em>entry a<sub>i,j </sub></em>is checked to indicate a link to compartment <em>i</em> from
+    compartment <em>j;</em> and <em>a<sub>i,i </sub> </em>is checked to indicate elimination (a leak) from compartment <em>i.</em> Vectors <em>M</em> and    <em>N </em>get<em> </em>checked entries to specify the <em>input and output locations</em> in the LC model.
+    </p>
 
-            <a id="addjob_selection" href="{% url 'interface:addjob' %}">
-                <h3>Create a New Job</h3>
-                <p>add new jobs to the queue</p>
-            </a>
-        </div>
+    <p>
+        <strong>Graphical results</strong>
+        show the original Model 0 and the structurally identifiable Models 1, 2,…., all downloadable in png format using Google Chrome.
+    </p>
+
+    <p>
+        Jobs start in <strong>pending</strong> status, move to <strong>running</strong> (one at a time) and finally to <strong>complete</strong>. If an error
+        occurs, the status changes to <strong>error</strong>. Job processing time depends on the number of simultaneous server job requests.
+    </p>
+
+    <hr class="dotted" />
+
+    <p>
+    * <em>LC models</em> can be expressed by a set of first-order differential equations in vector-matrix form: <em>d<strong>x</strong>/dt</em> = <em>Kx</em> +    <em>Bu</em> with outputs: <em>y</em> = C<em>x.</em> Here <strong><em>x</em></strong><em> </em>are state variables (quantities or concentrations). The
+        compartment matrix <em>K </em>consists of rate constants between compartments (off-diagonal); and of the negative of the sum of rate constants from each
+        compartment, including leaks to the environment (on-diagonal). The input vector <em>B</em> contains input gains, while the output vector <em>C </em>
+        contains measurement gains. DISTING requires only the <em>connectivity</em> of LC models to run, expressed in the equivalent model graph theory
+        representation A, M, N.
+    </p>
+
+    <ol style="list-style-type: none; margin-left: 0;">
+        <li>[1] M.J. Chapman and K.R. Godfrey (1989): A methodology for compartmental model indistinguishability, <em>Math Biosci</em>, <strong>96</strong>, pp. 141-164</li>
+        <li>[2] L-Q. Zhang, J.C. Collins and P.H. King (1991): Indistinguishability and identifiability analysis of linear compartmental models, <em>Math Biosci</em>,    <strong>103</strong>, pp.77-95</li>
+    </ol>
+
+    <h2>Actions</h2>
+
+    <div id="choices_tray">
+        <a id="queue_selection" href="{% url 'interface:queue' %}">
+            <h3>View the Job Queue</h3>
+            <p>view jobs, modify job statuses, edit individual jobs</p>
+        </a>
+
+        <a id="addjob_selection" href="{% url 'interface:addjob' %}">
+            <h3>Create a New Job</h3>
+            <p>add new jobs to the queue</p>
+        </a>
+    </div>
 
 {% endblock %}
