@@ -3,6 +3,7 @@ import django.contrib.auth.views
 
 urlpatterns = patterns('',
     url(r'^$', 'interface.views.home', name='home'),
+    url(r'^home_auth/$', 'interface.views.home_auth', name='home_auth'),
     url(r'^queue/$', 'interface.views.queue', name='queue'),
     url(r'^accounts/login/$', django.contrib.auth.views.login, name='login'),
     url(r'^logout/$', 'interface.views.logout_view', name='interface_logout'),

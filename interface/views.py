@@ -8,20 +8,37 @@ from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
 from interface.glue.sparsemats import Sparse2DMat
 from interface.models import SubmissionForm, Submission
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
+def_user = authenticate(username="test", password="password")
+
+@login_required
+def home_auth(request):
+    #return render_to_response("home.html", {}, context_instance=RequestContext(request))
+    return redirect('interface:home')
 
 def home(request):
     return render_to_response("home.html", {}, context_instance=RequestContext(request))
 
-@login_required
+#@login_required
 def queue(request):
     # render the queue
-    context = {
-        'jobs': Submission.objects.filter(user=request.user),
-        'pending': Submission.objects.filter(user=request.user, status=Submission.STATUS_PENDING),
-        'running': Submission.objects.filter(user=request.user, status=Submission.STATUS_RUNNING),
-        'completed': Submission.objects.filter(user=request.user, status=Submission.STATUS_COMPLETE),
-    }
+
+    try:
+        context = {
+            'jobs': Submission.objects.filter(user=request.user),
+            'pending': Submission.objects.filter(user=request.user, status=Submission.STATUS_PENDING),
+            'running': Submission.objects.filter(user=request.user, status=Submission.STATUS_RUNNING),
+            'completed': Submission.objects.filter(user=request.user, status=Submission.STATUS_COMPLETE),
+        }
+    except:
+        context = {
+            'jobs':Submission.objects.filter(user=def_user),
+            'pending': Submission.objects.filter(user=def_user, status=Submission.STATUS_PENDING),
+            'running': Submission.objects.filter(user=def_user, status=Submission.STATUS_RUNNING),
+            'completed': Submission.objects.filter(user=def_user, status=Submission.STATUS_COMPLETE),
+        }
     return render_to_response("queue.html", context, context_instance=RequestContext(request))
 
 
@@ -33,7 +50,7 @@ def logout_view(request):
 # === job adding/editing views
 # ==============================================================
 
-@login_required
+#@login_required
 def addjob(request):
     context = {}
 
@@ -41,11 +58,17 @@ def addjob(request):
         try:
             if 'job_name' not in request.POST or request.POST['job_name'].strip() == "":
                 raise ValueError("Name required when creating a job")
-
-            instance = Submission(
-                user=request.user,
-                name=request.POST['job_name']
-            )
+            
+            try:
+                instance = Submission(
+                    user=request.user,
+                    name=request.POST['job_name']
+                )
+            except:
+                instance = Submission(
+                    user=def_user,
+                    name=request.POST['job_name']
+                )
 
             Adjmat = Sparse2DMat(rows=request.POST['nodecount'], cols=request.POST['nodecount'])
             Amat = Sparse2DMat(rows=request.POST['nodecount'], cols=request.POST['nodecount'])
@@ -94,7 +117,7 @@ def addjob(request):
     return render_to_response("addjob.html", context, context_instance=RequestContext(request))
 
 
-@login_required
+#@login_required
 def editjob(request, jobID):
     # look up the job we're editing
     job = Submission.objects.get(id=jobID)
@@ -200,7 +223,7 @@ def editjob(request, jobID):
 # === job result views
 # ==============================================================
 
-@login_required
+# @login_required
 def viewresults(request, jobID):
     job = Submission.objects.get(id=jobID)
 
@@ -232,9 +255,11 @@ def viewresults(request, jobID):
 # === job manipulation views
 # ==============================================================
 
-@login_required
+#@login_required
 def resubmitjob(request, jobID):
-    job = Submission.objects.get(user=request.user, id=jobID)
+    
+    job = Submission.objects.get(id=jobID)
+
     job.status = Submission.STATUS_PENDING
     job.result = ''
     job.save()

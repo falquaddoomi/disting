@@ -27,7 +27,7 @@
                 {% if user.is_authenticated %}
                 logged in as <b>{{ user }}</b> - <a href="{% url 'interface:interface_logout' %}">log out</a>
                 {% else %}
-                not logged in - <a href="{% url 'interface:queue' %}">log in</a>
+                not logged in - <a href="{% url 'interface:home_auth' %}">log in</a>
                 {% endif %}
                 </div>
             </div>

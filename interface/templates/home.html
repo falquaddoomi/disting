@@ -58,7 +58,6 @@ p { text-indent: 1em; }
     </p>
 
     <h2>Actions</h2>
-    {% if user.is_authenticated %}
         <div id="choices_tray">
             <a id="queue_selection" href="{% url 'interface:queue' %}">
                 <h3>View the Job Queue</h3>
@@ -70,10 +69,5 @@ p { text-indent: 1em; }
                 <p>add new jobs to the queue</p>
             </a>
         </div>
-    {% else %}
-        <p>
-        You'll need an account to use this tool, which you can obtain by contacting the site administrator, faisal (at) cs.ucla.edu.
-        </p>
-    {% endif %}
 
 {% endblock %}
