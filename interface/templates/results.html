@@ -59,31 +59,30 @@
     </div>
 
     <div style="margin-left: 20px;">
-        <h2>Input</h2>
-        <pre style="margin-left: 20px; overflow-x: auto;">{{ job.makeInput }}</pre>
+{#        <h2>Input</h2>#}
+{#        <pre style="margin-left: 20px; overflow-x: auto;">{{ job.makeInput }}</pre>#}
 
         {% if job.status != "pending" and job.status != "completed" and job.log %}
         <h2>Log</h2>
         <pre style="margin-left: 20px; overflow-x: auto;">{{ job.log }}</pre>
         {% endif %}
 
-        <h2 id="results_bar">Results</h2>
-        {% if job.result %}
-        {# <pre id="results_pre" style="margin-left: 20px; overflow-x: auto;">{{ job.result }}</pre> #}
-        <div id="results_pre" style="margin-left: 20px; overflow-x: auto;">
-        {% for name, model in job.extracted_results.items %}
-            <div style="margin-bottom: 0.5em;">
-                <h3>{{ name }}:</h3>
-                <pre>{{ model.matrix }}</pre>
-
-                <strong>A matrix:</strong><br />
-                <pre>{{ model.a_matrix }}</pre>
-            </div>
-        {% endfor %}
-        </div>
-        {% else %}
-        <div style="margin-left: 20px; font-style: italic;">(results pending completion or error...)</div>
-        {% endif %}
+{#        <h2 id="results_bar">Results</h2>#}
+{#        {% if job.result %}#}
+{#        <div id="results_pre" style="margin-left: 20px; overflow-x: auto;">#}
+{#        {% for name, model in job.extracted_results.items %}#}
+{#            <div style="margin-bottom: 0.5em;">#}
+{#                <h3>{{ name }}:</h3>#}
+{#                <pre>{{ model.matrix }}</pre>#}
+{##}
+{#                <strong>A matrix:</strong><br />#}
+{#                <pre>{{ model.a_matrix }}</pre>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#        </div>#}
+{#        {% else %}#}
+{#        <div style="margin-left: 20px; font-style: italic;">(results pending completion or error...)</div>#}
+{#        {% endif %}#}
 
         {% if job.graphs %}
         <h2>Graphs</h2>

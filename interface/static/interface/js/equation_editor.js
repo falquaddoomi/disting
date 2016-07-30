@@ -25,7 +25,7 @@ function buildMatrix(nodeCount, graphID, matrixID) {
     // === equation section
     // ===============================
 
-    $('<tr class="inline_header"><td colspan="' + nodeCount + '">Adjacency <a id="adj_tooltip">[?]</a>:</td></tr>')
+    $('<tr class="inline_header"><td colspan="' + nodeCount + '">Adjacency:</td></tr>')
         .appendTo($matHolder);
 
     // build the matrix itself
@@ -101,7 +101,7 @@ function buildMatrix(nodeCount, graphID, matrixID) {
             }).appendTo($cell);
 
         $("<label for='input_" + j + "' />")
-            .html("b<sub>" + j + "</sub>")
+            .html("r<sub>" + j + "</sub>")
             .appendTo($cell);
 
         $cell.appendTo($input_row);
@@ -136,7 +136,7 @@ function buildMatrix(nodeCount, graphID, matrixID) {
             }).appendTo($cell);
 
         $("<label for='output_" + j + "' />")
-            .html("c<sub>" + j + "</sub>")
+            .html("m<sub>" + j + "</sub>")
             .appendTo($cell);
 
         $cell.appendTo($output_row);

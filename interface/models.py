@@ -29,13 +29,15 @@ class Submission(models.Model):
 
     # helper method for formatting the job for the processor function
     def makeInput(self):
-        return """A = %(A)s
+        output = """A = %(A)s
 B = %(B)s
 C = %(C)s
 Adj = %(Adj)s
 n = %(n)s
 r = %(r)s
 m = %(m)s""" % model_to_dict(self)
+
+        return output
 
     # submission time
     created_on = models.DateTimeField(auto_now_add=True, editable=False)
