@@ -11,6 +11,8 @@ import re
 from django.forms import ModelForm, model_to_dict, Form
 from django.template.defaultfilters import default
 
+import scipy, numpy, networkx
+
 class Submission(models.Model):
     # store the user who submitted this request
     user = models.ForeignKey(User)
@@ -105,6 +107,37 @@ m = %(m)s""" % model_to_dict(self)
             models[m.group(1)] = { 'matrix': m.group(2).replace("1", "X"), 'a_matrix': m.group(3).replace("1", "X") }
 
         return models
+
+    def result_nonobservable(self):
+        if self.result.strip() == "":
+            return False
+
+        return "model nonobservable" in self.result
+
+    def result_noncontrollable(self):
+        if self.result.strip() == "":
+            return False
+
+        return "model noncontrollable" in self.result
+
+    def original_graph(self):
+        # returns the adjacency matrix for this model through a very circuitous route
+        data = self.makeInput()
+        inputParams = [re.sub(r"\s\s+", " ", str(line.strip().split('=')[1])) for line in data.split('\n')]
+
+        tempAdj = scipy.mat(inputParams[3])
+        AdjMat = tempAdj.T
+
+        AdjMat = numpy.matrix(AdjMat)
+        myGraph = networkx.MultiDiGraph(AdjMat)
+
+        result = str(networkx.to_numpy_matrix(myGraph).T)
+        matches = re.finditer(r"(\[([ ]*\[[01. ]+\]\n?)+\])", result, re.MULTILINE|re.DOTALL)
+        for m in matches:
+            result = json.loads(m.group(1).replace(". ", ",").replace(".]", "]").replace("\n", ", "))
+            break
+
+        return result
 
     def graphs(self):
         # we can only produce a gallery of graph data if there actually were results
