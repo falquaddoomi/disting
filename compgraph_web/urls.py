@@ -8,7 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'compgraph_web.views.home', name='home'),
-    url(r'^', include('interface.urls', namespace='interface')),
+    url(r'^DISTING/', include('interface.urls', namespace='interface')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
