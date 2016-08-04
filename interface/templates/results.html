@@ -112,11 +112,13 @@
         {% else %}
             <div>
                 {% if job.result_nonobservable %}
-                <h3>Model 0 is non-observable</h3>
+                <h3>Model 0 is unobservable</h3>
                 {% endif %}
+
                 {% if job.result_noncontrollable %}
-                <h3>Model 0 is non-controllable</h3>
+                <h3>Model 0 is uncontrollable</h3>
                 {% endif %}
+
                 {% if not job.result_nonobservable and not job.result_noncontrollable %}
                 <h3>There are no models indistinguishable from Model 0</h3>
                 {% endif %}
