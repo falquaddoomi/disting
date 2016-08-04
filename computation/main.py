@@ -109,17 +109,27 @@ def processInput(data, notify=default_notify):
 #         output.write('Complex eigenvalues--not all models may be discovered! (Michael Bilow)')
 #     ## <end> MB Additions/Modifications
 
+    nonobservable = False
+    noncontrollable = False
+
     if myGraphModel.QRank != n:
-       output.write('q rank != n nonobservable')
-       notify('q rank != n nonobservable')
-       notify('process ended')
-       return "model nonobservable"
+        output.write('q rank != n nonobservable')
+        notify('q rank != n nonobservable')
+        nonobservable = True
 
     if myGraphModel.RRank != n:
-       output.write('r rank != n noncontrollable')
-       notify('r rank != n noncontrollable')
-       notify('process ended')
-       return "model noncontrollable"
+        output.write('r rank != n noncontrollable')
+        notify('r rank != n noncontrollable')
+        noncontrollable = True
+
+    if noncontrollable or nonobservable:
+        notify('process ended')
+
+        error_msg = "%s %s" % (
+            "model nonbservable" if nonobservable else "",
+            "model noncontrollable" if noncontrollable else ""
+        )
+        return error_msg
 
     notify('DONE MAKING ORIG MODEL')
 
