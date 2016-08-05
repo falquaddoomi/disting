@@ -110,6 +110,7 @@
                 </span>
             </div>
         {% else %}
+            {% if job.status == "completed" %}
             <div>
                 {% if job.result_nonobservable %}
                 <h3>Model 0 is unobservable</h3>
@@ -126,6 +127,7 @@
                 {% minigraph job "Model 0" job.original_graph  %}
                 <div style="clear: both;"></div>
             </div>
+            {% endif %}
         {% endif %}
 
         <!-- invisible resources for drawing graphs -->
