@@ -21,23 +21,18 @@
 
     <script type="text/javascript" language="JavaScript">
     $(document).ready(function() {
+        $("#results_pre").hide();
+
         $("#results_bar")
-            .html("Results (collapse)")
+            .html("Extended Results (" + ($("#results_pre").is(":visible")?"collapse":"expand") + ")")
             .addClass("clickable_header")
             .css("cursor", "pointer")
-            .toggle(
-                function() {
-                    var $me = $(this);
-                    $("#results_pre").slideUp(function() {
-                        $me.html("Results (expand)");
-                    });
-                },
-                function() {
-                    var $me = $(this);
-                    $("#results_pre").slideDown(function() {
-                        $me.html("Results (collapse)");
-                    });
+            .click(function() {
+                var $me = $(this);
+                $("#results_pre").slideToggle(300, function() {
+                    $me.html("Extended Results (" + ($(this).is(":visible")?"collapse":"expand") + ")");
                 });
+            })
     })
     </script>
 {% endblock %}
@@ -67,26 +62,8 @@
         <pre style="margin-left: 20px; overflow-x: auto;">{{ job.log }}</pre>
         {% endif %}
 
-{#        <h2 id="results_bar">Results</h2>#}
-{#        {% if job.result %}#}
-{#        <div id="results_pre" style="margin-left: 20px; overflow-x: auto;">#}
-{#        <pre>{{ job.result }}</pre>#}
-{#        {% for name, model in job.extracted_results.items %}#}
-{#            <div style="margin-bottom: 0.5em;">#}
-{#                <h3>{{ name }}:</h3>#}
-{#                <pre>{{ model.matrix }}</pre>#}
-{##}
-{#                <strong>A matrix:</strong><br />#}
-{#                <pre>{{ model.a_matrix }}</pre>#}
-{#            </div>#}
-{#        {% endfor %}#}
-{#        </div>#}
-{#        {% else %}#}
-{#        <div style="margin-left: 20px; font-style: italic;">(results pending completion or error...)</div>#}
-{#        {% endif %}#}
-
-        {% if job.graphs %}
         <h2>Graphs</h2>
+        {% if job.graphs %}
             <div>
                 {% for name, model in jobgraph_items %}
                     {% minigraph job name model  %}
@@ -110,22 +87,44 @@
                 </span>
             </div>
         {% else %}
+            {% if job.status == "complete" %}
             <div>
                 {% if job.result_nonobservable %}
-                <h3>Model 0 is unobservable</h3>
+                <h4>Model 0 is unobservable</h4>
                 {% endif %}
 
                 {% if job.result_noncontrollable %}
-                <h3>Model 0 is uncontrollable</h3>
+                <h4>Model 0 is uncontrollable</h4>
                 {% endif %}
 
                 {% if not job.result_nonobservable and not job.result_noncontrollable %}
-                <h3>There are no models indistinguishable from Model 0</h3>
+                <h4>There are no models indistinguishable from Model 0</h4>
                 {% endif %}
 
                 {% minigraph job "Model 0" job.original_graph  %}
                 <div style="clear: both;"></div>
             </div>
+            {% else %}
+                <h3>Job in the <b>{{ job.status }}</b> state, re-run if possible for results.</h3>
+            {% endif %}
+        {% endif %}
+
+        <h2 id="results_bar">Extended Results</h2>
+        {% if job.result %}
+        <div id="results_pre" style="margin-left: 20px; overflow-x: auto;">
+        <pre>{{ job.result }}</pre>
+{#        {% for name, model in job.extracted_results.items %}#}
+{#            <div style="margin-bottom: 0.5em;">#}
+{#                <h3>{{ name }}:</h3>#}
+{#                <pre>{{ model.matrix }}</pre>#}
+{##}
+{#                <strong>A matrix:</strong><br />#}
+{#                <pre>{{ model.a_matrix }}</pre>#}
+{#            </div>#}
+{#        {% endfor %}#}
+        </div>
+        {% else %}
+        <div style="margin-left: 20px; font-style: italic;">(results pending completion or error...)</div>
         {% endif %}
 
         <!-- invisible resources for drawing graphs -->
