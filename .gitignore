@@ -2,4 +2,4 @@
 *.pyc
 .idea/
 /database.db
-/compgraph_web/logfile
+/compgraph_web/logfile*
