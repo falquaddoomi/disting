@@ -171,6 +171,10 @@ def editjob(request, jobID):
             job.r = Bmat.cols
             job.m = Cmat.rows
 
+            # clear its output and mark the job as needing to be re-run, since we edited it...
+            job.status = Submission.STATUS_PENDING
+            job.result = ''
+
             # everything went ok; push the new model instance to the db and continue
             job.save()
             return redirect('interface:viewjob', jobID=job.id) # Redirect after POST
