@@ -48,9 +48,9 @@
         <a class="button icon loop" style="width: 80px; margin-left: 2px;" href="{% url 'interface:resubmitjob' job.id %}">Resubmit Job</a>
         {% endif %}
         {% if job.status != "complete" and job.status != "error" %}
-        <a class="button icon settings danger" onclick="return confirm('Are you sure that you want to cancel this job?');" style="width: 80px; margin-left: 2px;" href="{% url 'interface:canceljob' job.id %}">Cancel Job</a>
+        <a class="button icon settings danger" onclick="return confirm('Are you sure that you want to cancel this job? You must be logged in to do so.');" style="width: 80px; margin-left: 2px;" href="{% url 'interface:canceljob' job.id %}">Cancel Job</a>
         {% endif %}
-        <a class="button icon remove danger" onclick="return confirm('Are you sure that you want to delete this job?');" style="width: 80px; margin-left: 2px;" href="{% url 'interface:removejob' job.id %}">Remove Job</a>
+        <a class="button icon remove danger" onclick="return confirm('Are you sure that you want to delete this job? You must be logged in to do so.');" style="width: 80px; margin-left: 2px;" href="{% url 'interface:removejob' job.id %}">Remove Job</a>
     </div>
 
     <div style="margin-left: 20px;">
