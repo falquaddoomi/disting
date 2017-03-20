@@ -48,9 +48,9 @@
         <a class="button icon loop" style="width: 80px; margin-left: 2px;" href="{% url 'interface:resubmitjob' job.id %}">Resubmit Job</a>
         {% endif %}
         {% if job.status != "complete" and job.status != "error" %}
-        <a class="button icon settings danger" onclick="return confirm('Are you sure that you want to cancel this job?');" style="width: 80px; margin-left: 2px;" href="{% url 'interface:canceljob' job.id %}">Cancel Job</a>
+        <a class="button icon settings danger" onclick="return confirm('Are you sure that you want to cancel this job? You must be logged in to do so.');" style="width: 80px; margin-left: 2px;" href="{% url 'interface:canceljob' job.id %}">Cancel Job</a>
         {% endif %}
-        <a class="button icon remove danger" onclick="return confirm('Are you sure that you want to delete this job?');" style="width: 80px; margin-left: 2px;" href="{% url 'interface:removejob' job.id %}">Remove Job</a>
+        <a class="button icon remove danger" onclick="return confirm('Are you sure that you want to delete this job? You must be logged in to do so.');" style="width: 80px; margin-left: 2px;" href="{% url 'interface:removejob' job.id %}">Remove Job</a>
     </div>
 
     <div style="margin-left: 20px;">
@@ -89,17 +89,7 @@
         {% else %}
             {% if job.status == "complete" %}
             <div>
-                {% if job.result_nonobservable %}
-                <h4>Model 0 is unobservable</h4>
-                {% endif %}
-
-                {% if job.result_noncontrollable %}
-                <h4>Model 0 is uncontrollable</h4>
-                {% endif %}
-
-                {% if not job.result_nonobservable and not job.result_noncontrollable %}
-                <h4>There are no models indistinguishable from Model 0</h4>
-                {% endif %}
+                <h4>There are no structurally identifiable models indistinguishable from Model 0</h4>
 
                 {% minigraph job "Model 0" job.original_graph  %}
                 <div style="clear: both;"></div>
@@ -110,10 +100,10 @@
             {% endif %}
         {% endif %}
 
-        <h2 id="results_bar">Extended Results</h2>
-        {% if job.result %}
-        <div id="results_pre" style="margin-left: 20px; overflow-x: auto;">
-        <pre>{{ job.result }}</pre>
+{#        <h2 id="results_bar">Extended Results</h2>#}
+{#        {% if job.result %}#}
+{#        <div id="results_pre" style="margin-left: 20px; overflow-x: auto;">#}
+{#        <pre>{{ job.result }}</pre>#}
 {#        {% for name, model in job.extracted_results.items %}#}
 {#            <div style="margin-bottom: 0.5em;">#}
 {#                <h3>{{ name }}:</h3>#}
@@ -123,10 +113,10 @@
 {#                <pre>{{ model.a_matrix }}</pre>#}
 {#            </div>#}
 {#        {% endfor %}#}
-        </div>
-        {% else %}
-        <div style="margin-left: 20px; font-style: italic;">(results pending completion or error...)</div>
-        {% endif %}
+{#        </div>#}
+{#        {% else %}#}
+{#        <div style="margin-left: 20px; font-style: italic;">(results pending completion or error...)</div>#}
+{#        {% endif %}#}
 
         <!-- invisible resources for drawing graphs -->
         <img id="input_arrow_glyph" style="display: none;" src="{{ STATIC_URL }}interface/images/input_arrow.png" />
