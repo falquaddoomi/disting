@@ -21,6 +21,9 @@ def home_auth(request):
 def home(request):
     return render_to_response("home.html", {}, context_instance=RequestContext(request))
 
+def maintenance(request):
+    return render_to_response("maintenance.html", {}, context_instance=RequestContext(request))
+
 #@login_required
 def queue(request):
     # render the queue

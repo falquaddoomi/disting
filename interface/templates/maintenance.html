@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>DISTING: down for maintenance</title>
+
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}interface/res/gh-buttons.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}interface/css/interface.css" />
+
+        {% block script %}
+        <!-- script includes for pages that need this -->
+        {% endblock %}
+
+        {% block style %}
+        <!-- provides a place for inheriting pages to add custom styles -->
+        {% endblock %}
+    </head>
+
+    <body>
+        <div id="trunk">
+            <div id="header">
+                <h1><a id="homelink" href="{% url 'interface:home' %}">DISTING</a> : {% block childpagename2 %}Model Distinguishability Tool{% endblock %}</h1>
+            </div>
+
+            <div id="content" style="text-align: center;">
+                <h1>Down for Maintenance</h1>
+                
+                <p>DISTING is currently down for maintenance.</p>
+                <p>Thank you for your interest, and please check back again shortly.</p>
+            </div>
+
+            <div id="footer"></div>
+        </div>
+    </body>
+</html>
