@@ -28,14 +28,14 @@ def maintenance(request):
 def queue(request):
     # render the queue
 
-    try:
+    if request.user:
         context = {
             'jobs': Submission.objects.filter(user=request.user),
             'pending': Submission.objects.filter(user=request.user, status=Submission.STATUS_PENDING),
             'running': Submission.objects.filter(user=request.user, status=Submission.STATUS_RUNNING),
             'completed': Submission.objects.filter(user=request.user, status=Submission.STATUS_COMPLETE),
         }
-    except:
+    else:
         context = {
             'jobs':Submission.objects.filter(user=def_user),
             'pending': Submission.objects.filter(user=def_user, status=Submission.STATUS_PENDING),
@@ -61,13 +61,13 @@ def addjob(request):
         try:
             if 'job_name' not in request.POST or request.POST['job_name'].strip() == "":
                 raise ValueError("Name required when creating a job")
-            
-            try:
+
+            if request.user:
                 instance = Submission(
                     user=request.user,
                     name=request.POST['job_name']
                 )
-            except:
+            else:
                 instance = Submission(
                     user=def_user,
                     name=request.POST['job_name']
