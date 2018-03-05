@@ -28,7 +28,7 @@ def maintenance(request):
 def queue(request):
     # render the queue
 
-    if request.user:
+    if request.user.is_authenticated():
         context = {
             'jobs': Submission.objects.filter(user=request.user),
             'pending': Submission.objects.filter(user=request.user, status=Submission.STATUS_PENDING),
@@ -62,7 +62,7 @@ def addjob(request):
             if 'job_name' not in request.POST or request.POST['job_name'].strip() == "":
                 raise ValueError("Name required when creating a job")
 
-            if request.user:
+            if request.user.is_authenticated():
                 instance = Submission(
                     user=request.user,
                     name=request.POST['job_name']
