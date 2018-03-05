@@ -5,7 +5,12 @@ import os
 SETTINGS_DIR = os.path.dirname(__file__)
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
-DEBUG = False
+# kludge to "fix" kombu's uuid dependency
+# courtesy of https://stackoverflow.com/a/39586528/346905
+import uuid
+uuid._uuid_generate_random = None
+
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
