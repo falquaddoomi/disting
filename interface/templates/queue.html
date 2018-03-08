@@ -31,7 +31,7 @@
                         {% if job.status == 'error' %}
                         <a class="button icon loop" style="width: 80px;" href="{% url 'interface:resubmitjob' job.id %}">Resubmit</a>
                         {% endif %}
-                        <a class="button icon search" style="width: 80px; margin-left: 2px;" href="{% url 'interface:viewjob' job.id %}">View Details</a>
+                        <a class="button icon search" style="width: 80px; margin-left: 2px;" href="{% url 'interface:viewjob' job.id %}">View Results</a>
                     </td>
                 </tr>
             {% empty %}
