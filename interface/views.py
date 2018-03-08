@@ -9,9 +9,15 @@ from django.template.context import RequestContext
 from interface.glue.sparsemats import Sparse2DMat
 from interface.models import SubmissionForm, Submission
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
 
-def_user = authenticate(username="test", password="password")
+# determine that the test user exists and create them if they don't
+def_user = authenticate(username='test', password='password')
+
+if not def_user:
+    def_user = User.objects.create_user('test', password='password')
+    def_user.save()
+
 
 @login_required
 def home_auth(request):
