@@ -31,16 +31,26 @@ p { text-indent: 1em; }
     top: -1px;
 }
 
-#choices_tray a h3 { margin: 0px; }
+#choices_tray a h3 { margin: 0; }
 #choices_tray a p {
     text-indent: 0; color: #555;
-    margin: 5px 3px 3px 0px;
+    margin: 5px 3px 3px 0;
 }
 
 strong.uber { font-size: larger; }
 
 ol.refs {
     list-style-type: none; margin-left: 0; padding-left: 0;
+    counter-reset: list;
+}
+ol.refs > li {
+    list-style: none;
+    position: relative;
+    margin-bottom: 0.5em;
+}
+ol.refs > li:before {
+    counter-increment: list;
+    content: "[" counter(list) "] ";
 }
 
 p { text-indent: 0; }
@@ -61,7 +71,7 @@ hr.dotted {
 {% endblock %}
 
 {% block content %}
-    <p>Welcome to <strong class="uber">DISTING</strong>, a tool for generating alternative structurally identifiable <em>linear compartmental (LC) models</em>* that are <strong><em>input-output indistinguishable</em></strong> from a postulated LC model [1,2].</p>
+    <p>Welcome to <strong class="uber">DISTING</strong> [1], a tool for generating alternative structurally identifiable <em>linear compartmental (LC) models</em>* that are <strong><em>input-output indistinguishable</em></strong> from a postulated LC model [2,3].</p>
 
     <p>
     <strong class="uber">App Usage</strong><br />
@@ -87,8 +97,9 @@ hr.dotted {
         </p>
 
         <ol class="refs">
-            <li>[1] M.J. Chapman and K.R. Godfrey (1989): A methodology for compartmental model indistinguishability, Math Biosci, <strong>96</strong>, pp. 141-164</li>
-            <li>[2] L-Q. Zhang, J.C. Collins and P.H. King (1991): Indistinguishability and identifiability analysis of linear compartmental models, Math Biosci, <strong>103</strong>, pp.77-95</li>
+            <li id="disting">Davidson, N.R., Godfrey, K.R., Alquaddoomi, F., Nola, D. and DiStefano III, J.J., 2017. DISTING: A web application for fast algorithmic computation of alternative indistinguishable linear compartmental models. Computer methods and programs in biomedicine, <strong>143</strong>, pp.129-135.</li>
+            <li id="chapman">M.J. Chapman and K.R. Godfrey (1989): A methodology for compartmental model indistinguishability, Math Biosci, <strong>96</strong>, pp. 141-164</li>
+            <li id="zhang">L-Q. Zhang, J.C. Collins and P.H. King (1991): Indistinguishability and identifiability analysis of linear compartmental models, Math Biosci, <strong>103</strong>, pp.77-95</li>
         </ol>
     </div>
 
