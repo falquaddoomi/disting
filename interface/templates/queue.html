@@ -3,6 +3,40 @@
 {% block childpagename %}Queue{% endblock %}
 {% block childpagename2 %}Queue{% endblock %}
 
+{% block script %}
+    <script type="text/javascript" language="JavaScript" src="{{ STATIC_URL }}js/jquery-1.7.1.min.js"></script>
+
+    <script type="text/javascript" language="JavaScript">
+    $(document).ready(function() {
+        var refreshTimer = null;
+
+        function syncRefresh() {
+            if ($("#autorefresh_queue").is(":checked")) {
+                refreshTimer = setInterval(function() {
+                    console.log("refreshing...");
+
+                    // delete everything in the task list div and refresh it
+                    $.get("/DISTING/queue", function(html) {
+                        $("#task_list").replaceWith($("#task_list", $(html)));
+                    });
+                }, 3000);
+            }
+            else {
+                clearInterval(refreshTimer);
+            }
+        }
+
+        // when the 'allow autorefresh' box is checked, automatically refresh the queue
+        $("#autorefresh_queue").change(function() {
+            syncRefresh();
+        });
+
+        // and check if we should auto-refresh initially, too
+        syncRefresh();
+    })
+    </script>
+{% endblock %}
+
 {% block content %}
 <p>Below is your job queue, which shows the jobs that you've added that are pending, in progress, and completed.</p>
 
@@ -10,9 +44,14 @@
         <div style="margin-bottom: 1em; text-align: left; width: 600px;">
             <a class="button icon add" style="width: 80px;" href="{% url 'interface:addjob' %}">Add Job</a>
             <a class="button icon reload" style="width: 80px; margin-left: 2px;" href="{% url 'interface:queue' %}">Refresh</a>
+
+            <label>
+                <input type="checkbox" id="autorefresh_queue" checked />
+                auto-refresh queue (once every 3 seconds)
+            </label>
         </div>
 
-        <table class="task_list" style="width: 100%;" cellpadding="0" cellspacing="0">
+        <table id="task_list" class="task_list" style="width: 100%;" cellpadding="0" cellspacing="0">
             <tr class="task_header">
                 <td>Name</td>
                 <td>Submitted @</td>
