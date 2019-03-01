@@ -1,4 +1,5 @@
-# Create your views here.
+import os
+
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.core import paginator
@@ -11,11 +12,15 @@ from interface.models import SubmissionForm, Submission
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
+# read admin username, password from environment
+ADMIN_USER = os.environ.get('ADMIN_USER', 'test')
+ADMIN_PASS = os.environ.get('ADMIN_PASS', 'password')
+
 # determine that the test user exists and create them if they don't
-def_user = authenticate(username='test', password='password')
+def_user = authenticate(username=ADMIN_USER, password=ADMIN_PASS)
 
 if not def_user:
-    def_user = User.objects.create_user('test', password='password')
+    def_user = User.objects.create_user(ADMIN_USER, password=ADMIN_PASS)
     def_user.save()
 
 
@@ -270,7 +275,7 @@ def viewresults(request, jobID):
 
 #@login_required
 def resubmitjob(request, jobID):
-    
+
     job = Submission.objects.get(id=jobID)
 
     job.status = Submission.STATUS_PENDING
