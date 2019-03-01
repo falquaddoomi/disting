@@ -6,12 +6,9 @@ __author__ = 'Faisal'
 import socket
 
 def formatMatrix(in_mat):
-    # FAISAL: to explain the change, it seems like whatever converts the matrices to strings adds "Matrix()" around it now,
-    # so we don't have to add that ourselves...
-    intermediate = (",".join(str(in_mat).replace(" ","").split("\n"))).lower()
-
-    # FAISAL: super hack, replacing matrix([ ... ]) with matrix( ... ) b/c that's what maxima wants now
-    return intermediate.replace("matrix([", "matrix(").replace("])", ")")
+    # tested to work with a relatively recent version of maxima (5.41.0)
+    dim_set = ", ".join(str(z) for z in list([list(in_mat.row(x)) for x in range(in_mat.rows)]))
+    return "matrix(%s)" % dim_set
 
 def getMatrixRank(in_mat):
     command = "rank(%s);" % formatMatrix(in_mat)
