@@ -5,6 +5,24 @@ This project aims to provide a means to identify the family of compartment model
 
 ## How to install and run DISTING
 
+There are two methods for installing DISTING and its dependencies: via Docker (recommended), or by installing directly into your system.
+
+### Installing and Running Using Docker
+
+First, ensure that you have have installed the appropriate version of Docker for your operating system: [Docker Installation](https://docs.docker.com/install/).
+
+Create a file called `.env` in this directory with the following contents:
+```
+ADMIN_USER=yournamehere
+ADMIN_PASS=yourpassword
+```
+
+The above credentials will be used as the default login for DISTING itself, and for the management interfaces.
+
+Then, run the `run_disting.sh` script in this source directory, which will build the DISTING image, then launch a container. Once the script has completed, you can access your local instance of DISTING at http://localhost:5580. You can access supervisord's interface at http://localhost:9001, where you can monitor, stop, and restart the DISTING suprocesses. If you wish to stop your local process, use `docker ps` to see the list of Docker containers that are running; check the last column for the name of the DISTING container. Use `docker stop <name of container>` to stop your container.
+
+### Installing and Running Locally (Without Docker)
+
 Clone this repository to a location of your choice on the server. Once it's there, run the **setup.sh** script and it will install all the requisite packages.
 
 Run the **launch.sh** script and it will start a screen session with four subscreens, described below:
