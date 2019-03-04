@@ -21,7 +21,18 @@ def getMatrixRank(in_mat):
     #     getMatrixRank.memoized[command] = int(result)
 
     # return getMatrixRank.memoized[command]
-    return int(calculate(command))
+    try:
+        result = calculate(command)
+
+        try:
+            return int(result)
+        except ValueError as ex:
+            print "Couldn't cast result '%s' to an integer" % result
+            raise ex
+    except Exception as ex:
+        print "Failed when executing the command '%s'" % command
+        raise ex
+
 
 # getMatrixRank.memoized = {}
 # getMatrixRank.memohit = 0
