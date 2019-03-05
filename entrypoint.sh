@@ -7,6 +7,7 @@ if [ -z "$ADMIN_USER" ] || [ -z "$ADMIN_PASS" ]; then
 fi
 
 cd /app
+mkdir logging
 python manage.py syncdb --noinput && python manage.py migrate
 
 /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
